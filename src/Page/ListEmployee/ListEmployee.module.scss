@@ -1,0 +1,37 @@
+.list_film {
+    margin-top: 90px;
+    background-color: #fff;
+    margin-top: 70px;
+    padding: 10px 0;
+    border-radius: 5px;
+}
+.Request_film {
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    justify-content: space-between;
+}
+.trash_film {
+    .icon_trash {
+        margin-left: 5px;
+        color: orange;
+    }
+}
+.button_create-film {
+    .icon_create {
+        font-size: 20px;
+        color: #000;
+        margin-right: 5px;
+    }
+    button {
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #ff4500;
+
+        &:hover {
+            background-color: red;
+        }
+    }
+}

@@ -1,0 +1,45 @@
+.wrapper {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.thumbnail_video {
+    width: 100px;
+    height: 50px;
+    margin-right: 10px;
+    object-fit: cover;
+    animation: fadeIn ease-in-out 0.2;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.info_video {
+    width: 190px;
+    float: left;
+}
+.name {
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 3px;
+    margin-top: -3px;
+    max-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.description {
+    font-size: 11px;
+}

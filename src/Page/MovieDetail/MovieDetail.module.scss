@@ -1,0 +1,166 @@
+.DetailFilm {
+    border-radius: 5px;
+    overflow: hidden;
+    width: 1060px;
+    margin: auto;
+    padding: 0 15px;
+    margin-top: 70px;
+    display: flex;
+}
+.content {
+    width: 670px;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #1a1a1a;
+    min-height: 200px;
+}
+.content_info {
+    display: flex;
+}
+.image_content {
+    width: 315px;
+    position: relative;
+    height: 420px;
+    border-radius: 5px;
+    overflow: hidden;
+
+    .image {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+    }
+    .watch_film {
+        text-decoration: none;
+        color: white;
+        background-color: #d9534f;
+        position: absolute;
+        padding: 10px 12px;
+        border-radius: 5px;
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%);
+    }
+}
+.info_content {
+    padding-left: 20px;
+    h1 {
+        font-size: 26px;
+        color: #fff;
+    }
+    .info_description {
+        font-size: 16px;
+        color: #ccc;
+    }
+}
+.info_status {
+    width: 315px;
+    margin-top: 8px;
+    border-radius: 5px;
+    background-color: #222222;
+    padding: 5px 8px;
+    height: 277px;
+    overflow: auto;
+
+    p {
+        font-size: 14px;
+        margin: 8px;
+        color: #ccc;
+    }
+}
+.info_evaluate {
+    margin-top: 8px;
+    border-radius: 8px;
+    background-color: #222222;
+
+    h2 {
+        color: #d2691e;
+        padding: 5px 8px;
+        font-size: 20px;
+        font-weight: 400;
+    }
+    .list_stars {
+        display: flex;
+        padding-bottom: 8px;
+        padding-left: 8px;
+        padding-right: 8px;
+        font-size: 16px;
+        color: #ea9d00;
+
+        .icon_stars {
+            margin-right: 5px;
+        }
+    }
+}
+
+// list_new-film
+.list_new-film {
+    width: 320px;
+    min-height: 500px;
+    max-height: 620px;
+    overflow: auto;
+    padding: 10px;
+    background-color: #1a1a1a;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+//Content_newFilm
+
+.Content_newFilm {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+
+    img {
+        width: 60px;
+        border-radius: 3px;
+        height: 70px;
+        object-fit: cover;
+    }
+
+    .info_film {
+        padding-left: 8px;
+        float: left;
+
+        h4 {
+            color: #fff;
+            font-size: 14px;
+        }
+        .info_description {
+            color: #696969;
+            font-size: 12px;
+        }
+    }
+}
+
+// cast_film
+// .cast_film {
+//     width: ;
+// }
+.cast_film {
+    height: 170px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #222222;
+
+    .title {
+        color: #ffd700;
+        font-size: 20px;
+    }
+}
+.list_cast {
+    .item_cast {
+        display: flex;
+        flex-direction: column;
+        .image_cast {
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .info_cast {
+            color: #1e90ff;
+        }
+    }
+}

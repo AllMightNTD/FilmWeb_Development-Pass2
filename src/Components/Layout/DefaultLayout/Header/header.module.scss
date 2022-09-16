@@ -1,0 +1,164 @@
+.header_film {
+    --search-button-width: 40px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 61px;
+    display: flex;
+    // text-align: center;
+    align-items: center;
+    background-color: #333333;
+    border-bottom: 1px solid #4d4d4d;
+}
+.navbar_film {
+    display: flex;
+    padding: 0 106px;
+    width: 100%;
+
+    .title_film {
+        font-size: 22px;
+        color: #ff0000;
+        margin-top: 6px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+}
+.List_item-classify {
+    display: flex;
+    margin-left: 20px;
+    list-style: none;
+    color: #b9b9b9;
+}
+.item_classify {
+    color: #b9b9b9;
+    text-decoration: none;
+    list-style: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 14px;
+    margin-top: 16px;
+    text-transform: uppercase;
+    margin-left: 40px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.item_classify:hover {
+    color: red;
+}
+
+// .menu_settings {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     text-align: center;
+//     margin-right: 100px;
+
+//     button {
+//         background-color: transparent;
+//         border: none;
+//     }
+// }
+
+.bar_settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+// Icon Bars
+.bar_menu {
+    margin-left: 36px;
+    background-color: transparent;
+    width: 30px;
+    margin-top: 2px;
+    border: none;
+    outline: none;
+}
+.icon-bars {
+    font-size: 25px;
+    color: #fff;
+}
+.Menu_settings-box {
+    width: 150px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid #bfbfbf;
+    background-color: white;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+.menu_setting-item {
+    text-decoration: none;
+    padding: 5px 10px;
+    color: black;
+}
+.menu_setting-item:hover {
+    background-color: #ccc;
+}
+
+// OPTION MOVIE
+.OptionMovie_box {
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    opacity: 0.8;
+    text-align: left;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 500px;
+    margin-top: 12px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-height: 165px;
+    animation: 0.8 ease-in;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    animation: fadeIn ease-in-out 0.2s;
+
+    .option_link-movie {
+        width: 30%;
+        margin-top: 5px;
+        color: #eee;
+        text-decoration: none;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+// Accounts
+.account_box {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    margin-left: 40px;
+    margin-top: 4px;
+}
+.account {
+    width: 40px;
+    height: 40px;
+    outline: none;
+    background-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    border: 1px solid #eee;
+    box-shadow: 0 0 5px #aaaaaa;
+
+    .icon_account {
+        color: #ccc;
+        font-size: 20px;
+    }
+}
