@@ -315,9 +315,9 @@ function Header() {
                     </Tippy>
                 </div>
                 <div className={cx('account_box')}>
-                    <button className={cx('account')}>
+                    <Link to={'/signUp-Login'} className={cx('account')}>
                         <FontAwesomeIcon icon={faUser} className={cx('icon_account')} />
-                    </button>
+                    </Link>
                 </div>
             </nav>
         </div>

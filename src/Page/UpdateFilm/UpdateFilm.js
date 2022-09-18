@@ -45,10 +45,23 @@ function UpdateFilm() {
 
                 <Form.Group clasName="mb-3" controlId="formBasicPassword">
                     <Form.Label>Category</Form.Label>
-                    <Form.Select aria-label="Default select example" className="ml-4" name="category" required>
+                    <Form.Select aria-label="Default select example" className={cx('ml-4')} name="category" required>
                         <option value="">--Thể Loại --</option>
-                        <option value="love">love</option>
-                        <option value="act">act</option>
+                        <option value="love">Tình Cảm</option>
+                        <option value="act">Hành Động</option>
+                        <option value="detective">Trinh Thám</option>
+                        <option value="legend">Thần Thoại</option>
+                        <option value="music">Âm Nhạc</option>
+                        <option value="science">Khoa Học</option>
+                        <option value="history">Lịch Sử</option>
+                        <option value="hero">Kiếm Hiệp</option>
+                        <option value="adventure">Phiêu Lưu</option>
+                        <option value="cartoon">Hoạt Hình</option>
+                        <option value="war">Chiến Tranh</option>
+                        <option value="criminal">Hình Sự</option>
+                        <option value="horrified">Kinh Dị</option>
+                        <option value="sport">Thể Thao</option>
+                        <option value="school">Học Đường</option>
                     </Form.Select>
                 </Form.Group>
 
