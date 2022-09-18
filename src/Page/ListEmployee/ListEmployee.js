@@ -125,7 +125,7 @@ function ListEmployee() {
                         Thuc hien
                     </button>
                 </div>
-                <Table striped bordered hover className="mt-3">
+                <Table striped bordered hover className={cx('mt-3')}>
                     <thead>
                         <tr>
                             <th></th>
