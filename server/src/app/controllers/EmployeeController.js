@@ -12,6 +12,7 @@ class EmployeeController {
     }
     saveEmployee(req, res, next) {
         // Lưu dữ liệu trên sever
+        console.log(req.body.action);
         const music = new Music(req.body);
         music
             .save()

@@ -40,87 +40,54 @@ function Header() {
                     },
                     {
                         name: 'Thần Thoại',
-                        category: 'love',
+                        category: 'legend',
                     },
                     {
                         name: 'Âm Nhạc',
-                        category: 'love',
+                        category: 'music',
                     },
                     {
                         name: 'Khoa Học',
-                        category: 'love',
+                        category: 'science',
                     },
                     {
                         name: 'Lịch Sử',
-                        category: 'love',
+                        category: 'history',
                     },
                     {
                         name: 'Kiếm Hiệp',
-                        category: 'love',
+                        category: 'hero',
                     },
                     {
                         name: 'Phiêu Lưu',
-                        category: 'love',
+                        category: 'adventure',
                     },
                     {
                         name: 'Hoạt Hình',
-                        category: 'love',
+                        category: 'cartoon',
                     },
-                    {
-                        name: 'Tâm Lý',
-                        category: 'love',
-                    },
+
                     {
                         name: 'Chiến Tranh',
-                        category: 'love',
+                        category: 'war',
                     },
                     {
                         name: 'Hình Sự',
-                        category: 'love',
+                        category: 'criminal',
                     },
-                    {
-                        name: 'Tài Liệu',
-                        category: 'love',
-                    },
-                    {
-                        name: 'Gia Đình',
-                        category: 'love',
-                    },
-                    {
-                        name: 'Thanh Xuân',
-                        category: 'love',
-                    },
+
                     {
                         name: 'Kinh Dị',
-                        category: 'love',
-                    },
-                    {
-                        name: 'Võ Thuật',
-                        category: 'love',
-                    },
-                    {
-                        name: 'TV Show',
-                        category: 'love',
-                    },
-                    {
-                        name: 'Cổ Trang',
-                        category: 'love',
+                        category: 'horrified',
                     },
                     {
                         name: 'Thể Thao',
-                        category: 'love',
+                        category: 'sport',
                     },
-                    {
-                        name: 'Bí Ân',
-                        category: 'love',
-                    },
+
                     {
                         name: 'Học Đường',
-                        category: 'love',
-                    },
-                    {
-                        name: 'Động Vật',
-                        category: 'love',
+                        category: 'school',
                     },
                 ],
             },

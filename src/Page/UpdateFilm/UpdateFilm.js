@@ -43,9 +43,13 @@ function UpdateFilm() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group clasName="mb-3" controlId="formBasicPassword">
                     <Form.Label>Category</Form.Label>
-                    <Form.Control type="text" placeholder={dataFilm.category} name="category" />
+                    <Form.Select aria-label="Default select example" className="ml-4" name="category" required>
+                        <option value="">--Thể Loại --</option>
+                        <option value="love">love</option>
+                        <option value="act">act</option>
+                    </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
