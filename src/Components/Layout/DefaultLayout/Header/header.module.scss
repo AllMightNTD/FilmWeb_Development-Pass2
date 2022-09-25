@@ -8,16 +8,16 @@
     display: flex;
     // text-align: center;
     align-items: center;
-    background-color: #333333;
-    border-bottom: 1px solid #4d4d4d;
+    background: #6699ff;
 }
 .navbar_film {
     display: flex;
-    padding: 0 106px;
-    width: 100%;
+    margin: 0 auto;
+    width: 1024px;
 
     .title_film {
         font-size: 22px;
+        padding-top: 1px;
         color: #ff0000;
         margin-top: 6px;
         font-weight: 700;
@@ -26,12 +26,14 @@
 }
 .List_item-classify {
     display: flex;
+    padding-top: 11px;
     margin-left: 20px;
+    align-items: center;
     list-style: none;
-    color: #b9b9b9;
+    color: #fff;
 }
-.item_classify {
-    color: #b9b9b9;
+.item_link-classify {
+    color: #fff;
     text-decoration: none;
     list-style: none;
     font-weight: 600;
@@ -42,9 +44,6 @@
     margin-left: 40px;
     font-size: 14px;
     cursor: pointer;
-}
-.item_classify:hover {
-    color: red;
 }
 
 // .menu_settings {
@@ -96,35 +95,6 @@
 }
 .menu_setting-item:hover {
     background-color: #ccc;
-}
-
-// OPTION MOVIE
-.OptionMovie_box {
-    background-color: black;
-    display: flex;
-    flex-direction: row;
-    opacity: 0.8;
-    text-align: left;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 500px;
-    margin-top: 12px;
-    padding-top: 5px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    min-height: 165px;
-    animation: 0.8 ease-in;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    animation: fadeIn ease-in-out 0.2s;
-
-    .option_link-movie {
-        width: 30%;
-        margin-top: 5px;
-        color: #eee;
-        text-decoration: none;
-    }
 }
 
 @keyframes fadeIn {

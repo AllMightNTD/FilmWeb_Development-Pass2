@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 const Music = new Schema(
     {
         name: String,
-        description: String,
+        singer: String,
         image: String,
         videoID: String,
         category: String,

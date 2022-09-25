@@ -1,10 +1,11 @@
 .container {
     // Node ở Đây Đã
-    width: 1519px;
+    width: 100%;
     overflow: hidden;
-    height: 3000px;
-    background-color: #333;
+    height: 800px;
+    background: linear-gradient(to right, #659999, #f4791f);
     line-height: 1.428571429;
+    border: none;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -12,6 +13,6 @@
     background-repeat: no-repeat;
 }
 .content {
-    width: 1060px;
+    width: 100%;
     margin: 0 auto;
 }

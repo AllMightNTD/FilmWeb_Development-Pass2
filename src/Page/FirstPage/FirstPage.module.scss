@@ -1,0 +1,33 @@
+.container {
+    width: 100%;
+    height: 630px;
+    margin-top: 61px;
+}
+.image_background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+}
+.btn_next-main {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    bottom: 50px;
+    transform: translateX(-50%);
+    background-color: black;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    padding-top: 14px;
+    cursor: pointer;
+}
+.btn_next-main:hover {
+    background-color: red;
+    color: #fff;
+}

@@ -1,9 +1,11 @@
 .list_film {
-    margin-top: 90px;
-    background-color: #fff;
-    margin-top: 70px;
-    padding: 10px 0;
+    width: 1024px;
+    position: relative;
+    height: 550px;
+    margin: 80px auto 0 auto;
     border-radius: 5px;
+    background-color: #fff;
+    padding: 20px 0;
 }
 .Request_film {
     display: flex;
@@ -34,4 +36,10 @@
             background-color: red;
         }
     }
+}
+.Pagination_page {
+    margin-top: 40px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }

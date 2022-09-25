@@ -1,9 +1,12 @@
+import React from 'react';
 import style from './SignUpAndLogin.module.scss';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import Tippy from '@tippyjs/react/headless';
 function SignIn(props) {
     const cx = classNames.bind(style);
 
@@ -11,6 +14,9 @@ function SignIn(props) {
     const HandleSignUp = () => {
         props.parentCallBack(false);
     };
+
+    const [watchPass, setWatchPass] = useState(false);
+
     return (
         <form className={cx('form_container')} name="Sign-In">
             <h2 className={cx('title')}>Sign In With</h2>
@@ -26,11 +32,29 @@ function SignIn(props) {
             </div>
             <div className={cx('info')}>
                 <label>UserName</label>
-                <input type="text" className={cx('input_text')}></input>
+                <div className={cx('info_text')}>
+                    <input type="text" className={cx('input_text')}></input>
+                </div>
             </div>
             <div className={cx('info')}>
                 <label>Password</label>
-                <input type="password" className={cx('input_text')}></input>
+                <div className={cx('info_text')}>
+                    <input type={watchPass ? 'text' : 'password'} className={cx('input_text')}></input>
+                    <Tippy
+                        placement="bottom"
+                        render={(attrs) => (
+                            <div className={cx('box_tooltip')} tabIndex="-1" {...attrs}>
+                                Check password
+                            </div>
+                        )}
+                    >
+                        <FontAwesomeIcon
+                            icon={faEye}
+                            onClick={() => setWatchPass(!watchPass)}
+                            style={{ cursor: 'pointer' }}
+                        />
+                    </Tippy>
+                </div>
             </div>
             <button type="submit" className={cx('btn_submit')}>
                 Sign in
@@ -38,9 +62,9 @@ function SignIn(props) {
             <div className={cx('sign_up-hear')}>
                 <span>
                     Not have an account ?{' '}
-                    <a href="#" onClick={HandleSignUp}>
+                    <span onClick={HandleSignUp} style={{ color: 'blue', cursor: 'pointer' }}>
                         Sign up here
-                    </a>
+                    </span>
                 </span>
             </div>
         </form>

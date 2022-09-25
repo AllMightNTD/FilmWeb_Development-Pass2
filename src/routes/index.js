@@ -8,8 +8,9 @@ import TrashEmployee from '../Page/TrashEmployee/TrashEmployee';
 import EmployeeCategory from '../Page/EmployeeCategory/EmployeeCategory';
 import WatchMovie from '../Page/WatchMovie';
 import SingUpAndLogin from '../Page/SingUpAndLogin/SingUpAndLogin';
+import FirstPage from '../Page/FirstPage';
 const publicRoutes = [
-    { path: '/', component: Employee },
+    { path: '/', component: FirstPage },
     { path: '/Employee', component: Employee },
     { path: '/create', component: CreatEmployee },
     { path: '/listEmployee', component: ListEmployee },

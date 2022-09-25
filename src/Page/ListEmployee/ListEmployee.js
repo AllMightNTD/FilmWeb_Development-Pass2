@@ -11,6 +11,8 @@ import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Pagination from 'react-bootstrap/Pagination';
+import Container from 'react-bootstrap/Container';
 import $ from 'jquery';
 
 function ListEmployee() {
@@ -40,24 +42,53 @@ function ListEmployee() {
     // DOM
     var usersItemcheckbox = $('input[name="usersID[]"');
     console.log(usersItemcheckbox);
+    const [page, setPage] = useState(1);
+    const [active, setActive] = useState(1);
+    let items = [];
+    for (let number = 1; number <= 5; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number === active} onClick={() => handlePage(number)}>
+                {number}
+            </Pagination.Item>,
+        );
+    }
+
+    const handlePage = (number) => {
+        setActive(number);
+        setPage(number);
+        console.log(number);
+    };
 
     useEffect(() => {
         // Get link lấy ra dữ liệu là 1 object bao gồm 1 mảng và 1 count(số dữ liệu xóa )
         axios
-            .get('http://localhost:5000/me/storedEmloyee')
+            .get(`http://localhost:5000/me/storedEmloyee?page=${page}&type=less`)
             .then((myData) => {
-                console.log(myData);
+                console.log(myData.data);
                 // Set data dữ liệu
-                setDataFilm(myData.data.musics);
-                // Set số dữ liệu xóa
-                setDeletedCount(myData.data.deletedCount);
+                setDataFilm(myData.data);
             })
             .catch(function (error) {
                 console.log(error);
             });
-    }, []);
-    // console.log(id);
+    }, [page]);
 
+    useEffect(() => {
+        // Get link lấy ra dữ liệu là 1 object bao gồm 1 mảng và 1 count(số dữ liệu xóa )
+        axios
+            .get(`http://localhost:5000/me/deleteCount`)
+            .then((myData) => {
+                console.log(myData.data);
+                // Set data dữ liệu
+                setDeletedCount(myData.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }, [deletedCount]);
+
+    // console.log(id);
+    // Xử lý click vào checkAll
     const handleCheckAll = () => {
         setCheckedAll(!checkedAll);
         if (checkedAll == false) {
@@ -70,6 +101,9 @@ function ListEmployee() {
     };
 
     usersItemcheckbox.change(function () {
+        // Lấy ra số lượng input đang check và so sánh với tất cả số lượng các input item
+        // Nếu bằng nhau => checked cái CheckAll
+        // Không bằng nhau thì bỏ check
         var isCheckedAll = usersItemcheckbox.length === $('input[name="usersID[]"]:checked').length;
         console.log(isCheckedAll);
         if (isCheckedAll == false) {
@@ -80,6 +114,7 @@ function ListEmployee() {
         renderExcuteButton();
     });
     function renderExcuteButton() {
+        // Lấy ra số lượng input đang check
         var checkedCount = $('input[name="usersID[]"]:checked').length;
         console.log(checkedCount);
         if (checkedCount > 0) {
@@ -98,6 +133,10 @@ function ListEmployee() {
                             <FontAwesomeIcon icon={faTrash} className={cx('icon_trash')} />({deletedCount})
                         </h3>
                     </a>
+                    <div className={cx('Pagination_page')}>
+                        <Pagination size="sm">{items}</Pagination>
+                        <br />
+                    </div>
                     <Link to="/create" className={cx('button_create-film')} style={{ textDecoration: 'none' }}>
                         <FontAwesomeIcon icon={faSquarePlus} className={cx('icon_create')} />
                         <button>Tạo Phim</button>
@@ -125,7 +164,7 @@ function ListEmployee() {
                         Thuc hien
                     </button>
                 </div>
-                <Table striped bordered hover className={cx('mt-3')}>
+                <Table striped bordered hover className={cx('mt-3 table')}>
                     <thead>
                         <tr>
                             <th></th>

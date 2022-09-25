@@ -48,6 +48,7 @@ function TrashEmployee() {
     // Đang bật thì tắt , đang tắt thì bật
     const handleCheckAll = () => {
         setCheckedAll(!checkedAll);
+        setDisabled(!isDisabled);
 
         if (checkedAll == false) {
             // setDisabled(false);

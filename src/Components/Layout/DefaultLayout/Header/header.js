@@ -19,265 +19,42 @@ function Header() {
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
 
-    const dataA = [
+    const ListItem = [
         {
-            name: 'Thể Loại',
-            to: '/',
-            placement: 'bottom-end',
-            option: {
-                hello: [
-                    {
-                        name: 'Hành Động',
-                        category: 'act',
-                    },
-                    {
-                        name: 'Tình Cảm',
-                        category: 'love',
-                    },
-                    {
-                        name: 'Trinh Thám',
-                        category: 'detective',
-                    },
-                    {
-                        name: 'Thần Thoại',
-                        category: 'legend',
-                    },
-                    {
-                        name: 'Âm Nhạc',
-                        category: 'music',
-                    },
-                    {
-                        name: 'Khoa Học',
-                        category: 'science',
-                    },
-                    {
-                        name: 'Lịch Sử',
-                        category: 'history',
-                    },
-                    {
-                        name: 'Kiếm Hiệp',
-                        category: 'hero',
-                    },
-                    {
-                        name: 'Phiêu Lưu',
-                        category: 'adventure',
-                    },
-                    {
-                        name: 'Hoạt Hình',
-                        category: 'cartoon',
-                    },
-
-                    {
-                        name: 'Chiến Tranh',
-                        category: 'war',
-                    },
-                    {
-                        name: 'Hình Sự',
-                        category: 'criminal',
-                    },
-
-                    {
-                        name: 'Kinh Dị',
-                        category: 'horrified',
-                    },
-                    {
-                        name: 'Thể Thao',
-                        category: 'sport',
-                    },
-
-                    {
-                        name: 'Học Đường',
-                        category: 'school',
-                    },
-                ],
-            },
+            name: 'Rap',
+            category: 'rap',
         },
         {
-            name: 'Quốc Gia',
-            to: '/',
-            placement: 'bottom',
-            option: {
-                hello: [
-                    {
-                        name: 'Anh',
-                        category: 'england',
-                    },
-                    { name: 'Mỹ', category: 'america' },
-                    {
-                        name: 'Canada',
-                        category: 'canada',
-                    },
-                    {
-                        name: 'China',
-                        category: 'china',
-                    },
-                    {
-                        name: 'Hồng Kông',
-                        category: 'england',
-                    },
-                    { name: 'Ấn Độ', category: 'america' },
-                    {
-                        name: 'Hàn Quốc',
-                        category: 'canada',
-                    },
-                    {
-                        name: 'Nga',
-                        category: 'china',
-                    },
-                    {
-                        name: 'Pháp',
-                        category: 'england',
-                    },
-                    { name: 'Đức', category: 'america' },
-                    {
-                        name: 'Thái Lan',
-                        category: 'canada',
-                    },
-                    {
-                        name: 'Tây Ban Nha',
-                        category: 'china',
-                    },
-                ],
-            },
+            name: 'Ballad',
+            category: 'ballad',
         },
         {
-            name: 'Phim Lẻ',
-            to: '/',
-            placement: 'bottom',
-            option: {
-                hello: [
-                    {
-                        name: 'Năm 2019',
-                        category: '2019',
-                    },
-                    { name: 'Năm 2020', category: '2020' },
-                    { name: 'Năm 2021', category: '2021' },
-                    { name: 'Năm 2022', category: '2022' },
-                    {
-                        name: 'Năm 2018',
-                        category: '2019',
-                    },
-                    { name: 'Năm 2017', category: '2020' },
-                    { name: 'Năm 2016', category: '2021' },
-                    { name: 'Năm 2015', category: '2022' },
-                    {
-                        name: 'Năm 2014',
-                        category: '2013',
-                    },
-                    { name: 'Năm 2012', category: '2020' },
-                    { name: 'Năm 2011', category: '2021' },
-                    { name: 'Năm 2010', category: '2022' },
-                ],
-            },
+            name: 'Pop',
+            category: 'pop',
         },
         {
-            name: 'Phim Bộ',
-            to: '/',
-            placement: 'bottom',
-            option: {
-                hello: [
-                    {
-                        name: 'Anh',
-                        category: 'england',
-                    },
-                    { name: 'Mỹ', category: 'america' },
-                    {
-                        name: 'Canada',
-                        category: 'canada',
-                    },
-                    {
-                        name: 'China',
-                        category: 'china',
-                    },
-                ],
-            },
-        },
-        {
-            name: 'Chiếu Rạp',
-            to: '/',
-            visible: false,
-            placement: 'bottom',
-            option: {
-                hello: [
-                    {
-                        category: 'act',
-                    },
-                    {
-                        category: 'love',
-                    },
-                    {
-                        category: 'detective',
-                    },
-                    {
-                        category: 'love',
-                    },
-                ],
-            },
-        },
-        {
-            name: 'Sắp Chiếu',
-            to: '/',
-            visible: false,
-            placement: 'bottom',
-            option: {
-                hello: [
-                    {
-                        category: 'Hành Động',
-                    },
-                    {
-                        category: 'Tình Cảm',
-                    },
-                    {
-                        category: 'Hài Hước',
-                    },
-                    {
-                        category: 'Trinh Thám',
-                    },
-                ],
-            },
+            name: 'Love',
+            category: 'love',
         },
     ];
-
-    dataA.map((data) => {
-        console.log(data.name);
-        data.option.hello.map((data2) => {
-            console.log(data2.name);
-        });
-    });
 
     return (
         <div className={cx('header_film')}>
             <nav className={cx('navbar_film')}>
-                <Link to="/Employee" className={cx('title_film')}>
-                    PHIM 1406
+                <Link to="/" className={cx('title_film')}>
+                    MUSIC VIDEO
                 </Link>
                 <ul className={cx('List_item-classify')}>
-                    {dataA.map((dataOption, index) => (
-                        <Tippy
-                            visible={dataOption.visible}
-                            interactive
-                            placement={dataOption.placement}
-                            render={(attrs) => (
-                                <div className={cx('OptionMovie_box')} tabIndex="-1" {...attrs}>
-                                    {dataOption.option.hello.map((data2) => {
-                                        return (
-                                            <a className={cx('option_link-movie')} href={`/the-loai/${data2.category}`}>
-                                                {data2.name}
-                                            </a>
-                                        );
-                                    })}
-                                </div>
-                            )}
-                        >
-                            <Link
-                                key={index}
-                                to={dataOption.to}
-                                className={cx('item_classify')}
+                    {ListItem.map((item, index) => (
+                        <li>
+                            <a
+                                href={`/the-loai/${item.category}`}
+                                className={cx('item_link-classify')}
                                 style={{ textDecoration: 'none' }}
                             >
-                                {dataOption.name}
-                            </Link>
-                        </Tippy>
+                                {item.name}
+                            </a>
+                        </li>
                     ))}
                 </ul>
 

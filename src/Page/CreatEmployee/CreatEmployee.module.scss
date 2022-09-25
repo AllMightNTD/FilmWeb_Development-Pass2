@@ -1,9 +1,12 @@
 .create_film {
-    margin-top: 90px;
+    width: 1000px;
     position: fixed;
+    left: 50%;
+    top: 15%;
+    right: 50%;
+    transform: translateX(-50%);
     padding-bottom: 20px;
     border-radius: 5px;
-    width: 1000px;
     background-color: #fff;
 }
 // .scrollable {

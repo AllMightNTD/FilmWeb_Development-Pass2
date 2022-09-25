@@ -1,19 +1,56 @@
 // Định nghĩa Controller
 const { deleteModel } = require('mongoose');
 const Music = require('../model/Music');
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 6;
 class MeController {
     // List employee
     // Số dữ liệu xóa : countDocumentDeleted (count)
     // Trả về 1 object bao gồm 1 mảng và 1 count
     storedemployee(req, res, next) {
-        Promise.all([Music.find(), Music.countDocumentsDeleted()]).then(([musics, deletedCount]) => {
-            res.send({
-                musics,
-                deletedCount,
+        var page = req.query.page;
+        if (page) {
+            // Get page
+            // Chuyển sang int
+            page = parseInt(page);
+            // Số lượng bỏ qua
+            var skipNumber = (page - 1) * PAGE_SIZE;
+            Music.find({})
+                .skip(skipNumber)
+                // Số lượng giới hạn
+                .limit(PAGE_SIZE)
+                .then((musics) => {
+                    // Lấy dữ liệu trong model user truyền vào home
+
+                    //  Biến nó thành Object Literal từ Object Constructor
+
+                    // Trọc sang view (render sang view ) truyền data lấy từ model sang view
+                    // view đọc file , logic và render ra màn hình từ đó trọc về browser
+                    res.json(musics);
+                })
+                .catch((error) => next(error));
+        } else {
+            Music.find({}, function (err, musics) {
+                if (!err) {
+                    res.send(musics);
+                } else {
+                    res.status(500).json({ error: 'message' });
+                }
             });
+
+            // res.render('home')
+        }
+    }
+
+    DeletedCountMusic(req, res, next) {
+        Music.countDocumentsDeleted({}, function (err, deletedCount) {
+            if (!err) {
+                res.json(deletedCount);
+            } else {
+                res.status(500).json({ error: 'message' });
+            }
         });
     }
+
     // Tìm danh sách đã xóa bằng findDeleted
     trashemployee(req, res, next) {
         Music.findDeleted({})

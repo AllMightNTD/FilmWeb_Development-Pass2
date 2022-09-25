@@ -10,6 +10,7 @@ const mecontrol = require('../app/controllers/MeController');
 router.use('/trash', mecontrol.trashemployee);
 
 router.use('/storedEmloyee', mecontrol.storedemployee);
+router.use('/deleteCount', mecontrol.DeletedCountMusic);
 // Show theo thể loại
 router.use('/:category', mecontrol.showCategory);
 

@@ -2,7 +2,7 @@ import Footer from './Footer/Footer';
 import Header from './Header/header';
 import style from './DefaultLayout.module.scss';
 import classNames from 'classnames/bind';
-
+import FirstPage from '../../../Page/FirstPage';
 const cx = classNames.bind(style);
 
 function DefaultLayout({ children }) {
