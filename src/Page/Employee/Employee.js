@@ -64,13 +64,13 @@ function Employee() {
             <div className={cx('container-fluid')}>
                 <div className={cx('row')}>
                     {data.map((item, index) => (
-                        <div key={index} className={cx('col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3')}>
+                        <div key={index} className={cx('col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mb-4')}>
                             <Link to={`/MovieDetail/${item.slug}`} className={cx('item_movie')}>
                                 <div className={cx('item_image')}>
                                     <img className={cx('image_movie')} src={item.image} />
                                 </div>
                                 <div className={cx('info')}>
-                                    <p className={cx('title_item')}>{item.name}</p>
+                                    <h3 className={cx('title_item')}>{item.name}</h3>
                                     <span className={cx('actor')}>{item.director}</span>
                                 </div>
                             </Link>

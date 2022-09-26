@@ -13,7 +13,7 @@
 .navbar_film {
     display: flex;
     margin: 0 auto;
-    width: 1024px;
+    max-width: 1200px;
 
     .title_film {
         font-size: 18px;
@@ -149,5 +149,98 @@
     .icon_account {
         color: #ccc;
         font-size: 20px;
+    }
+}
+.bar_menu-icon {
+    font-size: 25px;
+    margin-top: 18px;
+    display: none;
+}
+// media screen
+@media screen and (max-width: 1080px) {
+    .List_item-classify {
+        display: none;
+    }
+    .bar_settings {
+        display: none;
+    }
+    .account_box {
+        display: none;
+    }
+    .bar_menu-icon {
+        display: block;
+        cursor: pointer;
+        margin-bottom: 5px;
+    }
+    .title_film {
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
+}
+
+// Hiển thị trên mobile
+.header_mobile {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    z-index: 22000;
+    background-color: #fff;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    width: 280px;
+    height: 1320px;
+    padding: 20px;
+    animation: fadeIn ease-in-out 0.8s;
+
+    .title_film {
+        text-decoration: none;
+        color: red;
+        font-weight: 700;
+    }
+
+    .List_item-mobile {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        li:hover {
+            width: 90px;
+            padding: 0 5px;
+            background-color: #ffcc00;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+        }
+    }
+
+    .item_link-mobile {
+        text-decoration: none;
+    }
+}
+.info_mobile {
+    display: flex;
+    justify-content: space-around;
+}
+.close_icon {
+    cursor: pointer;
+    font-size: 25px;
+}
+.shadows_block {
+    position: fixed;
+    top: 0;
+    z-index: 20000;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    opacity: 0.5;
+}
+
+@keyframes fadeIn {
+    from {
+        right: -300px;
+    }
+    to {
+        right: 0;
     }
 }

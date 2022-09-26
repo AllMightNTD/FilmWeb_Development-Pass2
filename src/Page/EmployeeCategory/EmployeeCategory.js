@@ -4,7 +4,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import React, { useEffect, useState } from 'react';
 import classnames from 'classnames/bind';
-import MovieItem from '../MovieItem/Item';
 import { useParams } from 'react-router-dom';
 import style from './EmployeeCategory.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
@@ -41,13 +40,23 @@ function EmployeeCategory() {
     console.log(dataFilm);
     return (
         <div className={cx('container')}>
-            <Container fluid="xl" className={cx('mt-2', 'ml-2')}>
-                <Row>
+            <div className={cx('container-fluid')}>
+                <div className={cx('row')}>
                     {dataFilm.map((item, index) => (
-                        <MovieItem key={index} data={item} />
+                        <div key={index} className={cx('col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3')}>
+                            <Link to={`/MovieDetail/${item.slug}`} className={cx('item_movie')}>
+                                <div className={cx('item_image')}>
+                                    <img className={cx('image_movie')} src={item.image} />
+                                </div>
+                                <div className={cx('info')}>
+                                    <h3 className={cx('title_item')}>{item.name}</h3>
+                                    <span className={cx('actor')}>{item.director}</span>
+                                </div>
+                            </Link>
+                        </div>
                     ))}
-                </Row>
-            </Container>
+                </div>
+            </div>
             <div className={cx('Pagination_page')}>
                 <Pagination size="sm">{items}</Pagination>
                 <br />
