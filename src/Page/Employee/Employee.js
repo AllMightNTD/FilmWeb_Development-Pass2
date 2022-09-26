@@ -3,7 +3,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import MovieItem from '../MovieItem/Item';
 import classnames from 'classnames/bind';
 import style from './Employee.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
@@ -49,7 +48,10 @@ function Employee() {
     return (
         <div className={cx('container')}>
             <div className={cx('Popular')}>
-                <img src="https://s3.cloud.cmctelecom.vn/tinhte1/2016/07/3795952_maxresdefault_6.jpg"></img>
+                <img
+                    src="https://s3.cloud.cmctelecom.vn/tinhte1/2016/07/3795952_maxresdefault_6.jpg"
+                    className={cx('image_popular')}
+                ></img>
                 <div className={cx('infor')}>
                     <h2 className={cx('name')}>The Legend of Tarzan</h2>
                     <p className={cx('description')}>Forum with second hard attack</p>
@@ -59,13 +61,23 @@ function Employee() {
                     </a>
                 </div>
             </div>
-            <Container fluid="xl" className={cx('mt-2', 'container_content')}>
-                <Row className={cx('Row_content')}>
+            <div className={cx('container-fluid')}>
+                <div className={cx('row')}>
                     {data.map((item, index) => (
-                        <MovieItem key={index} data={item} />
+                        <div key={index} className={cx('col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3')}>
+                            <Link to={`/MovieDetail/${item.slug}`} className={cx('item_movie')}>
+                                <div className={cx('item_image')}>
+                                    <img className={cx('image_movie')} src={item.image} />
+                                </div>
+                                <div className={cx('info')}>
+                                    <p className={cx('title_item')}>{item.name}</p>
+                                    <span className={cx('actor')}>{item.director}</span>
+                                </div>
+                            </Link>
+                        </div>
                     ))}
-                </Row>
-            </Container>
+                </div>
+            </div>
             <div className={cx('Pagination_page')}>
                 <Pagination size="sm">{items}</Pagination>
                 <br />

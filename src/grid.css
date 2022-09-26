@@ -1,13 +1,3 @@
-.card {
-    width: 18rem;
-    height: 545px;
-    overflow: hidden;
-}
-.card-img-top {
-    width: 100%;
-    height: 424px;
-    object-fit: cover;
-}
 .grid {
     width: 100%;
     display: block;
