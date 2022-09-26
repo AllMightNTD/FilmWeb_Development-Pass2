@@ -15,10 +15,25 @@ function CreatEmployee() {
                 </Form.Group>
 
                 <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
-                    <Form.Label>Singer</Form.Label>
-                    <Form.Control type="text" placeholder="Singer" name="singer" />
+                    <Form.Label>Director</Form.Label>
+                    <Form.Control type="text" placeholder="Director" name="director" />
                 </Form.Group>
-
+                <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
+                    <Form.Label>Writer</Form.Label>
+                    <Form.Control type="text" placeholder="Director" name="writer" />
+                </Form.Group>
+                <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
+                    <Form.Label>TimeMovie</Form.Label>
+                    <Form.Control type="text" placeholder="timeMovie" name="timeMovie" />
+                </Form.Group>
+                <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control as="textarea" rows={3} placeholder="describe" name="describe" />
+                </Form.Group>
+                <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
+                    <Form.Label>Main Actor</Form.Label>
+                    <Form.Control type="text" placeholder="mainActor" name="mainActor" />
+                </Form.Group>
                 <Form.Group className={cx('mb-3 scrollable')} controlId="formBasicPassword">
                     <Form.Label>Category</Form.Label>
                     <Form.Select aria-label="Default select example" className={cx('ml-4')} name="category" required>

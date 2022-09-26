@@ -8,7 +8,7 @@
     display: flex;
     // text-align: center;
     align-items: center;
-    background: #6699ff;
+    background: #fff;
 }
 .navbar_film {
     display: flex;
@@ -16,10 +16,10 @@
     width: 1024px;
 
     .title_film {
-        font-size: 22px;
+        font-size: 18px;
         padding-top: 1px;
         color: #ff0000;
-        margin-top: 6px;
+        margin-top: 16px;
         font-weight: 700;
         text-decoration: none;
     }
@@ -30,20 +30,39 @@
     margin-left: 20px;
     align-items: center;
     list-style: none;
-    color: #fff;
+    color: #666666;
+
+    li {
+        margin-top: 8px;
+        margin-left: 20px;
+        text-align: center;
+        align-items: center;
+    }
+
+    li:hover {
+        background-color: #ffcc00;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+    }
 }
 .item_link-classify {
-    color: #fff;
+    color: #666666;
     text-decoration: none;
     list-style: none;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 1px;
+    padding: 5px 10px;
     line-height: 14px;
-    margin-top: 16px;
-    text-transform: uppercase;
-    margin-left: 40px;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    text-align: center;
     cursor: pointer;
+}
+.name_option {
+    margin-left: 6px;
 }
 
 // .menu_settings {
@@ -75,7 +94,7 @@
 }
 .icon-bars {
     font-size: 25px;
-    color: #fff;
+    color: #666666;
 }
 .Menu_settings-box {
     width: 150px;
@@ -112,7 +131,7 @@
     height: 40px;
     background-color: transparent;
     margin-left: 40px;
-    margin-top: 4px;
+    margin-top: 10px;
 }
 .account {
     width: 40px;

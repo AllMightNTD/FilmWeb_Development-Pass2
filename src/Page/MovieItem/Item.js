@@ -9,16 +9,16 @@ const cx = classnames.bind(style);
 function MovieItem({ data }) {
     return (
         <Col xl={3} lg={3} md={3} sm={4} xs={12} className={cx('col_item')}>
-            <div key={data.id} className={cx('block_data')}>
-                <Link className={cx('Link_image')} to={`/MovieDetail/${data.slug}`}>
+            <Link to={`/MovieDetail/${data.slug}`} key={data.id} className={cx('block_data')}>
+                <div className={cx('Link_image')}>
                     <img className={cx('image_movie')} src={data.image} alt={data.name} />
-                </Link>
+                </div>
 
-                <Link to={`/MovieDetail/${data.slug}`} style={{ textDecoration: 'none' }} className={cx('info_movie')}>
+                <div style={{ textDecoration: 'none' }} className={cx('info_movie')}>
                     <p className={cx('title_movie')}>{data.name}</p>
-                    <span className={cx('description_movie')}>{data.description}</span>
-                </Link>
-            </div>
+                    <span className={cx('description_movie')}>{data.mainActor}</span>
+                </div>
+            </Link>
         </Col>
     );
 }

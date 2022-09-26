@@ -7,7 +7,11 @@ const Schema = mongoose.Schema;
 const Music = new Schema(
     {
         name: String,
-        singer: String,
+        director: String,
+        writer: String,
+        timeMovie: String,
+        describe: String,
+        mainActor: String,
         image: String,
         videoID: String,
         category: String,

@@ -31,16 +31,22 @@ function UpdateFilm() {
                     <Form.Label> Name</Form.Label>
                     <Form.Control type="text" placeholder={dataFilm.name} name="name" />
                 </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label> Director</Form.Label>
+                    <Form.Control type="text" placeholder={dataFilm.director} name="director" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label> Main Actor</Form.Label>
+                    <Form.Control type="text" placeholder={dataFilm.mainActor} name="mainActor" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label> Writer</Form.Label>
+                    <Form.Control type="text" placeholder={dataFilm.writer} name="writer" />
+                </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Description</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows={2}
-                        type="text"
-                        placeholder={dataFilm.description}
-                        name="description"
-                    />
+                    <Form.Control as="textarea" rows={2} type="text" placeholder={dataFilm.describe} name="describe" />
                 </Form.Group>
 
                 <Form.Group clasName="mb-3" controlId="formBasicPassword">

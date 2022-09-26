@@ -9,6 +9,8 @@ import style from './Employee.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 function Employee() {
     const cx = classnames.bind(style);
@@ -46,6 +48,17 @@ function Employee() {
     }, [page]);
     return (
         <div className={cx('container')}>
+            <div className={cx('Popular')}>
+                <img src="https://s3.cloud.cmctelecom.vn/tinhte1/2016/07/3795952_maxresdefault_6.jpg"></img>
+                <div className={cx('infor')}>
+                    <h2 className={cx('name')}>The Legend of Tarzan</h2>
+                    <p className={cx('description')}>Forum with second hard attack</p>
+                    <a className={cx('btn_move')}>
+                        Watch Trailer
+                        <FontAwesomeIcon icon={faPlay} className={cx('icon_play')} />
+                    </a>
+                </div>
+            </div>
             <Container fluid="xl" className={cx('mt-2', 'container_content')}>
                 <Row className={cx('Row_content')}>
                     {data.map((item, index) => (

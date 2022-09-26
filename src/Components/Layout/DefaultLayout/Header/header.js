@@ -8,8 +8,17 @@ import { useEffect, useState } from 'react';
 import style from './header.module.scss';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faEllipsisVertical, faSpinner, faUser } from '@fortawesome/free-solid-svg-icons';
-
+import {
+    faMagnifyingGlass,
+    faEllipsisVertical,
+    faSpinner,
+    faUser,
+    faVideo,
+    faEye,
+    faFilm,
+    faFileVideo,
+} from '@fortawesome/free-solid-svg-icons';
+import Logo from '../../../../Logo/Capture.PNG';
 import VideoItem from '../../../SearchVideoItem';
 import Search from '../../Search';
 const cx = classnames.bind(style);
@@ -21,18 +30,22 @@ function Header() {
 
     const ListItem = [
         {
+            icon: <FontAwesomeIcon icon={faVideo} />,
             name: 'Rap',
             category: 'rap',
         },
         {
+            icon: <FontAwesomeIcon icon={faEye} />,
             name: 'Ballad',
             category: 'ballad',
         },
         {
+            icon: <FontAwesomeIcon icon={faFilm} />,
             name: 'Pop',
             category: 'pop',
         },
         {
+            icon: <FontAwesomeIcon icon={faFileVideo} />,
             name: 'Love',
             category: 'love',
         },
@@ -52,7 +65,8 @@ function Header() {
                                 className={cx('item_link-classify')}
                                 style={{ textDecoration: 'none' }}
                             >
-                                {item.name}
+                                {item.icon}
+                                <span className={cx('name_option')}> {item.name}</span>
                             </a>
                         </li>
                     ))}
