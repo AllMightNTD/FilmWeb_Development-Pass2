@@ -13,15 +13,53 @@
 .navbar_film {
     display: flex;
     margin: 0 auto;
-    max-width: 1200px;
-
+    width: 1200px;
+    justify-content: space-around;
+}
+.option_left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     .title_film {
         font-size: 18px;
-        padding-top: 1px;
         color: #ff0000;
-        margin-top: 16px;
         font-weight: 700;
         text-decoration: none;
+    }
+}
+
+.nav_bar-option {
+    display: flex;
+}
+.option_PC-right {
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    // Accounts
+    .account_box {
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+    }
+    .account {
+        width: 100%;
+        height: 100%;
+        outline: none;
+        background-color: transparent;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        border: 1px solid #eee;
+        box-shadow: 0 0 5px #aaaaaa;
+
+        .icon_account {
+            color: #ccc;
+            font-size: 20px;
+        }
     }
 }
 .List_item-classify {
@@ -125,32 +163,6 @@
     }
 }
 
-// Accounts
-.account_box {
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    margin-left: 40px;
-    margin-top: 10px;
-}
-.account {
-    width: 40px;
-    height: 40px;
-    outline: none;
-    background-color: transparent;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    border: 1px solid #eee;
-    box-shadow: 0 0 5px #aaaaaa;
-
-    .icon_account {
-        color: #ccc;
-        font-size: 20px;
-    }
-}
 .bar_menu-icon {
     font-size: 25px;
     margin-top: 18px;
@@ -158,20 +170,41 @@
 }
 // media screen
 @media screen and (max-width: 1080px) {
-    .List_item-classify {
-        display: none;
-    }
-    .bar_settings {
-        display: none;
-    }
-    .account_box {
-        display: none;
-    }
-    .bar_menu-icon {
+    .nav_mobile {
         display: block;
-        cursor: pointer;
-        margin-bottom: 5px;
     }
+    .navbar_film {
+        position: relative;
+        display: flex;
+        align-items: center;
+        .option_left {
+            position: absolute;
+            left: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-bottom: 6px;
+            .title_film {
+                margin-top: 16px;
+            }
+        }
+
+        .option_PC-right {
+            display: flex;
+            position: absolute;
+            right: 10px;
+            bottom: -20px;
+        }
+        .bar_menu-icon {
+            cursor: pointer;
+            display: block;
+            margin-bottom: 10px;
+        }
+    }
+    .nav_bar-option {
+        display: none;
+    }
+
     .title_film {
         margin-right: 20px;
         margin-bottom: 10px;
@@ -179,52 +212,91 @@
 }
 
 // Hiển thị trên mobile
-.header_mobile {
+.nav_mobile {
     display: none;
     flex-direction: column;
     position: fixed;
-    right: 0;
+    left: 0;
+    padding: 20px 0;
     z-index: 22000;
     background-color: #fff;
     box-shadow: 10px 10px 5px #aaaaaa;
     width: 280px;
     height: 1320px;
-    padding: 20px;
     animation: fadeIn ease-in-out 0.8s;
 
-    .title_film {
-        text-decoration: none;
-        color: red;
-        font-weight: 700;
+    .search_mobile {
+        position: relative;
+        top: 50px;
+        display: flex;
+        align-items: center;
+        text-align: center;
     }
 
     .List_item-mobile {
+        margin-top: 100px;
         display: flex;
+        padding-left: 10px;
+        padding-top: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        width: 100%;
         flex-direction: column;
         list-style: none;
-        li:hover {
-            width: 90px;
-            padding: 0 5px;
-            background-color: #ffcc00;
-            border-bottom-left-radius: 25px;
-            border-bottom-right-radius: 25px;
-            border-top-left-radius: 25px;
-            border-top-right-radius: 25px;
+
+        li {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        li:hover .item_link-mobile {
+            color: #ffcc00;
         }
     }
 
     .item_link-mobile {
+        position: relative;
+        color: #666666;
         text-decoration: none;
+        list-style: none;
+        font-weight: 700;
+        letter-spacing: 1px;
+
+        line-height: 14px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+
+        .name_option {
+            position: absolute;
+            left: 28px;
+        }
     }
 }
+// Title và Bar icon
 .info_mobile {
     display: flex;
+    position: relative;
     justify-content: space-around;
+    .title_film {
+        position: absolute;
+        left: 10px;
+        text-decoration: none;
+        color: red;
+        font-weight: 700;
+    }
+    .close_icon {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        font-size: 25px;
+    }
 }
-.close_icon {
-    cursor: pointer;
-    font-size: 25px;
-}
+
+// Lớp phủ
 .shadows_block {
     position: fixed;
     top: 0;
@@ -238,7 +310,7 @@
 
 @keyframes fadeIn {
     from {
-        right: -300px;
+        left: -300px;
     }
     to {
         right: 0;

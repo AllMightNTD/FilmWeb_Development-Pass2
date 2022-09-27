@@ -23,6 +23,7 @@ import {
 import Logo from '../../../../Logo/Capture.PNG';
 import VideoItem from '../../../SearchVideoItem';
 import Search from '../../Search';
+import UseWindowDemension from '../../../../hooks/useWindowDemension';
 const cx = classnames.bind(style);
 
 function Header() {
@@ -54,6 +55,16 @@ function Header() {
     ];
     const [isclose, setClose] = useState(false);
     const [iscloseShadow, setiscloseShadow] = useState(false);
+
+    // Lấy ra độ rộng của màn hình
+    const { width, height } = UseWindowDemension();
+    useEffect(() => {
+        if (width > 1080) {
+            setClose(false);
+            setiscloseShadow(false);
+        }
+    }, [width]);
+
     const handleClose = () => {
         setiscloseShadow(false);
         setClose(false);
@@ -62,74 +73,80 @@ function Header() {
         setiscloseShadow(true);
         setClose(!isclose);
     };
+
     const handleCloseShadow = () => {
         setiscloseShadow(!iscloseShadow);
-        setClose(!isclose);
+        setClose(false);
     };
     console.log(isclose);
     return (
         <div>
             <div className={cx('header_film')}>
                 <nav className={cx('navbar_film')}>
-                    <Link to="/" className={cx('title_film')}>
-                        MUSIC VIDEO
-                    </Link>
-                    <ul className={cx('List_item-classify')}>
-                        {ListItem.map((item, index) => (
-                            <li>
-                                <a
-                                    href={`/the-loai/${item.category}`}
-                                    className={cx('item_link-classify')}
-                                    style={{
-                                        textDecoration: 'none',
-                                    }}
-                                >
-                                    {item.icon}
-                                    <span className={cx('name_option')}> {item.name}</span>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-
-                    {/* Search */}
-                    {<Search />}
-
-                    <div className={cx('bar_settings')}>
-                        <Tippy
-                            interactive
-                            visible={visible}
-                            onClickOutside={hide}
-                            placement="bottom-start"
-                            render={(attrs) => (
-                                <div className={cx('Menu_settings-box')} tabIndex="-1" {...attrs}>
-                                    <Link
-                                        to="/listEmployee"
-                                        className={cx('menu_setting-item')}
-                                        style={{ textDecoration: 'none' }}
-                                    >
-                                        Information
-                                    </Link>
-                                    <Link
-                                        to="/create"
-                                        className={cx('menu_setting-item')}
-                                        style={{ textDecoration: 'none' }}
-                                    >
-                                        Create
-                                    </Link>
-                                </div>
-                            )}
-                        >
-                            <button onClick={visible ? hide : show} className={cx('bar_menu')}>
-                                <FontAwesomeIcon icon={faEllipsisVertical} className={cx('icon-bars')} />
-                            </button>
-                        </Tippy>
-                    </div>
-                    <div className={cx('account_box')}>
-                        <Link to={'/signUp-Login'} className={cx('account')}>
-                            <FontAwesomeIcon icon={faUser} className={cx('icon_account')} />
+                    <div className={cx('option_left')}>
+                        <Link to="/" className={cx('title_film')}>
+                            MUSIC VIDEO
                         </Link>
+                        <FontAwesomeIcon icon={faBars} className={cx('bar_menu-icon')} onClick={handleOpenBar} />
                     </div>
-                    <FontAwesomeIcon icon={faBars} className={cx('bar_menu-icon')} onClick={handleOpenBar} />
+                    <div className={cx('nav_bar-option')}>
+                        <ul className={cx('List_item-classify')}>
+                            {ListItem.map((item, index) => (
+                                <li>
+                                    <a
+                                        href={`/the-loai/${item.category}`}
+                                        className={cx('item_link-classify')}
+                                        style={{
+                                            textDecoration: 'none',
+                                        }}
+                                    >
+                                        {item.icon}
+                                        <span className={cx('name_option')}> {item.name}</span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+
+                        {/* Search */}
+                        {<Search />}
+                    </div>
+                    <div className={cx('option_PC-right')}>
+                        <div className={cx('bar_settings')}>
+                            <Tippy
+                                interactive
+                                visible={visible}
+                                onClickOutside={hide}
+                                placement="bottom-start"
+                                render={(attrs) => (
+                                    <div className={cx('Menu_settings-box')} tabIndex="-1" {...attrs}>
+                                        <Link
+                                            to="/listEmployee"
+                                            className={cx('menu_setting-item')}
+                                            style={{ textDecoration: 'none' }}
+                                        >
+                                            Information
+                                        </Link>
+                                        <Link
+                                            to="/create"
+                                            className={cx('menu_setting-item')}
+                                            style={{ textDecoration: 'none' }}
+                                        >
+                                            Create
+                                        </Link>
+                                    </div>
+                                )}
+                            >
+                                <button onClick={visible ? hide : show} className={cx('bar_menu')}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} className={cx('icon-bars')} />
+                                </button>
+                            </Tippy>
+                        </div>
+                        <div className={cx('account_box')}>
+                            <Link to={'/signUp-Login'} className={cx('account')}>
+                                <FontAwesomeIcon icon={faUser} className={cx('icon_account')} />
+                            </Link>
+                        </div>
+                    </div>
                 </nav>
             </div>
             {/* Hiện thị trên màn anh nhỏ */}
@@ -138,52 +155,26 @@ function Header() {
                 style={{ display: `${iscloseShadow ? 'block' : 'none'}` }}
                 onClick={handleCloseShadow}
             ></div>
-            <nav className={cx('header_mobile')} style={{ display: `${isclose ? 'flex' : 'none'}` }}>
+            {/* Bật tắt nav_mobile */}
+            <nav className={cx('nav_mobile')} style={{ display: `${isclose ? 'flex' : 'none'}` }}>
                 <div className={cx('info_mobile')}>
+                    <FontAwesomeIcon icon={faClose} className={cx('close_icon')} onClick={handleClose} />
                     <Link to="/" className={cx('title_film')}>
                         MUSIC VIDEO
                     </Link>
-                    <div className={cx('bar_settings')}>
-                        <Tippy
-                            interactive
-                            visible={visible}
-                            onClickOutside={hide}
-                            placement="bottom-start"
-                            render={(attrs) => (
-                                <div className={cx('Menu_settings-box')} tabIndex="-1" {...attrs}>
-                                    <Link
-                                        to="/listEmployee"
-                                        className={cx('menu_setting-item')}
-                                        style={{ textDecoration: 'none' }}
-                                    >
-                                        Information
-                                    </Link>
-                                    <Link
-                                        to="/create"
-                                        className={cx('menu_setting-item')}
-                                        style={{ textDecoration: 'none' }}
-                                    >
-                                        Create
-                                    </Link>
-                                </div>
-                            )}
-                        >
-                            <button onClick={visible ? hide : show} className={cx('bar_menu')}>
-                                <FontAwesomeIcon icon={faEllipsisVertical} className={cx('icon-bars')} />
-                            </button>
-                        </Tippy>
-                    </div>
-                    <FontAwesomeIcon icon={faClose} className={cx('close_icon')} onClick={handleClose} />
+                </div>
+                <div className={cx('search_mobile')}>
+                    <Search />
                 </div>
                 <ul className={cx('List_item-mobile')}>
                     {ListItem.map((item, index) => (
                         <li>
                             <a
                                 href={`/the-loai/${item.category}`}
-                                className={cx('item_link-classify')}
+                                className={cx('item_link-mobile')}
                                 style={{ textDecoration: 'none' }}
                             >
-                                {item.icon}
+                                <div className={cx('icon_option')}> {item.icon}</div>
                                 <span className={cx('name_option')}> {item.name}</span>
                             </a>
                         </li>

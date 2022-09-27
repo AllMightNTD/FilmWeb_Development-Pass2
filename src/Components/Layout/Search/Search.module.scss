@@ -1,6 +1,6 @@
 .search {
     position: relative;
-    width: 320px;
+    width: 240px;
     height: 30px;
     margin-left: 40px;
     margin-top: 15px;
@@ -70,7 +70,7 @@
 
 // Search_result
 .search_result {
-    width: 340px;
+    width: 240px;
     min-height: 129px;
     max-height: 350px;
     padding: 12px;
@@ -103,6 +103,27 @@
 
 @media screen and (max-width: 1080px) {
     .search {
-        display: none;
+        position: absolute;
+        right: 20px;
+        padding-right: 10px;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            right: 34px;
+            height: 20px;
+            width: 1px;
+            background-color: #999999;
+        }
+    }
+    .clear {
+        position: absolute;
+        right: 40px;
+        border: none;
+        outline: none;
+        top: 50%;
+        color: #999999;
+        background-color: transparent;
     }
 }
