@@ -95,7 +95,7 @@ function TrashEmployee() {
                     <FontAwesomeIcon icon={faList} />
                     <p>Danh sách phim</p>
                 </a>
-                <div className="d-flex mb-4">
+                <div className={cx('d-flex mb-4')} style={{ alignItems: 'center' }}>
                     <Form.Check
                         type="checkbox"
                         checked={checkedAll}
@@ -105,7 +105,13 @@ function TrashEmployee() {
                         // Hàm xử lý check ALL được gọi khi click
                         onChange={handleCheckAll}
                     />
-                    <Form.Select aria-label="Default select example" className="ml-4" name="action" required>
+                    <Form.Select
+                        aria-label="Default select example"
+                        className={cx('ml-4')}
+                        name="action"
+                        style={{ width: '200px', marginLeft: '10px', marginRight: '10px' }}
+                        required
+                    >
                         <option value="">--Hành Động --</option>
                         <option value="restore">Khôi Phục</option>
                     </Form.Select>

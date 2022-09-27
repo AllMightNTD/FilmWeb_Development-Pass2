@@ -9,7 +9,15 @@ import Pagination from 'react-bootstrap/Pagination';
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCircleChevronRight,
+    faClock,
+    faClockFour,
+    faClockRotateLeft,
+    faPlay,
+    faStar,
+    faUserClock,
+} from '@fortawesome/free-solid-svg-icons';
 
 function Employee() {
     const cx = classnames.bind(style);
@@ -69,9 +77,27 @@ function Employee() {
                                 <div className={cx('item_image')}>
                                     <img className={cx('image_movie')} src={item.image} />
                                 </div>
-                                <div className={cx('info')}>
-                                    <h3 className={cx('title_item')}>{item.name}</h3>
-                                    <span className={cx('actor')}>{item.director}</span>
+                                <div className={cx('infor_item-movie')}>
+                                    <h5 className={cx('title_movie-item')}>{item.name}</h5>
+                                    <span className={cx('actor_movie-item')}>{item.director}</span>
+                                    <div className={cx('time_zone-item')}>
+                                        <div className={cx('all_block-zone')}>
+                                            <div className={cx('time_item')}>
+                                                <FontAwesomeIcon
+                                                    icon={faClockRotateLeft}
+                                                    className={cx('clock_icons')}
+                                                />
+                                                <span className={cx('time')}>{item.timeMovie}</span>
+                                            </div>
+                                            <div className={cx('stars_movie-item')}>
+                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
+                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
+                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
+                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
+                                            </div>
+                                        </div>
+                                        <FontAwesomeIcon icon={faCircleChevronRight} className={cx('next_icon')} />
+                                    </div>
                                 </div>
                             </Link>
                         </div>

@@ -6,12 +6,12 @@ function FirstPage() {
     return (
         <div className={cx('container')}>
             <img
-                src="https://img5.thuthuatphanmem.vn/uploads/2021/11/17/anh-nen-dung-cu-am-nhac_013831252.jpg"
+                src="https://wallpaperaccess.com/full/1089112.jpg"
                 className={cx('image_background')}
                 alt="background-music"
             ></img>
             <a className={cx('btn_next-main')} href="/employee">
-                <span>GO TO MUSIC</span>
+                <span>GO TO MOVIE</span>
             </a>
         </div>
     );

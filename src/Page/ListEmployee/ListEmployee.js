@@ -133,16 +133,12 @@ function ListEmployee() {
                             <FontAwesomeIcon icon={faTrash} className={cx('icon_trash')} />({deletedCount})
                         </h3>
                     </a>
-                    <div className={cx('Pagination_page')}>
-                        <Pagination size="sm">{items}</Pagination>
-                        <br />
-                    </div>
                     <Link to="/create" className={cx('button_create-film')} style={{ textDecoration: 'none' }}>
                         <FontAwesomeIcon icon={faSquarePlus} className={cx('icon_create')} />
                         <button>Tạo Phim</button>
                     </Link>
                 </div>
-                <div className="d-flex">
+                <div className={cx('d-flex')} style={{ alignItems: 'center' }}>
                     <Form.Check
                         type="checkbox"
                         checked={checkedAll}
@@ -151,7 +147,7 @@ function ListEmployee() {
                         style={{ marginLeft: '20px' }}
                         onChange={handleCheckAll}
                     />
-                    <Form.Select aria-label="Default select example" className="ml-4" name="action" required>
+                    <Form.Select className={cx('select_option-form')} name="action" style={{ width: '200px' }} required>
                         <option value="">--Hành Động --</option>
                         <option value="delete">Xóa</option>
                     </Form.Select>
@@ -210,6 +206,10 @@ function ListEmployee() {
                         }
                     </tbody>
                 </Table>
+                <div className={cx('Pagination_page')}>
+                    <Pagination size="sm">{items}</Pagination>
+                    <br />
+                </div>
 
                 {
                     <Modal show={show} onHide={handleClose}>

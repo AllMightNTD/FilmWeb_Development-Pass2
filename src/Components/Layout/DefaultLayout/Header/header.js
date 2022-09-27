@@ -85,7 +85,7 @@ function Header() {
                 <nav className={cx('navbar_film')}>
                     <div className={cx('option_left')}>
                         <Link to="/" className={cx('title_film')}>
-                            MUSIC VIDEO
+                            NTD FILM
                         </Link>
                         <FontAwesomeIcon icon={faBars} className={cx('bar_menu-icon')} onClick={handleOpenBar} />
                     </div>
@@ -160,7 +160,7 @@ function Header() {
                 <div className={cx('info_mobile')}>
                     <FontAwesomeIcon icon={faClose} className={cx('close_icon')} onClick={handleClose} />
                     <Link to="/" className={cx('title_film')}>
-                        MUSIC VIDEO
+                        FiLms NtD
                     </Link>
                 </div>
                 <div className={cx('search_mobile')}>

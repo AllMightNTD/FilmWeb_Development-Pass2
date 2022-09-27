@@ -1,9 +1,36 @@
 .create_film {
     width: 1000px;
-    margin: 80px auto;
-    padding-bottom: 20px;
+    position: fixed;
+    overflow: hidden;
+    border: 1px solid black;
+    top: 80px;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
     border-radius: 5px;
-    background-color: #fff;
+    background-color: beige;
+}
+
+.container_form {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+}
+.form_block {
+    display: flex;
+
+    .form_block-2 {
+        padding-left: 15px;
+    }
+}
+.block_submit {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.text_input {
+    width: 470px;
 }
 // .scrollable {
 //     overflow: auto;

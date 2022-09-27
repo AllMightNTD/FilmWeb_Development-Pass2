@@ -24,15 +24,6 @@
     transition: all 0.2s ease-in-out;
 }
 
-@keyframes fadeIn {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.1);
-    }
-}
-
 .info_video {
     position: relative;
     left: 10px;

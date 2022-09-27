@@ -1,10 +1,14 @@
 .list_film {
     width: 1024px;
-    position: relative;
+    position: fixed;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
     height: 550px;
+    border: 1px solid black;
     margin: 80px auto 0 auto;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: beige;
     padding: 20px 0;
 }
 .Request_film {
@@ -37,8 +41,12 @@
         }
     }
 }
+.select_option-form {
+    width: 200px;
+    margin: 0 10px;
+}
 .Pagination_page {
-    margin-top: 40px;
+    margin-top: 10px 0;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
