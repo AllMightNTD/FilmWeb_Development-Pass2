@@ -1,5 +1,5 @@
 .list_film {
-    width: 1024px;
+    width: 700px;
     position: fixed;
     left: 50%;
     right: 50%;
@@ -50,4 +50,12 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+}
+@media screen and (max-width: 733) {
+    .category {
+        display: none;
+    }
+    .create_time {
+        display: none;
+    }
 }

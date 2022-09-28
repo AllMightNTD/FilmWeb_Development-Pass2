@@ -7,6 +7,7 @@ import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
+import { useEffect } from 'react';
 function SignIn(props) {
     const cx = classNames.bind(style);
 
@@ -18,7 +19,7 @@ function SignIn(props) {
     const [watchPass, setWatchPass] = useState(false);
 
     return (
-        <form className={cx('form_container')} name="Sign-In">
+        <>
             <h2 className={cx('title')}>Sign In With</h2>
             <div className={cx('form_connect-social')}>
                 <div className={cx('facebook')}>
@@ -31,31 +32,31 @@ function SignIn(props) {
                 </div>
             </div>
             <div className={cx('info')}>
-                <label>UserName</label>
-                <div className={cx('info_text')}>
-                    <input type="text" className={cx('input_text')}></input>
-                </div>
+                <input type="text" placeholder="UseName" className={cx('input_text')}></input>
             </div>
             <div className={cx('info')}>
-                <label>Password</label>
-                <div className={cx('info_text')}>
-                    <input type={watchPass ? 'text' : 'password'} className={cx('input_text')}></input>
-                    <Tippy
-                        placement="bottom"
-                        render={(attrs) => (
-                            <div className={cx('box_tooltip')} tabIndex="-1" {...attrs}>
-                                Check password
-                            </div>
-                        )}
-                    >
-                        <FontAwesomeIcon
-                            icon={faEye}
-                            onClick={() => setWatchPass(!watchPass)}
-                            style={{ cursor: 'pointer' }}
-                        />
-                    </Tippy>
-                </div>
+                <input
+                    type={watchPass ? 'text' : 'password'}
+                    placeholder="Password"
+                    className={cx('input_text')}
+                ></input>
+                <Tippy
+                    placement="bottom"
+                    render={(attrs) => (
+                        <div className={cx('box_tooltip')} tabIndex="-1" {...attrs}>
+                            Check password
+                        </div>
+                    )}
+                >
+                    <FontAwesomeIcon
+                        className={cx('icon_checkPass')}
+                        icon={faEye}
+                        onClick={() => setWatchPass(!watchPass)}
+                        style={{ cursor: 'pointer' }}
+                    />
+                </Tippy>
             </div>
+
             <button type="submit" className={cx('btn_submit')}>
                 Sign in
             </button>
@@ -67,7 +68,7 @@ function SignIn(props) {
                     </span>
                 </span>
             </div>
-        </form>
+        </>
     );
 }
 export default SignIn;

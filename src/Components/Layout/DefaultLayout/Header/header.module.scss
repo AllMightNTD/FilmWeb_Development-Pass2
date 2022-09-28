@@ -2,13 +2,14 @@
     --search-button-width: 40px;
     position: fixed;
     top: 0;
-    z-index: 1000;
+    z-index: 100;
     width: 100%;
     height: 61px;
     display: flex;
     // text-align: center;
     align-items: center;
     background: #fff;
+    box-shadow: 0 0 5px #aaaaaa;
 }
 .navbar_film {
     display: flex;
@@ -42,12 +43,6 @@
         width: 40px;
         height: 40px;
         background-color: transparent;
-    }
-    .account {
-        width: 100%;
-        height: 100%;
-        outline: none;
-        background-color: transparent;
         border-radius: 50%;
         display: flex;
         justify-content: center;
@@ -55,7 +50,6 @@
         align-items: center;
         border: 1px solid #eee;
         box-shadow: 0 0 5px #aaaaaa;
-
         .icon_account {
             color: #ccc;
             font-size: 20px;
@@ -75,21 +69,24 @@
         margin-left: 20px;
         text-align: center;
         align-items: center;
-    }
-
-    li:hover {
-        background-color: #ffcc00;
+        transition: color 0.3s, background 0.3s;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
         border-top-left-radius: 25px;
         border-top-right-radius: 25px;
+    }
+
+    li:hover {
+        background-color: #ffcc00;
+    }
+    li:hover a {
+        color: #fff;
     }
 }
 .item_link-classify {
     color: #666666;
     text-decoration: none;
     list-style: none;
-    font-weight: 700;
     letter-spacing: 1px;
     padding: 5px 10px;
     line-height: 14px;
@@ -98,6 +95,7 @@
     align-items: center;
     text-align: center;
     cursor: pointer;
+    font-weight: 600;
 }
 .name_option {
     margin-left: 6px;
@@ -145,6 +143,16 @@
     background-color: white;
     box-shadow: 10px 10px 5px #aaaaaa;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .menu_setting-item {
     text-decoration: none;
     padding: 5px 10px;
@@ -218,7 +226,7 @@
     position: fixed;
     left: 0;
     padding: 20px 0;
-    z-index: 22000;
+    z-index: 300;
     background-color: #fff;
     box-shadow: 10px 10px 5px #aaaaaa;
     width: 280px;
@@ -297,10 +305,10 @@
 }
 
 // Lớp phủ
-.shadows_block {
+.modal_shadows {
     position: fixed;
     top: 0;
-    z-index: 20000;
+    z-index: 200;
     left: 0;
     right: 0;
     bottom: 0;

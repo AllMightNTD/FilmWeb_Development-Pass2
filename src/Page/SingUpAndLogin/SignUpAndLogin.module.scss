@@ -1,36 +1,124 @@
-.Container {
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-}
 .form {
-    width: 500px;
-    height: 600px;
+    width: 400px;
+    height: 450px;
     background-color: #fff;
     border-radius: 5px;
-    position: relative;
+    position: fixed;
     display: flex;
+    z-index: 500;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     flex-direction: column;
-    padding: 40px 80px;
+    animation: fadeIn ease-in-out 0.8s;
+    padding: 20px 40px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 20px #aaaaaa;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+// .form_center {
+//     width: 400px;
+//     height: 500px;
+//     background-color: #fff;
+//     border-radius: 5px;
+//     position: fixed;
+//     display: flex;
+//     flex-direction: column;
+//     padding: 40px;
+//     border: 1px solid #eee;
+//     box-shadow: 0 0 20px #aaaaaa;
+// }
+
+@media screen and (max-width: 485px) {
+    // Thay đổi class của form , hiển thị khi màn hình nhỏ hơn hoặc bằng 485px
+    .form_center {
+        width: 280px;
+        position: fixed;
+        height: 500px;
+        background-color: #fff;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        right: 0;
+        z-index: 300;
+        border: 1px solid #eee;
+        top: 0;
+        padding: 40px;
+        box-shadow: 0 0 20px #aaaaaa;
+        animation: fadeMove ease-in-out 0.8s;
+        transform: none;
+    }
+    .facebook {
+        width: 110px !important;
+        position: relative;
+        height: 40px;
+        display: flex;
+        span {
+            display: none;
+        }
+        .icon {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    .google {
+        position: relative;
+        width: 110px !important;
+        height: 40px;
+        span {
+            display: none;
+        }
+        .icon {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    .input_text {
+        padding: 10px !important;
+    }
+}
+@keyframes fadeMove {
+    from {
+        right: -280px;
+    }
+    to {
+        right: 0;
+    }
 }
 .title {
     text-align: center;
 }
 .form_connect-social {
-    display: flex;
+    display: inline-flex;
     margin-top: 30px;
     margin-bottom: 20px;
 }
 .facebook {
     width: 160px;
     color: #fff;
-    padding: 12px 32px;
+    display: flex;
+    padding: 10px 5px;
+    text-align: center;
+    align-items: center;
     background-color: #3b5998;
     .icon {
         font-size: 18px;
+        margin-left: 20px;
         margin-right: 10px;
     }
     border-radius: 5px;
@@ -39,7 +127,7 @@
     margin-left: 20px;
     width: 160px;
     color: #fff;
-    padding: 12px 32px;
+    padding: 10px 5px;
     background-color: #fbbc05;
     .icon {
         font-size: 18px;
@@ -49,21 +137,23 @@
 }
 .info {
     display: flex;
-    flex-direction: column;
     margin-top: 10px;
-
-    .info_text {
-        background-color: #e6e6fa;
-        border-radius: 5px;
-    }
+    width: 100%;
+    position: relative;
     .input_text {
-        width: 90%;
+        width: 100%;
         padding: 10px 20px;
-        background-color: #e6e6fa;
-        border: none;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        border-bottom: 1px solid black;
         outline: none;
-        border-radius: 5px;
     }
+}
+.icon_checkPass {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }
 .btn_submit {
     padding: 10px 20px;

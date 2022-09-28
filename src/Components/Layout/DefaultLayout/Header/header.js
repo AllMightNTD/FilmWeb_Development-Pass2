@@ -23,6 +23,7 @@ import {
 import Logo from '../../../../Logo/Capture.PNG';
 import VideoItem from '../../../SearchVideoItem';
 import Search from '../../Search';
+import SingUpAndLogin from '../../../../Page/SingUpAndLogin/SingUpAndLogin';
 import UseWindowDemension from '../../../../hooks/useWindowDemension';
 const cx = classnames.bind(style);
 
@@ -65,20 +66,37 @@ function Header() {
         }
     }, [width]);
 
+    // Hàm xử lý khi ấn vào nút 'X' để tắt navbar_mobile
     const handleClose = () => {
         setiscloseShadow(false);
         setClose(false);
     };
+    // Hàm xử lý khi ấn vào icon 'menu' để mở navbar
     const handleOpenBar = () => {
         setiscloseShadow(true);
         setClose(!isclose);
     };
 
-    const handleCloseShadow = () => {
+    // Hàm xử lý khi ấn vào modal ẩn dưới navbar_mobile
+    // => ẩn Navbar_mobile luôn
+
+    const [isopenForm, setOpenForm] = useState(false);
+
+    // Xử lý mở form đăng kí , đăng nhập và lớp phủ
+    const handleOpenFormSignUpandSignIn = () => {
+        setOpenForm(!isopenForm);
         setiscloseShadow(!iscloseShadow);
+    };
+    // Xử lý tắt lớp phủ
+    const handleCloseShadow = () => {
+        setiscloseShadow(false);
+        setOpenForm(false);
         setClose(false);
     };
     console.log(isclose);
+
+    // Xử lý bật/tắt form đăng ký đăng nhập
+
     return (
         <div>
             <div className={cx('header_film')}>
@@ -141,23 +159,26 @@ function Header() {
                                 </button>
                             </Tippy>
                         </div>
-                        <div className={cx('account_box')}>
-                            <Link to={'/signUp-Login'} className={cx('account')}>
-                                <FontAwesomeIcon icon={faUser} className={cx('icon_account')} />
-                            </Link>
+                        <div className={cx('account_box')} onClick={handleOpenFormSignUpandSignIn}>
+                            <FontAwesomeIcon icon={faUser} className={cx('icon_account')} />
                         </div>
                     </div>
                 </nav>
             </div>
+            {/* Form Đăng kí đăng nhập  */}
+            {/* Hiện thị form */}
+            {isopenForm ? <SingUpAndLogin /> : <></>}
+            {/* Hiển thị lớp modal */}
             {/* Hiện thị trên màn anh nhỏ */}
             <div
-                className={cx('shadows_block')}
+                className={cx('modal_shadows')}
                 style={{ display: `${iscloseShadow ? 'block' : 'none'}` }}
                 onClick={handleCloseShadow}
             ></div>
             {/* Bật tắt nav_mobile */}
             <nav className={cx('nav_mobile')} style={{ display: `${isclose ? 'flex' : 'none'}` }}>
                 <div className={cx('info_mobile')}>
+                    {/* Nút tắt modal navbar_mobile */}
                     <FontAwesomeIcon icon={faClose} className={cx('close_icon')} onClick={handleClose} />
                     <Link to="/" className={cx('title_film')}>
                         FiLms NtD
