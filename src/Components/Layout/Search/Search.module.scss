@@ -76,8 +76,17 @@
     padding: 12px;
     overflow: auto;
     background-color: #fff;
+    animation: fadeIn ease-in-out 0.3s;
     border-radius: 8px;
     box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .loading {

@@ -1,12 +1,12 @@
 .list_film {
-    width: 700px;
-    position: fixed;
+    width: 80%;
+    position: relative;
+    top: 60%;
     left: 50%;
-    right: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     height: 550px;
+    margin-top: 20px;
     border: 1px solid black;
-    margin: 80px auto 0 auto;
     border-radius: 5px;
     background-color: beige;
     padding: 20px 0;
@@ -17,6 +17,29 @@
     padding: 5px 20px;
     justify-content: space-between;
 }
+.modal_request {
+    display: flex;
+    align-items: center;
+}
+// Icon chọn tất cả
+.check_all-icon {
+    margin-left: 20px;
+}
+// BTN submit
+.submit_btn {
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: aqua;
+    margin: 0 10px;
+}
+
+// 2 nút xóa sửa
+.setting_data-table {
+    display: flex;
+}
+
 .trash_film {
     .icon_trash {
         margin-left: 5px;
@@ -51,11 +74,41 @@
     left: 50%;
     transform: translateX(-50%);
 }
-@media screen and (max-width: 733) {
-    .category {
-        display: none;
+// Button xóa trong bảng
+.btn_delete {
+    border: none;
+    outline: none;
+    text-decoration: none;
+    font-weight: 400;
+    border-radius: 5px;
+    background-color: #ff3333;
+    color: #fff;
+    margin: 0 10px;
+    padding: 6px 12px;
+}
+
+// Độ rộng mobile
+@media screen and (max-width: 734px) {
+    .list_film {
+        height: 810px;
+        position: relative;
     }
-    .create_time {
-        display: none;
+    .modal_request {
+        display: flex;
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+    .check_all-icon {
+        margin: 0 10px;
+    }
+    .select_option-form {
+        margin: 10px !important;
+    }
+    .setting_data-table {
+        flex-direction: column;
+        .btn_delete {
+            margin-bottom: 10px;
+        }
     }
 }

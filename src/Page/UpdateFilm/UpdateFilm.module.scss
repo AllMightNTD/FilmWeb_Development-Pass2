@@ -1,7 +1,41 @@
 .update_film {
-    width: 1000px;
-    margin: 0 auto;
-    margin-top: 90px;
-    padding: 10px 0;
-    background-color: #fff;
+    width: 80%;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid black;
+    top: 80px;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    background-color: beige;
+}
+.container_form {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+}
+.form_block {
+    display: flex;
+
+    .form_block-2 {
+        padding-left: 15px;
+    }
+}
+
+// Block nút submiy
+.block_submit {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 530px) {
+    .form_block {
+        flex-direction: column;
+        .form_block-2 {
+            padding-left: 0;
+        }
+    }
 }

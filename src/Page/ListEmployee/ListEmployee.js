@@ -12,9 +12,9 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Pagination from 'react-bootstrap/Pagination';
+import UseWindowDemension from '../../hooks/useWindowDemension';
 import Container from 'react-bootstrap/Container';
 import $ from 'jquery';
-
 function ListEmployee() {
     const cx = classnames.bind(style);
     const [dataFilm, setDataFilm] = useState([]);
@@ -124,6 +124,19 @@ function ListEmployee() {
         }
     }
 
+    // Thay đổi giao diện tùy theo độ rộng màn
+    const { width, height } = UseWindowDemension();
+
+    const [isTableMobile, setTableMobile] = useState(false);
+
+    useEffect(() => {
+        if (width <= 734) {
+            setTableMobile(true);
+        } else {
+            setTableMobile(false);
+        }
+    }, [width]);
+
     return (
         <div className={cx('list_film')}>
             <form method="POST" action="http://localhost:5000/employee/handle-form-action">
@@ -138,25 +151,20 @@ function ListEmployee() {
                         <button>Tạo Phim</button>
                     </Link>
                 </div>
-                <div className={cx('d-flex')} style={{ alignItems: 'center' }}>
+                <div className={cx('modal_request')}>
                     <Form.Check
                         type="checkbox"
                         checked={checkedAll}
                         id={`delete-checkbox`}
                         label={`Chon tat ca`}
-                        style={{ marginLeft: '20px' }}
+                        className={cx('check_all-icon')}
                         onChange={handleCheckAll}
                     />
                     <Form.Select className={cx('select_option-form')} name="action" style={{ width: '200px' }} required>
                         <option value="">--Hành Động --</option>
                         <option value="delete">Xóa</option>
                     </Form.Select>
-                    <button
-                        id="checkall-submit-btn"
-                        type="submit"
-                        class="btn btn-sm btn-primary ml-4"
-                        disabled={isDisabled}
-                    >
+                    <button id="checkall-submit-btn" type="submit" className={cx('submit_btn')} disabled={isDisabled}>
                         Thuc hien
                     </button>
                 </div>
@@ -166,8 +174,8 @@ function ListEmployee() {
                             <th></th>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Category</th>
-                            <th>Create time</th>
+                            <th style={{ display: `${isTableMobile ? 'none' : ''}` }}>Category</th>
+                            <th style={{ display: `${isTableMobile ? 'none' : ''}` }}>Create time</th>
                             <th>Setting</th>
                         </tr>
                     </thead>
@@ -181,11 +189,16 @@ function ListEmployee() {
                                     </th>
                                     <th>{index + 1}</th>
                                     <th>{dataItem.name}</th>
-                                    <th>{dataItem.category}</th>
-                                    <th>{dataItem.createdAt}</th>
+                                    <th style={{ display: `${isTableMobile ? 'none' : ''}` }}>{dataItem.category}</th>
+                                    <th style={{ display: `${isTableMobile ? 'none' : ''}` }}>{dataItem.createdAt}</th>
                                     <th>
-                                        <div style={{ display: 'flex' }}>
-                                            <a href={`/EditFilm/${dataItem._id}`} className={cx('btn btn-danger')}>
+                                        <div className={cx('setting_data-table')}>
+                                            <a
+                                                href={`/EditFilm/${dataItem._id}`}
+                                                // Margin bottom giữa 2 nút khi trên màn mobile
+                                                style={{ marginBottom: `${isTableMobile ? '10px' : ''}` }}
+                                                className={cx('btn btn-danger')}
+                                            >
                                                 Sửa
                                             </a>
 
