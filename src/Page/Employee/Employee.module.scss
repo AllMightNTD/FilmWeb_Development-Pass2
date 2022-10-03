@@ -172,8 +172,12 @@
 }
 // Phân trang
 .Pagination_page {
-    margin-top: 10px;
+    margin: 20px 0;
     position: relative;
-    left: 50%;
-    transform: translateX(-9%);
+    .item_Pagi {
+        margin: 0;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }

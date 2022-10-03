@@ -146,6 +146,7 @@ function ListEmployee() {
                             <FontAwesomeIcon icon={faTrash} className={cx('icon_trash')} />({deletedCount})
                         </h3>
                     </a>
+
                     <Link to="/create" className={cx('button_create-film')} style={{ textDecoration: 'none' }}>
                         <FontAwesomeIcon icon={faSquarePlus} className={cx('icon_create')} />
                         <button>Tạo Phim</button>
@@ -219,10 +220,6 @@ function ListEmployee() {
                         }
                     </tbody>
                 </Table>
-                <div className={cx('Pagination_page')}>
-                    <Pagination size="sm">{items}</Pagination>
-                    <br />
-                </div>
 
                 {
                     <Modal show={show} onHide={handleClose}>
@@ -243,6 +240,12 @@ function ListEmployee() {
                     </Modal>
                 }
             </form>
+            <div className={cx('Pagination_page')}>
+                <Pagination size="sm" className={cx('item_Pagi')}>
+                    {items}
+                </Pagination>
+                <br />
+            </div>
         </div>
     );
 }

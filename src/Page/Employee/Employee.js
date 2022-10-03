@@ -105,7 +105,9 @@ function Employee() {
                 </div>
             </div>
             <div className={cx('Pagination_page')}>
-                <Pagination size="sm">{items}</Pagination>
+                <Pagination className={cx('item_Pagi')} size="sm">
+                    {items}
+                </Pagination>
                 <br />
             </div>
         </div>

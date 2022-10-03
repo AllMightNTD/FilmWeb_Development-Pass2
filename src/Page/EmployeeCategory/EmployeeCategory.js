@@ -8,6 +8,16 @@ import { useParams } from 'react-router-dom';
 import style from './EmployeeCategory.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faCircleChevronRight,
+    faClock,
+    faClockFour,
+    faClockRotateLeft,
+    faPlay,
+    faStar,
+    faUserClock,
+} from '@fortawesome/free-solid-svg-icons';
 function EmployeeCategory() {
     const cx = classnames.bind(style);
     const params = useParams();
@@ -39,18 +49,36 @@ function EmployeeCategory() {
     }, [page]);
     console.log(dataFilm);
     return (
-        <div className={cx('container')}>
+        <div className={cx('container_category')}>
             <div className={cx('container-fluid')}>
                 <div className={cx('row')}>
                     {dataFilm.map((item, index) => (
-                        <div key={index} className={cx('col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3')}>
+                        <div key={index} className={cx('col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mb-4')}>
                             <Link to={`/MovieDetail/${item.slug}`} className={cx('item_movie')}>
                                 <div className={cx('item_image')}>
                                     <img className={cx('image_movie')} src={item.image} />
                                 </div>
-                                <div className={cx('info')}>
-                                    <h3 className={cx('title_item')}>{item.name}</h3>
-                                    <span className={cx('actor')}>{item.director}</span>
+                                <div className={cx('infor_item-movie')}>
+                                    <h5 className={cx('title_movie-item')}>{item.name}</h5>
+                                    <span className={cx('actor_movie-item')}>{item.director}</span>
+                                    <div className={cx('time_zone-item')}>
+                                        <div className={cx('all_block-zone')}>
+                                            <div className={cx('time_item')}>
+                                                <FontAwesomeIcon
+                                                    icon={faClockRotateLeft}
+                                                    className={cx('clock_icons')}
+                                                />
+                                                <span className={cx('time')}>{item.timeMovie}</span>
+                                            </div>
+                                            <div className={cx('stars_movie-item')}>
+                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
+                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
+                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
+                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
+                                            </div>
+                                        </div>
+                                        <FontAwesomeIcon icon={faCircleChevronRight} className={cx('next_icon')} />
+                                    </div>
                                 </div>
                             </Link>
                         </div>
@@ -58,7 +86,9 @@ function EmployeeCategory() {
                 </div>
             </div>
             <div className={cx('Pagination_page')}>
-                <Pagination size="sm">{items}</Pagination>
+                <Pagination size="sm" className={cx('item_Pagi')}>
+                    {items}
+                </Pagination>
                 <br />
             </div>
         </div>
