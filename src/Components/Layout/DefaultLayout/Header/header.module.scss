@@ -42,6 +42,7 @@
     .account_box {
         cursor: pointer;
         width: 40px;
+        overflow: hidden;
         height: 40px;
         background-color: transparent;
         border-radius: 50%;
@@ -56,6 +57,20 @@
             font-size: 20px;
         }
     }
+}
+.login_to-account {
+    display: flex;
+    align-items: center;
+    p {
+        margin: 0;
+        padding: 0;
+        margin-right: 10px;
+    }
+}
+.image_account {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .List_item-classify {
     display: flex;

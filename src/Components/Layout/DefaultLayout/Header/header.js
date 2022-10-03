@@ -27,11 +27,13 @@ import SingUpAndLogin from '../../../../Page/SingUpAndLogin/SingUpAndLogin';
 import UseWindowDemension from '../../../../hooks/useWindowDemension';
 const cx = classnames.bind(style);
 
-function Header() {
+function Header({ dataLogin, checkLoginTo }) {
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
 
+    const checkLogin = checkLoginTo;
+    console.log(dataLogin);
     const ListItem = [
         {
             icon: <FontAwesomeIcon icon={faVideo} />,
@@ -159,9 +161,21 @@ function Header() {
                                 </button>
                             </Tippy>
                         </div>
-                        <div className={cx('account_box')} onClick={handleOpenFormSignUpandSignIn}>
-                            <FontAwesomeIcon icon={faUser} className={cx('icon_account')} />
-                        </div>
+                        {checkLogin ? (
+                            <div className={cx('login_to-account')}>
+                                <p>{dataLogin.name}</p>
+                                <div className={cx('account_box')}>
+                                    <img
+                                        className={cx('image_account')}
+                                        src="https://img.thuthuattinhoc.vn/uploads/2019/01/08/anh-anime-boy-dep-nhat_101905549.jpg"
+                                    ></img>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className={cx('account_box')} onClick={handleOpenFormSignUpandSignIn}>
+                                <FontAwesomeIcon icon={faUser} className={cx('icon_account')} />
+                            </div>
+                        )}
                     </div>
                 </nav>
             </div>

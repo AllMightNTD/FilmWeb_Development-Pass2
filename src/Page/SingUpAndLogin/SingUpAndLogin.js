@@ -24,9 +24,9 @@ function SingUpAndLogin() {
     }, [width]);
     console.log(width);
     return (
-        <form className={cx(`${isCenter ? 'form' : 'form_center'}`)} ref={formID} id="form" method="POST">
+        <div className={cx(`${isCenter ? 'form' : 'form_center'}`)} ref={formID} id="form" method="POST">
             {haveAccount ? <SignIn parentCallBack={callBackFuntion} /> : <SignUp parentCallBack={callBackFuntion} />}
-        </form>
+        </div>
     );
 }
 

@@ -11,15 +11,40 @@ import { useEffect } from 'react';
 function SignIn(props) {
     const cx = classNames.bind(style);
 
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
     // Chuyển form đăng kí
     const HandleSignUp = () => {
         props.parentCallBack(false);
     };
 
+    async function handleSubmitSignIn(event) {
+        event.preventDefault();
+        const result = await fetch('http://localhost:5000/accounts/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username,
+                password,
+            }),
+        }).then((res) => res.json());
+        if (result.status === 'ok') {
+            alert('Sign In Successfully');
+            console.log('Got the data', result.data);
+            console.log('Got the tokendata', result.tokendata);
+            localStorage.setItem('token', result.tokendata);
+        } else {
+            alert(result.error);
+        }
+    }
+
     const [watchPass, setWatchPass] = useState(false);
 
     return (
-        <>
+        <form method="POST" onSubmit={handleSubmitSignIn}>
             <h2 className={cx('title')}>Sign In With</h2>
             <div className={cx('form_connect-social')}>
                 <div className={cx('facebook')}>
@@ -32,12 +57,22 @@ function SignIn(props) {
                 </div>
             </div>
             <div className={cx('info')}>
-                <input type="text" placeholder="UseName" className={cx('input_text')}></input>
+                <input
+                    type="text"
+                    value={username}
+                    name="username"
+                    placeholder="UseName"
+                    onChange={(e) => setUsername(e.target.value)}
+                    className={cx('input_text')}
+                ></input>
             </div>
             <div className={cx('info')}>
                 <input
                     type={watchPass ? 'text' : 'password'}
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    name="password"
                     className={cx('input_text')}
                 ></input>
                 <Tippy
@@ -68,7 +103,7 @@ function SignIn(props) {
                     </span>
                 </span>
             </div>
-        </>
+        </form>
     );
 }
 export default SignIn;
