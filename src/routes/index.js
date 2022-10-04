@@ -7,8 +7,9 @@ import MovieDetail from '../Page/MovieDetail/MovieDetail';
 import TrashEmployee from '../Page/TrashEmployee/TrashEmployee';
 import EmployeeCategory from '../Page/EmployeeCategory/EmployeeCategory';
 import WatchMovie from '../Page/WatchMovie';
-import SingUpAndLogin from '../Page/SingUpAndLogin/SingUpAndLogin';
 import FirstPage from '../Page/FirstPage';
+import SignIn from '../Page/SingUpAndLogin/SignIn';
+import SignUp from '../Page/SingUpAndLogin/SignUp';
 const publicRoutes = [
     { path: '/', component: FirstPage },
     { path: '/Employee', component: Employee },
@@ -18,8 +19,9 @@ const publicRoutes = [
     { path: '/MovieDetail/:slug', component: MovieDetail },
     { path: 'watch-movie/:slug', component: WatchMovie },
     { path: '/the-loai/:category', component: EmployeeCategory },
+    { path: '/register', component: SignIn },
+    { path: '/login', component: SignUp },
     { path: '/trash', component: TrashEmployee },
-    { path: '/signUp-Login', component: SingUpAndLogin, layout: null },
 ];
 
 const privateRoutes = [];

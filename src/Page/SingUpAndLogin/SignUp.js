@@ -45,7 +45,7 @@ function SignUp(props) {
     }
 
     return (
-        <form method="POST" onSubmit={handleSubmit}>
+        <form method="POST" onSubmit={handleSubmit} className={cx('form_container')}>
             <h2 className={cx('title')}>Sign Up With</h2>
             <div className={cx('info')}>
                 <input

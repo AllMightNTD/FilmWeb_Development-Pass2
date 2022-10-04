@@ -19,6 +19,14 @@ function SignIn(props) {
         props.parentCallBack(false);
     };
 
+    const HandleDataLogin = (data) => {
+        props.parentCallbackDataLogin(data);
+    };
+
+    const HandleCheckLogin = (data) => {
+        props.parentCheckLogin(data);
+    };
+
     async function handleSubmitSignIn(event) {
         event.preventDefault();
         const result = await fetch('http://localhost:5000/accounts/api/login', {
@@ -33,6 +41,8 @@ function SignIn(props) {
         }).then((res) => res.json());
         if (result.status === 'ok') {
             alert('Sign In Successfully');
+            HandleDataLogin(result.data);
+            HandleCheckLogin(true);
             console.log('Got the data', result.data);
             console.log('Got the tokendata', result.tokendata);
             localStorage.setItem('token', result.tokendata);
@@ -44,7 +54,7 @@ function SignIn(props) {
     const [watchPass, setWatchPass] = useState(false);
 
     return (
-        <form method="POST" onSubmit={handleSubmitSignIn}>
+        <form method="POST" className={cx('form_container')} onSubmit={handleSubmitSignIn}>
             <h2 className={cx('title')}>Sign In With</h2>
             <div className={cx('form_connect-social')}>
                 <div className={cx('facebook')}>

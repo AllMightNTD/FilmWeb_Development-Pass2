@@ -1,0 +1,126 @@
+// Hiển thị trên mobile
+.nav_mobile {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px 0;
+    z-index: 300;
+    background-color: #fff;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    width: 280px;
+    height: 1320px;
+    animation: fadeIn ease-in-out 0.8s;
+
+    .search_mobile {
+        position: relative;
+        top: 50px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+    .List_item-mobile {
+        margin-top: 100px;
+        display: flex;
+        padding-left: 10px;
+        padding-top: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        width: 100%;
+        flex-direction: column;
+        list-style: none;
+
+        li {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        li:hover .item_link-mobile {
+            color: #ffcc00;
+        }
+    }
+
+    .item_link-mobile {
+        position: relative;
+        color: #666666;
+        text-decoration: none;
+        list-style: none;
+        font-weight: 700;
+        letter-spacing: 1px;
+
+        line-height: 14px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+
+        .name_option {
+            position: absolute;
+            left: 28px;
+        }
+    }
+}
+// Title và Bar icon
+.info_mobile {
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    .title_film {
+        position: absolute;
+        left: 10px;
+        text-decoration: none;
+        color: red;
+        font-weight: 700;
+    }
+    .close_icon {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        font-size: 25px;
+    }
+}
+
+.title_film {
+    font-size: 18px;
+    color: #ff0000;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.bar_menu-icon {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 25px;
+    display: none;
+}
+@media screen and (max-width: 1080px) {
+    .bar_menu-icon {
+        cursor: pointer;
+        display: block;
+        color: red;
+        margin-bottom: 10px;
+    }
+}
+@keyframes fadeIn {
+    from {
+        left: -300px;
+    }
+    to {
+        right: 0;
+    }
+}
+// Lớp phủ
+.modal_shadows {
+    position: fixed;
+    top: 0;
+    z-index: 200;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    opacity: 0.5;
+}

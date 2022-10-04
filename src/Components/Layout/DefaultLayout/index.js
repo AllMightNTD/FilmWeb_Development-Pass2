@@ -6,16 +6,10 @@ import FirstPage from '../../../Page/FirstPage';
 import { useState } from 'react';
 const cx = classNames.bind(style);
 
-function DefaultLayout({
-    children,
-    data = {
-        name: 'Nguyễn Tiến Dũng',
-    },
-    checked = false,
-}) {
+function DefaultLayout({ children }) {
     return (
         <div className={cx('container')}>
-            <Header dataLogin={data} checkLoginTo={checked} />
+            <Header />
             <div className={cx('content')}>{children}</div>
             <Footer />
         </div>
