@@ -6,21 +6,18 @@ import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
+import AppContext from '../../Components/AppConText';
 import { useEffect } from 'react';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 function SignUp(props) {
     const cx = classNames.bind(style);
-
-    const [signInProps, setSignInProps] = useState(false);
-    // Chuyển form đăng nhập
-
-    const HandleSignIn = (isCheck) => {
-        props.parentCallBack(isCheck);
-    };
-
-    console.log(signInProps);
+    const navigate = useNavigate();
     const [watchPass, setWatchPass] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const { dispatch } = useContext(AppContext);
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -38,7 +35,12 @@ function SignUp(props) {
         }).then((res) => res.json());
         if (result.status === 'ok') {
             alert('Success fully');
-            HandleSignIn(true);
+            const { token, userName } = result.data;
+            console.log(userName);
+            localStorage.setItem('token', token);
+            // Day ra cha
+            dispatch({ type: 'CURRENT_USER', payload: { userName } });
+            navigate('/');
         } else {
             alert(result.error);
         }
@@ -98,10 +100,7 @@ function SignUp(props) {
             </button>
             <div className={cx('sign_up-hear')}>
                 <span>
-                    Not have an account ?{' '}
-                    <span onClick={() => HandleSignIn(true)} style={{ color: 'blue', cursor: 'pointer' }}>
-                        Sign in here
-                    </span>
+                    Not have an account ? <span style={{ color: 'blue', cursor: 'pointer' }}>Sign in here</span>
                 </span>
             </div>
         </form>

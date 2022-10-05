@@ -7,6 +7,7 @@ import style from './AccountAndBar.module.scss';
 import classnames from 'classnames/bind';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 const cx = classnames.bind(style);
 function AccountAndBar() {
     const [visible, setVisible] = useState(false);
@@ -24,16 +25,6 @@ function AccountAndBar() {
                     placement="bottom-start"
                     render={(attrs) => (
                         <div className={cx('Menu_settings-box')} tabIndex="-1" {...attrs}>
-                            <Link
-                                to="/listEmployee"
-                                className={cx('menu_setting-item')}
-                                style={{ textDecoration: 'none' }}
-                            >
-                                Information
-                            </Link>
-                            <Link to="/create" className={cx('menu_setting-item')} style={{ textDecoration: 'none' }}>
-                                Create
-                            </Link>
                             <Link to="/login" className={cx('menu_setting-item')} style={{ textDecoration: 'none' }}>
                                 Login
                             </Link>

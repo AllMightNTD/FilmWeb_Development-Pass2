@@ -1,25 +1,33 @@
 const bcrypt = require('bcryptjs');
 const AccountUser = require('../model/AccountUser');
 const jwt = require('jsonwebtoken');
-const { type } = require('@testing-library/user-event/dist/type');
-const { error } = require('jquery');
 const JWT_SECRET = 'sdasdklajlskjdlweqwoeioiu!@#%^&*())jklmsdadsdhhweqkl';
 
 class HandleAccountController {
     async handleLogin(req, res, next) {
-        const { username, password } = req.body;
+        try {
+            const { username, password } = req.body;
 
-        const user = await AccountUser.findOne({ username }).lean();
+            const user = await AccountUser.findOne({ username }).lean();
 
-        if (!user) {
-            return res.json({ status: 'error', error: 'Invalid username or password' });
+            if (!user) {
+                return res.json({ status: 'error', error: 'Invalid username or password' });
+            }
+            if (await bcrypt.compare(password, user.password)) {
+                const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET);
+                console.log(token);
+                return res.json({
+                    status: 'ok',
+                    data: {
+                        token,
+                        userName: user.username,
+                    },
+                });
+            }
+            res.json({ status: 'error', error: 'Invalid username or password' });
+        } catch (error) {
+            console.log(error.message);
         }
-        if (await bcrypt.compare(password, user.password)) {
-            const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET);
-            console.log(token);
-            return res.json({ status: 'ok', tokendata: token, data: atob(token.split('.')[1]) });
-        }
-        res.json({ status: 'error', error: 'Invalid username or password' });
     }
     async handleRegister(req, res, next) {
         const { username, password: plainTextpassword } = req.body;
@@ -38,11 +46,19 @@ class HandleAccountController {
         const password = await bcrypt.hash(plainTextpassword, 10);
 
         try {
-            const res = await AccountUser.create({
+            const user = await AccountUser.create({
                 username,
                 password,
             });
+            const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET);
             console.log('User create successfully', res);
+            res.send({
+                status: 'ok',
+                data: {
+                    token,
+                    userName: user.username,
+                },
+            });
         } catch (error) {
             console.log(error.message);
             if (error.code === 11000) {
@@ -50,9 +66,25 @@ class HandleAccountController {
             }
             throw error;
         }
-        res.send({ status: 'ok' });
     }
     handleChangePassword(req, res, next) {}
+
+    // Get current user
+    async getCurrentUser(req, res, next) {
+        try {
+            const data = { user: null };
+            if (req.user) {
+                const user = await AccountUser.findOne({ _id: req.user.userId });
+                data.user = { userName: user.username };
+            }
+            res.status(200).json({
+                status: 'success',
+                data: data,
+            });
+        } catch (error) {
+            res.json(error);
+        }
+    }
 }
 
 module.exports = new HandleAccountController();

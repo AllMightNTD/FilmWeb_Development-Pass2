@@ -19,8 +19,8 @@ const publicRoutes = [
     { path: '/MovieDetail/:slug', component: MovieDetail },
     { path: 'watch-movie/:slug', component: WatchMovie },
     { path: '/the-loai/:category', component: EmployeeCategory },
-    { path: '/register', component: SignIn },
-    { path: '/login', component: SignUp },
+    { path: '/register', component: SignUp },
+    { path: '/login', component: SignIn },
     { path: '/trash', component: TrashEmployee },
 ];
 

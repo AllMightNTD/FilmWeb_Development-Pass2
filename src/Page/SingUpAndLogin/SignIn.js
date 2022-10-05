@@ -7,25 +7,17 @@ import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
-import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AppContext from '../../Components/AppConText';
+import { useContext } from 'react';
 function SignIn(props) {
     const cx = classNames.bind(style);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // Chuyển form đăng kí
-    const HandleSignUp = () => {
-        props.parentCallBack(false);
-    };
-
-    const HandleDataLogin = (data) => {
-        props.parentCallbackDataLogin(data);
-    };
-
-    const HandleCheckLogin = (data) => {
-        props.parentCheckLogin(data);
-    };
+    const { dispatch } = useContext(AppContext);
+    const navigate = useNavigate();
 
     async function handleSubmitSignIn(event) {
         event.preventDefault();
@@ -41,11 +33,13 @@ function SignIn(props) {
         }).then((res) => res.json());
         if (result.status === 'ok') {
             alert('Sign In Successfully');
-            HandleDataLogin(result.data);
-            HandleCheckLogin(true);
-            console.log('Got the data', result.data);
-            console.log('Got the tokendata', result.tokendata);
-            localStorage.setItem('token', result.tokendata);
+            const { token, userName } = result.data;
+            console.log('Got the token', token);
+            console.log('Got the data', userName);
+            localStorage.setItem('token', token);
+            // Ban du lieu ra cha
+            dispatch({ type: 'CURRENT_USER', payload: { userName } });
+            navigate('/');
         } else {
             alert(result.error);
         }
@@ -107,10 +101,7 @@ function SignIn(props) {
             </button>
             <div className={cx('sign_up-hear')}>
                 <span>
-                    Not have an account ?{' '}
-                    <span onClick={HandleSignUp} style={{ color: 'blue', cursor: 'pointer' }}>
-                        Sign up here
-                    </span>
+                    Not have an account ? <span style={{ color: 'blue', cursor: 'pointer' }}>Sign up here</span>
                 </span>
             </div>
         </form>
