@@ -40,7 +40,8 @@ function SignUp(props) {
             localStorage.setItem('token', token);
             // Day ra cha
             dispatch({ type: 'CURRENT_USER', payload: { userName } });
-            navigate('/');
+            // Thực hiện chuyển trang sau khi đăng ký
+            navigate('/employee');
         } else {
             alert(result.error);
         }
@@ -100,7 +101,10 @@ function SignUp(props) {
             </button>
             <div className={cx('sign_up-hear')}>
                 <span>
-                    Not have an account ? <span style={{ color: 'blue', cursor: 'pointer' }}>Sign in here</span>
+                    Not have an account ?{' '}
+                    <Link to="/login" style={{ color: 'blue', cursor: 'pointer' }}>
+                        Sign in here
+                    </Link>
                 </span>
             </div>
         </form>

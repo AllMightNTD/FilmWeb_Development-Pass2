@@ -15,6 +15,7 @@ const cx = classnames.bind(style);
 
 function Header() {
     const { state, dispatch } = useContext(AppContext);
+    // Lấy state ra : chính là cái user , object trong đó có username
     const { user } = state;
     const SignOut = () => {
         // Xoas token
@@ -68,7 +69,7 @@ function Header() {
                                 )}
                             >
                                 <div className={cx('account_login')} onClick={handleHideShow}>
-                                    <p>Hello , {user.userName}</p>
+                                    <p>{user.userName}</p>
                                     <img
                                         src="https://img3.thuthuatphanmem.vn/uploads/2019/10/08/anh-nen-spider-man_105523432.jpg"
                                         alt="anh-spider"

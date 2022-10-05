@@ -72,10 +72,19 @@ class HandleAccountController {
     // Get current user
     async getCurrentUser(req, res, next) {
         try {
+            // Khởi tạo nó là 1 object
+            // Chứa trong nó 1 user ( user là 1 object)
             const data = { user: null };
+
+            // Sau quá trình checkCurrentUser rồi
+            // Có user => kiểm tra theo id sau khi verify token
             if (req.user) {
-                const user = await AccountUser.findOne({ _id: req.user.userId });
+                // Tìm kiếm
+                const user = await AccountUser.findOne({ _id: req.user.id });
+
+                // Set dữ liệu cho object user đấy
                 data.user = { userName: user.username };
+                console.log(data);
             }
             res.status(200).json({
                 status: 'success',

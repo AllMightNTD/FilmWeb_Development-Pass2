@@ -9,9 +9,9 @@ exports.checkCurrentUser = (req, res, next) => {
         const token = req.headers['authorization'];
         console.log(token);
         try {
-            const { userID } = jwt.verify(token, JWT_SECRET);
-            req.user = userID;
-            console.log(jwt.verify(token, JWT_SECRET));
+            req.user = jwt.verify(token, JWT_SECRET);
+            console.log(req.user);
+            console.log(jwt.verify(token, JWT_SECRET).username);
             next();
         } catch (error) {
             console.log(error.message);

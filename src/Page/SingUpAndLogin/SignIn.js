@@ -39,7 +39,8 @@ function SignIn(props) {
             localStorage.setItem('token', token);
             // Ban du lieu ra cha
             dispatch({ type: 'CURRENT_USER', payload: { userName } });
-            navigate('/');
+            // Thực hiện chuyển trang sau khi đăng nhập
+            navigate('/employee');
         } else {
             alert(result.error);
         }
@@ -101,7 +102,10 @@ function SignIn(props) {
             </button>
             <div className={cx('sign_up-hear')}>
                 <span>
-                    Not have an account ? <span style={{ color: 'blue', cursor: 'pointer' }}>Sign up here</span>
+                    Not have an account ?{' '}
+                    <Link style={{ color: 'blue', cursor: 'pointer' }} to="/register">
+                        Sign up here
+                    </Link>
                 </span>
             </div>
         </form>

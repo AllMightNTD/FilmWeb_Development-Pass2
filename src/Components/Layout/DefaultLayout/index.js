@@ -16,6 +16,7 @@ function DefaultLayout({ children }) {
     const initialState = { user: null, posts: [] };
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
+    // Hàm callback (gửi request liên tục lên sever để lấy lại dữ liệu )
     const checkCurrentUser = useCallback(async () => {
         try {
             const token = localStorage.getItem('token');
@@ -27,9 +28,12 @@ function DefaultLayout({ children }) {
                 },
             };
             const response = await axios(option);
-            console.log(response.data.data.user);
-            if (response.data.data.user) {
+            console.log(response.data.data);
+            if (response.data) {
+                // const { userName } = response.data;
+                // Object chứa name
                 const { userName } = response.data.data.user;
+                // Lấy ra và lưu vào state
                 dispatch({ type: 'CURRENT_USER', payload: { userName } });
             }
         } catch (error) {
@@ -37,6 +41,7 @@ function DefaultLayout({ children }) {
         }
     }, [dispatch]);
 
+    // Xử lý sau khi load trang ( gọi callback )
     useEffect(() => {
         checkCurrentUser();
     }, [checkCurrentUser]);
