@@ -22,7 +22,7 @@ function AccountAndBar() {
                     interactive
                     visible={visible}
                     onClickOutside={hide}
-                    placement="bottom-start"
+                    placement="bottom-end"
                     render={(attrs) => (
                         <div className={cx('Menu_settings-box')} tabIndex="-1" {...attrs}>
                             <Link to="/login" className={cx('menu_setting-item')} style={{ textDecoration: 'none' }}>

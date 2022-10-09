@@ -65,6 +65,13 @@ function Header() {
                                                 Sign Out
                                             </a>
                                         </div>
+                                        <Link
+                                            to="/trash"
+                                            className={cx('menu_setting-item')}
+                                            style={{ textDecoration: 'none' }}
+                                        >
+                                            Trash
+                                        </Link>
                                     </div>
                                 )}
                             >
