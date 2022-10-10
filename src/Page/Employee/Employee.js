@@ -1,23 +1,13 @@
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 import classnames from 'classnames/bind';
 import style from './Employee.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
-
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faCircleChevronRight,
-    faClock,
-    faClockFour,
-    faClockRotateLeft,
-    faPlay,
-    faStar,
-    faUserClock,
-} from '@fortawesome/free-solid-svg-icons';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import ProductCard from './MovieCard';
 
 function Employee() {
     const cx = classnames.bind(style);
@@ -53,62 +43,61 @@ function Employee() {
             });
         // Truyền page , trang thứ mấy lên
     }, [page]);
+
     return (
         <div className={cx('container')}>
-            <div className={cx('Popular')}>
-                <img
-                    src="https://s3.cloud.cmctelecom.vn/tinhte1/2016/07/3795952_maxresdefault_6.jpg"
-                    className={cx('image_popular')}
-                ></img>
-                <div className={cx('infor')}>
-                    <h2 className={cx('name')}>The Legend of Tarzan</h2>
-                    <p className={cx('description')}>Forum with second hard attack</p>
-                    <a className={cx('btn_move')}>
-                        Watch Trailer
-                        <FontAwesomeIcon icon={faPlay} className={cx('icon_play')} />
-                    </a>
+            <div className={cx('content-container')}>
+                <div className={cx('feature_content')}>
+                    <img
+                        className={cx('feature-title')}
+                        src="https://qph.cf2.quoracdn.net/main-qimg-51c9bcd51709e9bab16c2ad6a535528f-lq"
+                    ></img>
+                    <p className={cx('feature_desc')}>
+                        Loremsdaskdjhaskhdaksdhaskdhaskdhaskdhsakdhaskdhkasdhaskhdkashdkahdkas
+                    </p>
+                    <button className={cx('feature_btn')}>WATCH</button>
                 </div>
-            </div>
-            <div className={cx('container-fluid')}>
-                <div className={cx('row')}>
-                    {data.map((item, index) => (
-                        <div key={index} className={cx('col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mb-4')}>
-                            <Link to={`/MovieDetail/${item.slug}`} className={cx('item_movie')}>
-                                <div className={cx('item_image')}>
-                                    <img className={cx('image_movie')} src={item.image} />
-                                </div>
-                                <div className={cx('infor_item-movie')}>
-                                    <h5 className={cx('title_movie-item')}>{item.name}</h5>
-                                    <span className={cx('actor_movie-item')}>{item.director}</span>
-                                    <div className={cx('time_zone-item')}>
-                                        <div className={cx('all_block-zone')}>
-                                            <div className={cx('time_item')}>
-                                                <FontAwesomeIcon
-                                                    icon={faClockRotateLeft}
-                                                    className={cx('clock_icons')}
-                                                />
-                                                <span className={cx('time')}>{item.timeMovie}</span>
-                                            </div>
-                                            <div className={cx('stars_movie-item')}>
-                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
-                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
-                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
-                                                <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
-                                            </div>
-                                        </div>
-                                        <FontAwesomeIcon icon={faCircleChevronRight} className={cx('next_icon')} />
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
+
+                <h1 className={cx('movie-title')}>Feature Movie</h1>
+                {/* Film Nổi Bật  */}
+                <div className={cx('movie_feature-container')}>
+                    <div className={cx('container')}>
+                        <Swiper
+                            freeMode={true}
+                            grapCursor={true}
+                            modules={true}
+                            className={cx('mySwiper')}
+                            breakpoints={{
+                                0: {
+                                    slidesPerView: 1,
+                                    spaceBetween: 10,
+                                },
+                                480: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                },
+                                768: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 15,
+                                },
+                                1024: {
+                                    slidesPerView: 4,
+                                    spaceBetween: 15,
+                                },
+                                1280: {
+                                    slidesPerView: 5,
+                                    spaceBetween: 30,
+                                },
+                            }}
+                        >
+                            {data.map((data, index) => (
+                                <SwiperSlide key={index}>
+                                    <ProductCard data={data} key={index} />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </div>
                 </div>
-            </div>
-            <div className={cx('Pagination_page')}>
-                <Pagination className={cx('item_Pagi')} size="sm">
-                    {items}
-                </Pagination>
-                <br />
             </div>
         </div>
     );

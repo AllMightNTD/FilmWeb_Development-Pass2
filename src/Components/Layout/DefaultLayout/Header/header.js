@@ -4,13 +4,12 @@ import React, { useContext, useState } from 'react';
 import classnames from 'classnames/bind';
 import 'tippy.js/dist/tippy.css'; // optional
 import style from './header.module.scss';
-import NavPC from './NavPC/NavPC';
-import Logo from './Logo/logo';
-import AccountAndBar from './AccountAndBar';
-import NavMobile from './NavMobile/NavMobile';
 import { Link } from 'react-router-dom';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
+import AccountAndBar from './AccountAndBar';
 const cx = classnames.bind(style);
 
 function Header() {
@@ -27,67 +26,83 @@ function Header() {
     const handleHideShow = () => {
         setVisible(!visible);
     };
-    return (
-        <div className={cx('Header_Sign-To')}>
-            <div className={cx('header_film')}>
-                <nav className={cx('navbar_film')}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Logo />
-                        <NavMobile />
-                    </div>
-                    <NavPC />
 
-                    {user ? (
-                        <>
-                            <Tippy
-                                interactive
-                                visible={visible}
-                                onClickOutside={() => setVisible(false)}
-                                placement="bottom-start"
-                                render={(attrs) => (
-                                    <div className={cx('Menu_settings-box')} tabIndex="-1" {...attrs}>
-                                        <Link
-                                            to="/listEmployee"
-                                            className={cx('menu_setting-item')}
-                                            style={{ textDecoration: 'none' }}
-                                        >
-                                            Information
-                                        </Link>
-                                        <Link
-                                            to="/create"
-                                            className={cx('menu_setting-item')}
-                                            style={{ textDecoration: 'none' }}
-                                        >
-                                            Create
-                                        </Link>
-                                        <div className={cx('menu_setting-item')} onClick={() => SignOut()}>
-                                            <a style={{ textDecoration: 'none', color: 'black' }} href="#">
-                                                Sign Out
-                                            </a>
-                                        </div>
-                                        <Link
-                                            to="/trash"
-                                            className={cx('menu_setting-item')}
-                                            style={{ textDecoration: 'none' }}
-                                        >
-                                            Trash
-                                        </Link>
+    return (
+        <div className={cx('navbar')}>
+            <div className={cx('navbar_container')}>
+                <div className={cx('logo_container')}>
+                    <Link to="/" className={cx('logo')}>
+                        NTDFilm
+                    </Link>
+                </div>
+                <div className={cx('menu_container')}>
+                    <ul className={cx('menu-list')}>
+                        <li className={cx('menu-list_item')}>Home</li>
+                        <li className={cx('menu-list_item')}>Movie</li>
+                        <li className={cx('menu-list_item')}>Series</li>
+                        <li className={cx('menu-list_item')}>Popular</li>
+                        <li className={cx('menu-list_item')}>Trend</li>
+                    </ul>
+                </div>
+                {user ? (
+                    <>
+                        <Tippy
+                            interactive
+                            visible={visible}
+                            onClickOutside={() => setVisible(false)}
+                            placement="bottom-start"
+                            render={(attrs) => (
+                                <div className={cx('Menu_settings-box')} tabIndex="-1" {...attrs}>
+                                    <Link
+                                        to="/listEmployee"
+                                        className={cx('menu_setting-item')}
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        Information
+                                    </Link>
+                                    <Link
+                                        to="/create"
+                                        className={cx('menu_setting-item')}
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        Create
+                                    </Link>
+                                    <div className={cx('menu_setting-item')} onClick={() => SignOut()}>
+                                        <a style={{ textDecoration: 'none', color: 'black' }} href="#">
+                                            Sign Out
+                                        </a>
                                     </div>
-                                )}
-                            >
-                                <div className={cx('account_login')} onClick={handleHideShow}>
-                                    <p>{user.userName}</p>
-                                    <img
-                                        src="https://img3.thuthuatphanmem.vn/uploads/2019/10/08/anh-nen-spider-man_105523432.jpg"
-                                        alt="anh-spider"
-                                    ></img>
+                                    <Link
+                                        to="/trash"
+                                        className={cx('menu_setting-item')}
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        Trash
+                                    </Link>
                                 </div>
-                            </Tippy>
-                        </>
-                    ) : (
-                        <AccountAndBar />
-                    )}
-                </nav>
+                            )}
+                        >
+                            <div className={cx('profile_container')}>
+                                <img
+                                    src="https://upload.wikimedia.org/wikipedia/commons/9/90/Spiderman.JPG"
+                                    className={cx('profile-picture')}
+                                    onClick={handleHideShow}
+                                ></img>
+                                <div className={cx('profile_text-container')}>
+                                    <span className={cx('profile_text')}>{user.userName}</span>
+                                    <FontAwesomeIcon icon={faCaretDown} />
+                                </div>
+                                <div className={cx('toggle')}>
+                                    <FontAwesomeIcon className={cx('toogle_icon')} icon={faMoon} />
+                                    <FontAwesomeIcon className={cx('toogle_icon')} icon={faSun} />
+                                    <div className={cx('toggle_ball')}></div>
+                                </div>
+                            </div>
+                        </Tippy>
+                    </>
+                ) : (
+                    <AccountAndBar />
+                )}
             </div>
         </div>
     );

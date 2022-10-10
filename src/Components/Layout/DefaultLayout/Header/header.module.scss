@@ -1,83 +1,84 @@
-.header_film {
-    --search-button-width: 40px;
-    position: fixed;
-    top: 0;
-    z-index: 100;
+.navbar {
     width: 100%;
-    height: 61px;
-    display: flex;
-    // text-align: center;
-    align-items: center;
-    background: #fff;
-    box-shadow: 0 0 5px #aaaaaa;
-}
-.navbar_film {
-    display: flex;
-    margin: 0 auto;
-    width: 1200px;
-    justify-content: space-between;
+    z-index: 100;
+    height: 50px;
+    background-color: black;
 }
 
-// media screen
-@media screen and (max-width: 1080px) {
-    .navbar_film {
-        position: relative;
+.navbar_container {
+    display: flex;
+
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 90px;
+    padding-right: 40px;
+    height: 100%;
+    color: #fff;
+}
+.logo_container {
+    flex: 1;
+
+    .logo {
+        font-size: 30px;
+        color: #4dbf00;
+        font-weight: 600;
+    }
+}
+.menu_container {
+    flex: 6;
+
+    .menu-list {
         display: flex;
-        align-items: center;
-    }
-    .account_login {
-        padding-right: 10px;
+        margin-bottom: 0;
+        list-style: none;
+
+        .menu-list_item {
+            margin-right: 30px;
+        }
     }
 }
-.account_login {
-    p {
-        margin-right: 10px;
-        margin-top: 18px;
-    }
 
+.profile_container {
+    flex: 2;
     display: flex;
-    cursor: pointer;
     align-items: center;
-
-    img {
-        width: 40px;
-        height: 40px;
+    justify-content: flex-end;
+    .profile-picture {
+        width: 32px;
+        height: 32px;
         object-fit: cover;
         border-radius: 50%;
     }
+    .profile_text-container {
+        margin: 0 20px;
+    }
 }
-
-// Account Menu Login
-
-.Menu_settings-box {
-    width: 150px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+.toggle {
+    width: 40px;
+    height: 20px;
     display: flex;
-    text-align: left;
-    flex-direction: column;
-    border-radius: 5px;
-    border: 1px solid #bfbfbf;
-    background-color: white;
-    box-shadow: 10px 10px 5px #aaaaaa;
-    animation: fadeIn ease-in-out 0.3s;
-}
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+    position: relative;
+    border-radius: 30px;
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
+    .toogle_icon {
+        color: goldenrod;
     }
-    to {
-        opacity: 1;
+    .toggle_ball {
+        width: 18px;
+        height: 18px;
+        background-color: black;
+        position: absolute;
+        right: 1px;
+        border-radius: 50%;
+        cursor: pointer;
     }
 }
-
-.menu_setting-item {
-    text-decoration: none;
-    padding: 5px 10px;
-    color: black;
-}
-.menu_setting-item:hover {
-    background-color: #ccc;
-    color: black;
+@media screen and (max-width: 1120px) {
+    .navbar {
+        display: none;
+    }
 }

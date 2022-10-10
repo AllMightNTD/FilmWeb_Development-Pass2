@@ -10,6 +10,7 @@ import AppContext from '../../AppConText';
 import { useCallback } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import SideBar from './SideBar';
 const cx = classNames.bind(style);
 
 function DefaultLayout({ children }) {
@@ -50,7 +51,10 @@ function DefaultLayout({ children }) {
         <AppContext.Provider value={{ state, dispatch }}>
             <div className={cx('container')}>
                 <Header />
-                <div className={cx('content')}>{children}</div>
+                <div className={cx('content')}>
+                    <SideBar />
+                    {children}
+                </div>
                 <Footer />
             </div>
         </AppContext.Provider>

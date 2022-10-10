@@ -1,183 +1,48 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 .container {
-    max-width: 1200px;
-    margin: 62px auto 0 auto;
+    background-color: #151515;
+    min-height: calc(100vh - 50px);
+    color: #fff;
 }
+.content-container {
+    margin-left: 50px;
 
-// Popular movie
-.Popular {
-    width: 100%;
-    height: 550px;
-    margin-bottom: 40px;
-    .image_popular {
-        width: 100%;
-        height: 100%;
-        position: relative;
+    .feature_content {
+        height: 50vh;
+        background-color: red;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #151515),
+            url('https://img5.thuthuatphanmem.vn/uploads/2021/12/06/anh-nen-nguoi-nhen-4k-cho-may-tinh_090218550.jpg');
         object-fit: cover;
-    }
-    box-shadow: 0 0 5px #aaaaaaaa;
-}
-.infor {
-    position: absolute;
-    top: 30%;
-    left: 12%;
-    padding: 10px 5px;
+        padding: 40px;
 
-    .name {
-        font-weight: 600;
-        color: #fff;
-    }
-    .description {
-        color: #ccc;
-    }
-}
-.btn_move {
-    display: block;
-    margin-top: 40px;
-    color: #333;
-    padding: 10px 20px;
-    width: 150px;
-    border-radius: 30px;
-    background-color: #ffcc00;
-    .icon_play {
-        margin-left: 5px;
-    }
-    cursor: pointer;
-}
-.btn_move:hover {
-    color: #333;
-}
+        .feature-title {
+            width: 200px;
+            object-fit: cover;
+        }
+        .feature_desc {
+            max-width: 500px;
+            color: lightgray;
+            margin: 30px 0;
+        }
+        .feature_btn {
+            background-color: #4dbf00;
+            color: #fff;
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            font-weight: bold;
+            cursor: pointer;
+            animation: color 0.3s;
 
-// Movie Item
-.item_movie {
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    height: 544px;
-    box-shadow: 0 0 5px #aaaaaaaa;
-}
-.item_movie:hover {
-    box-shadow: 0 0 20px #aaaaaaaa;
-}
-.item_movie:hover .image_movie {
-    transform: scale(1.1);
-}
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-.item_image {
-    width: 100%;
-    height: 423px;
-    overflow: hidden;
-    .image_movie {
-        width: 100%;
-        height: 100%;
-        transition: all 0.2s ease-in-out;
-        object-fit: cover;
-    }
-}
-
-.infor_item-movie {
-    padding: 24px;
-    .title_movie-item {
-        font-size: 18px;
-        font-weight: 700;
-        width: 120px;
-        white-space: nowrap;
-        -webkit-line-clamp: 1; /* số dòng hiển thị */
-        -webkit-box-orient: horizontal;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: #333;
-        margin-bottom: 0;
-        line-height: 18px;
-    }
-    .actor_movie-item {
-        font-size: 14px;
-        color: #aaaaaa;
-        font-weight: 500;
-        line-height: 16px;
-    }
-}
-
-// Time and Stars
-.time_zone-item {
-    display: flex;
-    position: relative;
-    padding-top: 10px;
-    padding-left: 2px;
-    align-items: center;
-
-    .all_block-zone {
-        display: flex;
-
-        .time_item {
-            display: flex;
-            align-items: center;
-            .clock_icons {
-                color: #aaaaaa;
-                margin-top: 4px;
-                margin-right: 4px;
-            }
-
-            .time {
-                margin-top: 2px;
-                font-size: 14px;
-                color: #aaaaaa;
-                font-weight: 550;
+            &:hover {
+                background-color: red;
             }
         }
     }
-
-    .stars_movie-item {
-        display: flex;
-        padding-left: 16px;
-        align-items: center;
-
-        .star_icon {
-            font-size: 12px;
-            color: #ffcc00;
-        }
-    }
-    .next_icon {
-        position: absolute;
-        right: -12px;
-        font-size: 20px;
-    }
 }
-
-@media screen and (max-width: 875px) {
-    .infor_item-movie {
-        padding: 12px;
-    }
-    .all_block-zone {
-        flex-direction: column;
-    }
-    .stars_movie-item {
-        padding-left: 0 !important;
-        margin-top: 4px;
-    }
-    .next_icon {
-        right: 2px !important;
-    }
+.movie-title {
+    margin-left: 40px;
 }
-// Phân trang
-.Pagination_page {
-    margin: 20px 0;
-    position: relative;
-    .item_Pagi {
-        margin: 0;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-    }
+.movie_feature-container {
+    padding: 0 40px;
 }

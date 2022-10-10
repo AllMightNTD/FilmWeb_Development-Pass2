@@ -11,7 +11,7 @@ import FirstPage from '../Page/FirstPage';
 import SignIn from '../Page/SingUpAndLogin/SignIn';
 import SignUp from '../Page/SingUpAndLogin/SignUp';
 const publicRoutes = [
-    { path: '/', component: FirstPage },
+    { path: '/', component: Employee },
     { path: '/Employee', component: Employee },
     { path: '/create', component: CreatEmployee },
     { path: '/listEmployee', component: ListEmployee },
