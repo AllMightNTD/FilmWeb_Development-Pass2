@@ -47,13 +47,17 @@ function DefaultLayout({ children }) {
         checkCurrentUser();
     }, [checkCurrentUser]);
 
+    const [hideBar, setHideBar] = useState(false);
+
     return (
         <AppContext.Provider value={{ state, dispatch }}>
             <div className={cx('container')}>
                 <Header />
                 <div className={cx('content')}>
-                    <SideBar />
-                    {children}
+                    <SideBar checkHide={hideBar} />
+                    <div className={cx('content_main')} onClick={() => setHideBar(!hideBar)}>
+                        {children}
+                    </div>
                 </div>
                 <Footer />
             </div>

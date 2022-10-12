@@ -2,8 +2,6 @@
     position: relative;
     width: 240px;
     height: 30px;
-    margin-left: 40px;
-    margin-top: 15px;
     padding-left: 12px;
     background-color: #fff;
     text-align: left;
@@ -110,29 +108,29 @@
     }
 }
 
-@media screen and (max-width: 1080px) {
-    .search {
-        position: absolute;
-        right: 20px;
-        padding-right: 10px;
+// @media screen and (max-width: 1080px) {
+//     .search {
+//         position: absolute;
+//         right: 20px;
+//         padding-right: 10px;
 
-        &::after {
-            content: '';
-            position: absolute;
-            top: 5px;
-            right: 34px;
-            height: 20px;
-            width: 1px;
-            background-color: #999999;
-        }
-    }
-    .clear {
-        position: absolute;
-        right: 40px;
-        border: none;
-        outline: none;
-        top: 50%;
-        color: #999999;
-        background-color: transparent;
-    }
-}
+//         &::after {
+//             content: '';
+//             position: absolute;
+//             top: 5px;
+//             right: 34px;
+//             height: 20px;
+//             width: 1px;
+//             background-color: #999999;
+//         }
+//     }
+//     .clear {
+//         position: absolute;
+//         right: 40px;
+//         border: none;
+//         outline: none;
+//         top: 50%;
+//         color: #999999;
+//         background-color: transparent;
+//     }
+// }

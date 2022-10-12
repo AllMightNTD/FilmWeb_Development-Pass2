@@ -3,6 +3,7 @@ import React, { Component, useEffect, useRef, useState } from 'react';
 import classnames from 'classnames/bind';
 import style from './Employee.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper';
 import 'swiper/css';
@@ -48,14 +49,13 @@ function Employee() {
         <div className={cx('container')}>
             <div className={cx('content-container')}>
                 <div className={cx('feature_content')}>
-                    <img
-                        className={cx('feature-title')}
-                        src="https://qph.cf2.quoracdn.net/main-qimg-51c9bcd51709e9bab16c2ad6a535528f-lq"
-                    ></img>
+                    <h1 className={cx('feature_title')}>STAR WAR</h1>
                     <p className={cx('feature_desc')}>
                         Loremsdaskdjhaskhdaksdhaskdhaskdhaskdhsakdhaskdhkasdhaskhdkashdkahdkas
                     </p>
-                    <button className={cx('feature_btn')}>WATCH</button>
+                    <Link to="#" className={cx('feature_btn')}>
+                        WATCH
+                    </Link>
                 </div>
 
                 <h1 className={cx('movie-title')}>Feature Movie</h1>

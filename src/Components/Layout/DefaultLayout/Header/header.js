@@ -37,11 +37,21 @@ function Header() {
                 </div>
                 <div className={cx('menu_container')}>
                     <ul className={cx('menu-list')}>
-                        <li className={cx('menu-list_item')}>Home</li>
-                        <li className={cx('menu-list_item')}>Movie</li>
-                        <li className={cx('menu-list_item')}>Series</li>
-                        <li className={cx('menu-list_item')}>Popular</li>
-                        <li className={cx('menu-list_item')}>Trend</li>
+                        <Link to="#" className={cx('menu-list_item')}>
+                            Home
+                        </Link>
+                        <Link to="#" className={cx('menu-list_item')}>
+                            Movie
+                        </Link>
+                        <Link to="#" className={cx('menu-list_item')}>
+                            Series
+                        </Link>
+                        <Link to="#" className={cx('menu-list_item')}>
+                            Popular
+                        </Link>
+                        <Link to="#" className={cx('menu-list_item')}>
+                            Trend
+                        </Link>
                     </ul>
                 </div>
                 {user ? (
@@ -50,7 +60,7 @@ function Header() {
                             interactive
                             visible={visible}
                             onClickOutside={() => setVisible(false)}
-                            placement="bottom-start"
+                            placement="bottom"
                             render={(attrs) => (
                                 <div className={cx('Menu_settings-box')} tabIndex="-1" {...attrs}>
                                     <Link
@@ -83,14 +93,15 @@ function Header() {
                             )}
                         >
                             <div className={cx('profile_container')}>
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/9/90/Spiderman.JPG"
-                                    className={cx('profile-picture')}
-                                    onClick={handleHideShow}
-                                ></img>
-                                <div className={cx('profile_text-container')}>
-                                    <span className={cx('profile_text')}>{user.userName}</span>
-                                    <FontAwesomeIcon icon={faCaretDown} />
+                                <div className={cx('profile_info')} onClick={handleHideShow}>
+                                    <img
+                                        src="https://upload.wikimedia.org/wikipedia/commons/9/90/Spiderman.JPG"
+                                        className={cx('profile-picture')}
+                                    ></img>
+                                    <div className={cx('profile_text-container')}>
+                                        <span className={cx('profile_text')}>{user.userName}</span>
+                                        <FontAwesomeIcon icon={faCaretDown} className={cx('icon_bars')} />
+                                    </div>
                                 </div>
                                 <div className={cx('toggle')}>
                                     <FontAwesomeIcon className={cx('toogle_icon')} icon={faMoon} />

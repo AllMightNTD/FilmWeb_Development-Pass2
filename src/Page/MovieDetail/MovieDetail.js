@@ -21,6 +21,9 @@ function MovieDetail() {
 
     const [dataFilm, setDataFilm] = useState([]);
     const [dataNewFilm, setDataNewFilm] = useState([]);
+    // Số phần tử cắt
+    const [noOfElement, setNoOfElement] = useState(4);
+
     useEffect(() => {
         axios
             .get(`http://localhost:5000/employee/${slug}`)
@@ -32,6 +35,17 @@ function MovieDetail() {
             .then((res) => setDataNewFilm(res ? res.data : []))
             .catch((error) => console.log(error));
     }, []);
+
+    console.log(dataNewFilm);
+
+    // Data sau khi cắt
+    const splice = dataNewFilm.slice(0, noOfElement);
+    console.log(splice);
+
+    // Add thêm phần tử để hiển thị
+    const loadMore = () => {
+        setNoOfElement(noOfElement + noOfElement);
+    };
 
     const [imageElement, setImageElement] = useState(false);
 
@@ -151,7 +165,7 @@ function MovieDetail() {
                         <h4>View Also Watched</h4>
                         <div className={cx('container_fluid')}>
                             <div className={cx('row')}>
-                                {dataNewFilm.map((item, index) => (
+                                {splice.map((item, index) => (
                                     <div key={index} className={cx('col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mb-4')}>
                                         <Link to={`/MovieDetail/${item.slug}`} className={cx('item_movie')}>
                                             <div className={cx('item_image')}>
@@ -168,7 +182,9 @@ function MovieDetail() {
                         </div>
                     </div>
                     <div className={cx('block_btn-load')}>
-                        <button className={cx('btn_load-more')}>Load More</button>
+                        <button className={cx('btn_load-more')} onClick={loadMore}>
+                            Load More
+                        </button>
                     </div>
                 </div>
             </div>

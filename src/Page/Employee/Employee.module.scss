@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;400;500;600;700;800&family=Silkscreen:wght@400;700&display=swap');
 .container {
     background-color: #151515;
     min-height: calc(100vh - 50px);
@@ -10,13 +11,13 @@
         height: 50vh;
         background-color: red;
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #151515),
-            url('https://img5.thuthuatphanmem.vn/uploads/2021/12/06/anh-nen-nguoi-nhen-4k-cho-may-tinh_090218550.jpg');
+            url('https://wallpapers.com/images/featured/captain-america-uymfdo8a063hcbxb.jpg');
         object-fit: cover;
         padding: 40px;
 
-        .feature-title {
-            width: 200px;
-            object-fit: cover;
+        .feature_title {
+            font-size: 50px;
+            font-family: 'Silkscreen', 'sans-serif';
         }
         .feature_desc {
             max-width: 500px;
