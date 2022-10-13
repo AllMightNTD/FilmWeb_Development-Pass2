@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import style from './SearchVideoItem.module.scss';
-import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 

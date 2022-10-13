@@ -1,7 +1,4 @@
 import axios from 'axios';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import React, { useEffect, useState } from 'react';
 import classnames from 'classnames/bind';
 import { useParams } from 'react-router-dom';
@@ -9,15 +6,7 @@ import style from './EmployeeCategory.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faCircleChevronRight,
-    faClock,
-    faClockFour,
-    faClockRotateLeft,
-    faPlay,
-    faStar,
-    faUserClock,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCircleChevronRight, faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
 function EmployeeCategory() {
     const cx = classnames.bind(style);
     const params = useParams();

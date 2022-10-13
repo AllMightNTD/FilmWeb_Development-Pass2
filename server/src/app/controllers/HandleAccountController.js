@@ -2,6 +2,9 @@ const bcrypt = require('bcryptjs');
 const AccountUser = require('../model/AccountUser');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'sdasdklajlskjdlweqwoeioiu!@#%^&*())jklmsdadsdhhweqkl';
+const { OAuth2Client } = require('google-auth-library');
+
+const client = new OAuth2Client('70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com');
 
 class HandleAccountController {
     async handleLogin(req, res, next) {
@@ -69,6 +72,38 @@ class HandleAccountController {
     }
     handleChangePassword(req, res, next) {}
 
+    async googleLogin(req, res, next) {
+        const { tokenId } = req.body;
+        client
+            .verifyIdToken({
+                idToken: tokenId,
+                audience: '70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com',
+            })
+            .then((response) => {
+                const { email_verified, name, email } = response.payload;
+                console.log(response.payload);
+                if (email_verified) {
+                    let password = email;
+                    let username = name;
+                    console.log(password);
+                    console.log(username);
+
+                    const user = AccountUser.create({
+                        username,
+                        password,
+                    });
+                    const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET);
+                    console.log('User create successfully', res);
+                    res.send({
+                        status: 'ok',
+                        data: {
+                            token,
+                            name,
+                        },
+                    });
+                }
+            });
+    }
     // Get current user
     async getCurrentUser(req, res, next) {
         try {

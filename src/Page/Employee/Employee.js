@@ -1,11 +1,10 @@
 import axios from 'axios';
-import React, { Component, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classnames from 'classnames/bind';
 import style from './Employee.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import ProductCard from './MovieCard';

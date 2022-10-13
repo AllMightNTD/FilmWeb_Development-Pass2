@@ -54,7 +54,7 @@
 }
 .icon-bars {
     font-size: 25px;
-    color: #666666;
+    color: #fff;
 }
 .Menu_settings-box {
     width: 150px;
@@ -67,6 +67,15 @@
     border: 1px solid #bfbfbf;
     background-color: white;
     box-shadow: 10px 10px 5px #aaaaaa;
+    animation: fadeIn ease-in-out 0.5s;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .menu_setting-item {

@@ -3,9 +3,11 @@ import { faGratipay } from '@fortawesome/free-brands-svg-icons';
 import AppContext from '../../../AppConText';
 import {
     faBookBookmark,
+    faCircleUser,
     faHourglassStart,
     faHouse,
     faMagnifyingGlass,
+    faRightToBracket,
     faTv,
     faUsers,
     faXmark,
@@ -17,15 +19,21 @@ import { Link } from 'react-router-dom';
 import Search from '../../Search';
 import useWindowDemension from '../../../../hooks/useWindowDemension';
 import { useEffect, useContext } from 'react';
-import { useRef } from 'react';
 
 const cx = classNames.bind(style);
 
 function SideBar({ checkHide }) {
-    const [checkview, setCheckView] = useState(false);
-    const { width, height } = useWindowDemension();
-
     const { state, dispatch } = useContext(AppContext);
+
+    const SignOut = () => {
+        // Xoas token
+        // Cho dispatch ve null
+        localStorage.removeItem('token');
+        dispatch({ type: 'CURRENT_USER', payload: null });
+    };
+
+    const [checkview, setCheckView] = useState(false);
+
     // Lấy state ra : chính là cái user , object trong đó có username
     const { user } = state;
     console.log(user);
@@ -41,8 +49,6 @@ function SideBar({ checkHide }) {
             setCheckView(false);
         }
     }, [checkHide]);
-
-    console.log(width);
 
     const handleOpenViewSearch = () => {
         setCheckView(true);
@@ -118,16 +124,36 @@ function SideBar({ checkHide }) {
                 </div>
                 <span>Film_Love</span>
             </Link>
-            <div className={cx('sidebar_item')}>
-                <div className={cx('left_menu-icon')}>
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/9/90/Spiderman.JPG"
-                        className={cx('profile-picture')}
-                        onClick={handleOpenViewSearch}
-                    ></img>
+            {user ? (
+                <div className={cx('sidebar_item')}>
+                    <div className={cx('left_menu-icon')}>
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/9/90/Spiderman.JPG"
+                            className={cx('profile-picture')}
+                            onClick={handleOpenViewSearch}
+                        ></img>
+                    </div>
+                    <span>{user.userName}</span>
                 </div>
-                <span>{user.userName}</span>
-            </div>
+            ) : (
+                <>
+                    {' '}
+                    <Link to="/login" className={cx('sidebar_item')} onClick={SignOut}>
+                        {' '}
+                        <div className={cx('left_menu-icon')} onClick={handleOpenViewSearch}>
+                            <FontAwesomeIcon icon={faCircleUser} />
+                        </div>
+                        <span>Log_in</span>
+                    </Link>
+                </>
+            )}
+            <Link to="#" className={cx('sidebar_item')} onClick={SignOut}>
+                {' '}
+                <div className={cx('left_menu-icon')} onClick={handleOpenViewSearch}>
+                    <FontAwesomeIcon icon={faRightToBracket} />
+                </div>
+                <span>Log_out</span>
+            </Link>
         </div>
     );
 }

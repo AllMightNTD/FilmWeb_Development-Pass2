@@ -53,8 +53,8 @@ function DefaultLayout({ children }) {
         <AppContext.Provider value={{ state, dispatch }}>
             <div className={cx('container')}>
                 <Header />
+                <SideBar checkHide={hideBar} />
                 <div className={cx('content')}>
-                    <SideBar checkHide={hideBar} />
                     <div className={cx('content_main')} onClick={() => setHideBar(!hideBar)}>
                         {children}
                     </div>
