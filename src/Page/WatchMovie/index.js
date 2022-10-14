@@ -5,6 +5,9 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlag, faStar } from '@fortawesome/free-solid-svg-icons';
+import { data } from 'jquery';
 const cx = classNames.bind(style);
 function WatchMovie() {
     const params = useParams();
@@ -56,32 +59,71 @@ function WatchMovie() {
     return (
         <div className={cx('container')}>
             <div className={cx('main_film')}>
-                {/* <ReactPlayer
-                    controls
-                    width={'100%'}
-                    className={cx('film_clone-data')}
-                    onReady={() => console.log('Ready')}
-                    onStart={() => console.log('Start')}
-                    onPause={() => console.log('Pause')}
-                    onEnded={() => console.log('Ended')}
-                    url={`https://www.youtube.com/watch?v=${dataWatch.videoID}`}
-                /> */}
-                <video
-                    src={checkSkipFilm ? filmGood : advertisement}
-                    autoPlay
-                    preload="auto"
-                    playsInline
-                    className={cx('player_video')}
-                    controls
-                ></video>
+                <a href="https://www.i9bet333.com/signup" className={cx('link_advisement')}>
+                    <img src="https://ff.imacdn.com/img/i999-header-pc.jpg"></img>
+                </a>
 
-                {checkHideButtonSkip ? (
-                    <div className={cx('button_skip')} onClick={handleSkipAdvertisement}>
-                        {checkSkip ? <button>Skip</button> : <button>{number}</button>}
+                <div className={cx('main_content-type')}>
+                    <video
+                        src={checkSkipFilm ? filmGood : advertisement}
+                        autoPlay
+                        preload="auto"
+                        playsInline
+                        className={cx('player_video')}
+                        controls
+                    ></video>
+
+                    {checkHideButtonSkip ? (
+                        <div className={cx('button_skip')} onClick={handleSkipAdvertisement}>
+                            {checkSkip ? <button>Skip</button> : <button>{number}</button>}
+                        </div>
+                    ) : (
+                        <></>
+                    )}
+                </div>
+                <a href="https://www.i9bet333.com/signup" className={cx('link_advisement')}>
+                    <img className={cx('advisement_F8')} src="https://phimmoichills.net/newchill/tk22_pc.gif"></img>
+                </a>
+                <div className={cx('group_setting')}>
+                    <div className={cx('group_btn')}>
+                        <button className={cx('change_server')}>Đổi Sever</button>
+                        <button className={cx('PM_FAST')}>#1 PMFAST</button>
+                        <button>#2 PMHLS</button>
+                        <button>#3 PMBK</button>
                     </div>
-                ) : (
-                    <></>
-                )}
+                </div>
+                <div className={cx('separate')}></div>
+                <div className={cx('express_opinion-movie')}>
+                    <h3>
+                        Đánh giá phim <span>(50,72đ / 1000 lượt)</span>
+                    </h3>
+                    <div className={cx('star_group')}>
+                        <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
+                        <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
+                        <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
+                        <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
+                        <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
+                        <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
+                        <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
+                        <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
+                        <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
+                        <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
+                    </div>
+                    <div className={cx('button_feelings')}>
+                        <button>Thích</button>
+                        <button>Chia sẻ</button>
+                    </div>
+                    <button className={cx('button_save')}>
+                        <FontAwesomeIcon icon={faFlag} className={cx('icon_save')} />
+                        Lưu vào facebook
+                    </button>
+                    <h1 className={cx('title_movie')}>{dataWatch.name}</h1>
+                    <h4 className={cx('director')}>{dataWatch.director}</h4>
+                    <div className={cx('description_movie')}>
+                        <p className={cx('descibe_item')}>{dataWatch.describe}</p>[
+                        <a href={`/MovieDetail/${dataWatch.slug}`}>Xem thêm</a>]
+                    </div>
+                </div>
             </div>
         </div>
     );
