@@ -38,7 +38,7 @@ function ProductCard({ data }) {
                     <Card.Title
                         style={{
                             textAlign: 'center',
-                            color: '#333',
+                            color: '#999999',
                             maxWidth: '220px',
                             overflow: 'hidden',
                             whiteSpace: 'nowrap',

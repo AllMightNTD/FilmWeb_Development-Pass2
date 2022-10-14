@@ -7,7 +7,8 @@ const Schema = mongoose.Schema;
 const userAccount = new Schema(
     {
         username: { type: String, required: [true, 'Name must be required'], unique: true, trim: true },
-        password: { type: String, trim: true, required: [true, 'Password must be required'] },
+        // email: { type: String, required: [true, 'Email must be required'], unique: true, trim: true },
+        password: { type: String, trim: true },
     },
     { collection: 'usersAccounts' },
     {

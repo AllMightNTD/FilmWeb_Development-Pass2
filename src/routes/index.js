@@ -7,7 +7,6 @@ import MovieDetail from '../Page/MovieDetail/MovieDetail';
 import TrashEmployee from '../Page/TrashEmployee/TrashEmployee';
 import EmployeeCategory from '../Page/EmployeeCategory/EmployeeCategory';
 import WatchMovie from '../Page/WatchMovie';
-import FirstPage from '../Page/FirstPage';
 import SignIn from '../Page/SingUpAndLogin/SignIn';
 import SignUp from '../Page/SingUpAndLogin/SignUp';
 const publicRoutes = [

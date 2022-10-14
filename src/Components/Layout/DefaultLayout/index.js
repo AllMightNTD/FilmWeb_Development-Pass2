@@ -2,7 +2,6 @@ import Footer from './Footer/Footer';
 import Header from './Header/header';
 import style from './DefaultLayout.module.scss';
 import classNames from 'classnames/bind';
-import FirstPage from '../../../Page/FirstPage';
 import { useState } from 'react';
 import AppReducer from '../../../Reducer/AppReducer';
 import { useReducer } from 'react';

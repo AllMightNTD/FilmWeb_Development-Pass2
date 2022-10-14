@@ -74,23 +74,19 @@ class HandleAccountController {
 
     async googleLogin(req, res, next) {
         const { tokenId } = req.body;
-        client
+        await client
             .verifyIdToken({
                 idToken: tokenId,
                 audience: '70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com',
             })
-            .then((response) => {
-                const { email_verified, name, email } = response.payload;
-                console.log(response.payload);
-                if (email_verified) {
-                    let password = email;
-                    let username = name;
-                    console.log(password);
-                    console.log(username);
+            .then(async (response) => {
+                const { email_verified, name, email: emailPlain } = response.payload;
 
-                    const user = AccountUser.create({
-                        username,
-                        password,
+                if (email_verified) {
+                    console.log('Khong ton tai');
+                    const user = await AccountUser.create({
+                        username: name,
+                        password: '$2a$10$WSd.zrYDZ8vYMkjbcEcXyui2R5P34QeaHlmARqSKG59UDXOKbVBfag',
                     });
                     const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET);
                     console.log('User create successfully', res);
@@ -98,7 +94,7 @@ class HandleAccountController {
                         status: 'ok',
                         data: {
                             token,
-                            name,
+                            userName: name,
                         },
                     });
                 }

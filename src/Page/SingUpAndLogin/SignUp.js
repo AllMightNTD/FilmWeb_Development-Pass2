@@ -16,6 +16,7 @@ function SignUp(props) {
     const [watchPass, setWatchPass] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
 
     const { dispatch } = useContext(AppContext);
 
@@ -52,6 +53,18 @@ function SignUp(props) {
             <h2 className={cx('title')}>Sign Up With</h2>
             <div className={cx('info')}>
                 <input
+                    value={email}
+                    // onChange={(e) => setUsename(e.target.value)}
+                    type="text"
+                    name="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    className={cx('input_text')}
+                    required
+                ></input>
+            </div>
+            <div className={cx('info')}>
+                <input
                     value={username}
                     // onChange={(e) => setUsename(e.target.value)}
                     type="text"
@@ -59,6 +72,7 @@ function SignUp(props) {
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="UseName"
                     className={cx('input_text')}
+                    required
                 ></input>
             </div>
             <div className={cx('info')}>
@@ -69,6 +83,7 @@ function SignUp(props) {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                     className={cx('input_text')}
+                    required
                 ></input>
                 <Tippy
                     placement="bottom"

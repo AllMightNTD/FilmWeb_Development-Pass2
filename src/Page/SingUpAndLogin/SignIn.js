@@ -58,15 +58,18 @@ function SignIn(props) {
         axios({
             method: 'POST',
             url: 'http://localhost:5000/accounts/api/googleLogin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             data: {
                 tokenId: response.tokenId,
             },
         }).then((response) => {
             console.log(response.data.data);
             const token = response.data.data.token;
-            const userName = response.data.data.name;
-            console.log(token);
+            const userName = response.data.data.userName;
             console.log(userName);
+            console.log(token);
             localStorage.setItem('token', token);
             // Ban du lieu ra cha
             dispatch({ type: 'CURRENT_USER', payload: { userName } });
@@ -97,15 +100,20 @@ function SignIn(props) {
                     <FontAwesomeIcon icon={faGoogle} className={cx('icon')} />
                     <span>Google</span>
                     <GoogleLogin
+                        className={cx('google_login')}
                         clientId={clientId}
-                        buttonText="Login"
                         onSuccess={responseSuccesGoogle}
                         onFailure={responseErrorGoogle}
                         cookiePolicy={'single_host_origin'}
-                    />
+                    >
+                        <div>
+                            <span>Login with Google</span>
+                        </div>
+                    </GoogleLogin>
                     ,
                 </div>
             </div>
+
             <div className={cx('info')}>
                 <input
                     type="text"
