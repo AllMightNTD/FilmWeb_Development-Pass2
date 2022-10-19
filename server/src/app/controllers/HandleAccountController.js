@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
 const AccountUser = require('../model/AccountUser');
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = 'sdasdklajlskjdlweqwoeioiu!@#%^&*())jklmsdadsdhhweqkl';
 const { OAuth2Client } = require('google-auth-library');
 
 const client = new OAuth2Client('70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com');
@@ -17,7 +16,7 @@ class HandleAccountController {
                 return res.json({ status: 'error', error: 'Invalid username or password' });
             }
             if (await bcrypt.compare(password, user.password)) {
-                const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET);
+                const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET_KEY);
                 console.log(token);
                 return res.json({
                     status: 'ok',
@@ -33,10 +32,15 @@ class HandleAccountController {
         }
     }
     async handleRegister(req, res, next) {
-        const { username, password: plainTextpassword } = req.body;
-        if (!username || typeof username !== 'string') {
-            return res.json({ status: 'error', error: 'Invalid username' });
+        console.log(req.body);
+        const { email, username, password: plainTextpassword } = req.body;
+        if (!email || typeof email !== 'string') {
+            return res.json({ status: 'error', error: 'Invalid email' });
         }
+        if (!username || typeof username !== 'string') {
+            return res.json({ status: 'error', error: 'Invalid email' });
+        }
+
         if (!plainTextpassword || typeof plainTextpassword !== 'string') {
             return res.json({ status: 'error', error: 'Invalid password' });
         }
@@ -44,16 +48,20 @@ class HandleAccountController {
         if (plainTextpassword.length < 5) {
             return res.json({ status: 'error', error: 'Password too small . Should be atleast 6 characters ' });
         }
+        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+            return res.json({ status: 'error', error: 'Invalid email' });
+        }
 
         // Mã hóa Password
         const password = await bcrypt.hash(plainTextpassword, 10);
 
         try {
             const user = await AccountUser.create({
+                email,
                 username,
                 password,
             });
-            const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET);
+            const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET_KEY);
             console.log('User create successfully', res);
             res.send({
                 status: 'ok',
@@ -80,22 +88,47 @@ class HandleAccountController {
                 audience: '70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com',
             })
             .then(async (response) => {
-                const { email_verified, name, email: emailPlain } = response.payload;
+                const { email_verified, name, email } = response.payload;
 
                 if (email_verified) {
-                    console.log('Khong ton tai');
-                    const user = await AccountUser.create({
-                        username: name,
-                        password: '$2a$10$WSd.zrYDZ8vYMkjbcEcXyui2R5P34QeaHlmARqSKG59UDXOKbVBfag',
-                    });
-                    const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET);
-                    console.log('User create successfully', res);
-                    res.send({
-                        status: 'ok',
-                        data: {
-                            token,
-                            userName: name,
-                        },
+                    AccountUser.findOne({ email }).exec((err, user) => {
+                        if (err) {
+                            return res.json({ status: 'error', error: 'Something went wrong' });
+                        } else {
+                            if (user) {
+                                const token = jwt.sign(
+                                    { id: user._id, username: user.username },
+                                    process.env.JWT_SECRET_KEY,
+                                );
+                                console.log(token);
+                                return res.json({
+                                    status: 'ok',
+                                    data: {
+                                        token,
+                                        userName: user.username,
+                                    },
+                                });
+                            } else {
+                                const password = email + process.env.JWT_SECRET_KEY;
+                                const user = AccountUser.create({
+                                    email,
+                                    username: name,
+                                    password,
+                                });
+                                const token = jwt.sign(
+                                    { id: user._id, username: user.username },
+                                    process.env.JWT_SECRET_KEY,
+                                );
+                                console.log('User create successfully', res);
+                                res.send({
+                                    status: 'ok',
+                                    data: {
+                                        token,
+                                        userName: name,
+                                    },
+                                });
+                            }
+                        }
                     });
                 }
             });

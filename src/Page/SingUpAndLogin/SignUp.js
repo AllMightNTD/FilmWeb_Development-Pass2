@@ -11,15 +11,14 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 function SignUp(props) {
-    const cx = classNames.bind(style);
+    const { dispatch } = useContext(AppContext);
     const navigate = useNavigate();
+    const cx = classNames.bind(style);
+
     const [watchPass, setWatchPass] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-
-    const { dispatch } = useContext(AppContext);
-
     async function handleSubmit(event) {
         event.preventDefault();
         console.log('You clicked submit');
@@ -32,12 +31,13 @@ function SignUp(props) {
             body: JSON.stringify({
                 username,
                 password,
+                email,
             }),
         }).then((res) => res.json());
         if (result.status === 'ok') {
             alert('Success fully');
             const { token, userName } = result.data;
-            console.log(userName);
+            console.log(result.data);
             localStorage.setItem('token', token);
             // Day ra cha
             dispatch({ type: 'CURRENT_USER', payload: { userName } });
@@ -54,8 +54,7 @@ function SignUp(props) {
             <div className={cx('info')}>
                 <input
                     value={email}
-                    // onChange={(e) => setUsename(e.target.value)}
-                    type="text"
+                    type="email"
                     name="email"
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
@@ -66,7 +65,6 @@ function SignUp(props) {
             <div className={cx('info')}>
                 <input
                     value={username}
-                    // onChange={(e) => setUsename(e.target.value)}
                     type="text"
                     name="username"
                     onChange={(e) => setUsername(e.target.value)}
@@ -101,16 +99,6 @@ function SignUp(props) {
                     />
                 </Tippy>
             </div>
-            {/* <div className={cx('info')}>
-                <input
-                    type={watchPass ? 'text' : 'password'}
-                    placeholder="Confirm Password"
-                    className={cx('input_text')}
-                ></input>
-            </div> */}
-            {/* <div className={cx('info')}>
-                <input type="email" placeholder="Email" className={cx('input_text')}></input>
-            </div> */}
             <button type="submit" className={cx('btn_submit')}>
                 Sign Up
             </button>

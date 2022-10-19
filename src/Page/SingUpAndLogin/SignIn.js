@@ -67,9 +67,11 @@ function SignIn(props) {
         }).then((response) => {
             console.log(response.data.data);
             const token = response.data.data.token;
+            // Lấy ra tên
             const userName = response.data.data.userName;
             console.log(userName);
             console.log(token);
+            // Set token vào LocalStorage
             localStorage.setItem('token', token);
             // Ban du lieu ra cha
             dispatch({ type: 'CURRENT_USER', payload: { userName } });
