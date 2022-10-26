@@ -80,6 +80,8 @@ class HandleAccountController {
     }
     handleChangePassword(req, res, next) {}
 
+    // Login with google
+    // [POST] /api/googleLogin
     async googleLogin(req, res, next) {
         const { tokenId } = req.body;
         await client
@@ -87,11 +89,11 @@ class HandleAccountController {
                 idToken: tokenId,
                 audience: '70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com',
             })
-            .then(async (response) => {
+            .then((response) => {
                 const { email_verified, name, email } = response.payload;
 
                 if (email_verified) {
-                    AccountUser.findOne({ email }).exec((err, user) => {
+                    AccountUser.findOne({ email }).exec(async (err, user) => {
                         if (err) {
                             return res.json({ status: 'error', error: 'Something went wrong' });
                         } else {
@@ -109,29 +111,95 @@ class HandleAccountController {
                                     },
                                 });
                             } else {
-                                const password = email + process.env.JWT_SECRET_KEY;
-                                const user = AccountUser.create({
-                                    email,
-                                    username: name,
-                                    password,
-                                });
-                                const token = jwt.sign(
-                                    { id: user._id, username: user.username },
-                                    process.env.JWT_SECRET_KEY,
-                                );
-                                console.log('User create successfully', res);
-                                res.send({
-                                    status: 'ok',
-                                    data: {
-                                        token,
-                                        userName: name,
-                                    },
-                                });
+                                try {
+                                    const password = email + process.env.JWT_SECRET_KEY;
+                                    const user = await AccountUser.create({
+                                        email,
+                                        username: name,
+                                        password,
+                                    });
+                                    // const token = jwt.sign(
+                                    //     { id: user._id, username: user.username },
+                                    //     process.env.JWT_SECRET_KEY,
+                                    // );
+                                    // console.log('User create successfully', res);
+                                    // res.send({
+                                    //     status: 'ok',
+                                    //     data: {
+                                    //         token,
+                                    //         userName: name,
+                                    //     },
+                                    // });
+                                    const token = jwt.sign(
+                                        { id: user._id, username: user.username },
+                                        process.env.JWT_SECRET_KEY,
+                                    );
+                                    console.log('User create successfully', res);
+                                    res.send({
+                                        status: 'ok',
+                                        data: {
+                                            token,
+                                            userName: user.username,
+                                        },
+                                    });
+                                } catch (error) {
+                                    console.log(error.message);
+                                    if (error.code === 11000) {
+                                        return res.json({ status: 'error', error: 'Username is already in use' });
+                                    }
+                                    throw error;
+                                }
                             }
                         }
                     });
                 }
             });
+    }
+
+    // Login with facebook
+    // [POST] /api/facebookLogin
+    async facebookLogin(req, res, next) {
+        try {
+            const { email, username } = req.body;
+            const user = await AccountUser.findOne({ email }).lean();
+            // Nếu trùng email có sẵn thì đăng nhập luôn theo email
+            if (user) {
+                const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET_KEY);
+                console.log(token);
+                return res.json({
+                    status: 'ok',
+                    data: {
+                        token,
+                        userName: user.username,
+                    },
+                });
+            } else {
+                try {
+                    // Chưa tồn tại email thì tạo tài khoản mới
+                    const password = email + process.env.JWT_SECRET_KEY;
+                    const user = await AccountUser.create({
+                        email,
+                        username,
+                        password,
+                    });
+
+                    // Tạo token để mã hóa (bao gồm id , username , password)
+                    const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET_KEY);
+                    console.log('User create successfully', res);
+                    res.send({
+                        status: 'ok',
+                        data: {
+                            token,
+                            userName: user.username,
+                        },
+                    });
+                } catch (error) {
+                    console.log(error.message);
+                }
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
     }
     // Get current user
     async getCurrentUser(req, res, next) {

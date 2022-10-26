@@ -13,7 +13,7 @@ import AppContext from '../../Components/AppConText';
 import { useContext } from 'react';
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
-import axios from 'axios';
+import FacebookLogin from 'react-facebook-login';
 function SignIn(props) {
     const cx = classNames.bind(style);
 
@@ -23,6 +23,7 @@ function SignIn(props) {
     const { dispatch } = useContext(AppContext);
     const navigate = useNavigate();
 
+    // Đăng nhập với tài khoản
     async function handleSubmitSignIn(event) {
         event.preventDefault();
         const result = await fetch('http://localhost:5000/accounts/api/login', {
@@ -53,36 +54,38 @@ function SignIn(props) {
     const [watchPass, setWatchPass] = useState(false);
 
     // Đăng nhập google thành công
-    const responseSuccesGoogle = (response) => {
+    async function responseSuccesGoogle(response) {
         console.log(response);
-        axios({
+        const result = await fetch('http://localhost:5000/accounts/api/googleLogin', {
             method: 'POST',
-            url: 'http://localhost:5000/accounts/api/googleLogin',
             headers: {
                 'Content-Type': 'application/json',
             },
-            data: {
+            body: JSON.stringify({
                 tokenId: response.tokenId,
-            },
-        }).then((response) => {
-            console.log(response.data.data);
-            const token = response.data.data.token;
-            // Lấy ra tên
-            const userName = response.data.data.userName;
-            console.log(userName);
-            console.log(token);
-            // Set token vào LocalStorage
+            }),
+        }).then((res) => res.json());
+        if (result.status === 'ok') {
+            alert('Sign In Successfully');
+            const { token, userName } = result.data;
+            console.log('Got the token', token);
+            console.log('Got the data', userName);
             localStorage.setItem('token', token);
             // Ban du lieu ra cha
             dispatch({ type: 'CURRENT_USER', payload: { userName } });
             // Thực hiện chuyển trang sau khi đăng nhập
             navigate('/employee');
-        });
-    };
+        } else {
+            alert(result.error);
+        }
+    }
+
+    // Trường hợp login với google bị lỗi
     const responseErrorGoogle = (res) => {
         console.log(res);
     };
 
+    // clientID google
     const clientId = '70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com';
     useEffect(() => {
         gapi.load('client:auth2', () => {
@@ -90,14 +93,52 @@ function SignIn(props) {
         });
     }, []);
 
+    // Login with Facebook
+    async function responseFacebook(response) {
+        console.log(response);
+        const result = await fetch('http://localhost:5000/accounts/api/facebookLogin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: response.email,
+                username: response.name,
+            }),
+        }).then((res) => res.json());
+        if (result.status === 'ok') {
+            alert('Sign In Successfully');
+            const { token, userName } = result.data;
+            console.log('Got the token', token);
+            console.log('Got the data', userName);
+            localStorage.setItem('token', token);
+            // Ban du lieu ra cha
+            dispatch({ type: 'CURRENT_USER', payload: { userName } });
+            // Thực hiện chuyển trang sau khi đăng nhập
+            navigate('/employee');
+        } else {
+            alert(result.error);
+        }
+    }
+    async function componentClicked(data) {
+        console.warn(data);
+    }
+
     return (
         <form method="POST" className={cx('form_container')} onSubmit={handleSubmitSignIn}>
             <h2 className={cx('title')}>Sign In With</h2>
             <div className={cx('form_connect-social')}>
-                <div className={cx('facebook')}>
+                <FacebookLogin
+                    appId="657634382595918"
+                    autoLoad={false}
+                    fields="name,email,picture"
+                    onClick={componentClicked}
+                    callback={responseFacebook}
+                />
+                {/* <div className={cx('facebook')}>
                     <FontAwesomeIcon icon={faFacebook} className={cx('icon')} />
                     <span>FaceBook</span>
-                </div>
+                </div> */}
                 <div className={cx('google')}>
                     <FontAwesomeIcon icon={faGoogle} className={cx('icon')} />
                     <span>Google</span>
