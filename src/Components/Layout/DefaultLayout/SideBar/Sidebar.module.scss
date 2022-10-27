@@ -54,6 +54,9 @@
     .sidebar_item:hover span {
         color: #ff6600;
     }
+    .sidebar_item:hover .left_menu-icon {
+        color: #ff6600;
+    }
 }
 
 @keyframes moveToWidth {

@@ -1,7 +1,11 @@
 const bcrypt = require('bcryptjs');
 const AccountUser = require('../model/AccountUser');
+const VerifyEmail = require('../model/VeriFiEmail');
 const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library');
+const { generatorOTP } = require('../middleware/otpMail');
+const { mailTransport } = require('../middleware/otpMail');
+const { isValidObjectId } = require('mongoose');
 
 const client = new OAuth2Client('70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com');
 
@@ -31,6 +35,8 @@ class HandleAccountController {
             console.log(error.message);
         }
     }
+
+    // [POST] /api/register'
     async handleRegister(req, res, next) {
         console.log(req.body);
         const { email, username, password: plainTextpassword } = req.body;
@@ -61,6 +67,29 @@ class HandleAccountController {
                 username,
                 password,
             });
+            // Tạo mã OTP
+            const OTP = generatorOTP();
+            // Mã hóa mã OTP
+            const tokenOTP = await bcrypt.hash(OTP, 10);
+
+            // Lưu mã OTP
+            const newVerifyEmail = new VerifyEmail({
+                tokenOtp: tokenOTP,
+                owner: user._id,
+            });
+            newVerifyEmail.save();
+
+            // Gửi email xác thực , mã OTP
+            mailTransport().sendMail({
+                from: 'emailverification@gmail.com',
+                to: user.email,
+                subject: 'Verify your email account',
+                html: `<h1>${OTP}</h1>`,
+            });
+
+            // Check mã OTP từ người dùng
+
+            // Đăng nhập tài khoản
             const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET_KEY);
             console.log('User create successfully', res);
             res.send({
@@ -225,6 +254,26 @@ class HandleAccountController {
         } catch (error) {
             res.json(error);
         }
+    }
+
+    // async verifyEmail(req, res, next) {
+    //     const { userId, otp } = req.body;
+    //     if (!userId || !otp.trim()) {
+    //         res.send({
+    //             status: 'error',
+    //             error: 'incorrect otp code',
+    //         });
+    //     }
+    //     if(!isValidObjectId(userId)){
+    //         res.send({
+    //             status: 'error',
+    //             error: 'incorrect otp code',
+    //         });
+    //     }
+
+    // }
+    async VerifyEmail(req, res, next) {
+        const { otp } = req.body;
     }
 }
 

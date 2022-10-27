@@ -49,68 +49,70 @@ function SignUp(props) {
     }
 
     return (
-        <form method="POST" onSubmit={handleSubmit} className={cx('form_container')}>
-            <h2 className={cx('title')}>Sign Up With</h2>
-            <div className={cx('info')}>
-                <input
-                    value={email}
-                    type="email"
-                    name="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    className={cx('input_text')}
-                    required
-                ></input>
-            </div>
-            <div className={cx('info')}>
-                <input
-                    value={username}
-                    type="text"
-                    name="username"
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="UseName"
-                    className={cx('input_text')}
-                    required
-                ></input>
-            </div>
-            <div className={cx('info')}>
-                <input
-                    type={watchPass ? 'text' : 'password'}
-                    value={password}
-                    name="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    className={cx('input_text')}
-                    required
-                ></input>
-                <Tippy
-                    placement="bottom"
-                    render={(attrs) => (
-                        <div className={cx('box_tooltip')} tabIndex="-1" {...attrs}>
-                            Check password
-                        </div>
-                    )}
-                >
-                    <FontAwesomeIcon
-                        className={cx('icon_checkPass')}
-                        icon={faEye}
-                        onClick={() => setWatchPass(!watchPass)}
-                        style={{ cursor: 'pointer' }}
-                    />
-                </Tippy>
-            </div>
-            <button type="submit" className={cx('btn_submit')}>
-                Sign Up
-            </button>
-            <div className={cx('sign_up-hear')}>
-                <span>
-                    Not have an account ?{' '}
-                    <Link to="/login" style={{ color: 'blue', cursor: 'pointer' }}>
-                        Sign in here
-                    </Link>
-                </span>
-            </div>
-        </form>
+        <div className={cx('container')}>
+            <form method="POST" onSubmit={handleSubmit} className={cx('form_container')}>
+                <h2 className={cx('title')}>Sign Up With</h2>
+                <div className={cx('info')}>
+                    <input
+                        value={email}
+                        type="email"
+                        name="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        className={cx('input_text')}
+                        required
+                    ></input>
+                </div>
+                <div className={cx('info')}>
+                    <input
+                        value={username}
+                        type="text"
+                        name="username"
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="UseName"
+                        className={cx('input_text')}
+                        required
+                    ></input>
+                </div>
+                <div className={cx('info')}>
+                    <input
+                        type={watchPass ? 'text' : 'password'}
+                        value={password}
+                        name="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        className={cx('input_text')}
+                        required
+                    ></input>
+                    <Tippy
+                        placement="bottom"
+                        render={(attrs) => (
+                            <div className={cx('box_tooltip')} tabIndex="-1" {...attrs}>
+                                Check password
+                            </div>
+                        )}
+                    >
+                        <FontAwesomeIcon
+                            className={cx('icon_checkPass')}
+                            icon={faEye}
+                            onClick={() => setWatchPass(!watchPass)}
+                            style={{ cursor: 'pointer' }}
+                        />
+                    </Tippy>
+                </div>
+                <button type="submit" className={cx('btn_submit')}>
+                    Sign Up
+                </button>
+                <div className={cx('sign_up-hear')}>
+                    <span>
+                        Not have an account ?{' '}
+                        <Link to="/login" style={{ color: 'blue', cursor: 'pointer' }}>
+                            Sign in here
+                        </Link>
+                    </span>
+                </div>
+            </form>
+        </div>
     );
 }
 

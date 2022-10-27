@@ -9,6 +9,7 @@ import EmployeeCategory from '../Page/EmployeeCategory/EmployeeCategory';
 import WatchMovie from '../Page/WatchMovie';
 import SignIn from '../Page/SingUpAndLogin/SignIn';
 import SignUp from '../Page/SingUpAndLogin/SignUp';
+import ForgotPass from '../Page/SingUpAndLogin/ForgotPass';
 const publicRoutes = [
     { path: '/', component: Employee },
     { path: '/Employee', component: Employee },
@@ -20,6 +21,7 @@ const publicRoutes = [
     { path: '/the-loai/:category', component: EmployeeCategory },
     { path: '/register', component: SignUp },
     { path: '/login', component: SignIn },
+    { path: '/forgotPass', component: ForgotPass },
     { path: '/trash', component: TrashEmployee },
 ];
 

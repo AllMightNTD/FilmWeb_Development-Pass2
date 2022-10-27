@@ -3,7 +3,7 @@ import style from './SignUpAndLogin.module.scss';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
@@ -14,6 +14,7 @@ import { useContext } from 'react';
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
 import FacebookLogin from 'react-facebook-login';
+import ForgotPass from './ForgotPass';
 function SignIn(props) {
     const cx = classNames.bind(style);
 
@@ -124,26 +125,90 @@ function SignIn(props) {
         console.warn(data);
     }
 
+    const [checkForgotPass, setCheckForgotPass] = useState(false);
+
+    const handleRenderViewForgotPass = () => {
+        setCheckForgotPass(!checkForgotPass);
+    };
+
     return (
-        <form method="POST" className={cx('form_container')} onSubmit={handleSubmitSignIn}>
-            <h2 className={cx('title')}>Sign In With</h2>
-            <div className={cx('form_connect-social')}>
-                <FacebookLogin
-                    appId="657634382595918"
-                    autoLoad={false}
-                    fields="name,email,picture"
-                    onClick={componentClicked}
-                    callback={responseFacebook}
-                />
-                {/* <div className={cx('facebook')}>
-                    <FontAwesomeIcon icon={faFacebook} className={cx('icon')} />
-                    <span>FaceBook</span>
-                </div> */}
-                <div className={cx('google')}>
-                    <FontAwesomeIcon icon={faGoogle} className={cx('icon')} />
-                    <span>Google</span>
+        <div className={cx('container')}>
+            <form method="POST" className={cx('form_container')} onSubmit={handleSubmitSignIn}>
+                <h2 className={cx('title')}>Sign In With</h2>
+
+                <div className={cx('info')}>
+                    <input
+                        type="text"
+                        value={username}
+                        name="username"
+                        placeholder="UseName"
+                        onChange={(e) => setUsername(e.target.value)}
+                        className={cx('input_text')}
+                    ></input>
+                </div>
+                <div className={cx('info')}>
+                    <input
+                        type={watchPass ? 'text' : 'password'}
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        name="password"
+                        className={cx('input_text')}
+                    ></input>
+                    <Tippy
+                        placement="bottom"
+                        render={(attrs) => (
+                            <div className={cx('box_tooltip')} tabIndex="-1" {...attrs}>
+                                Check password
+                            </div>
+                        )}
+                    >
+                        <FontAwesomeIcon
+                            className={cx('icon_checkPass')}
+                            icon={faEye}
+                            onClick={() => setWatchPass(!watchPass)}
+                            style={{ cursor: 'pointer' }}
+                        />
+                    </Tippy>
+                </div>
+                <Link
+                    style={{ color: 'red', cursor: 'pointer' }}
+                    onClick={handleRenderViewForgotPass}
+                    to="/forgotPass"
+                    className={cx('forgot_pass')}
+                >
+                    Forgot Password ?
+                </Link>
+
+                <button type="submit" className={cx('btn_submit')}>
+                    Sign in
+                </button>
+                <div className={cx('sign_up-hear')}>
+                    <span>
+                        Not have an account ?{' '}
+                        <Link style={{ color: 'blue', cursor: 'pointer' }} to="/register">
+                            Sign up here
+                        </Link>
+                    </span>
+                </div>
+                <div className={cx('form_connect-social')}>
+                    <div className={cx('facebook_login')}>
+                        <div className={cx('facebook_icon')}>
+                            <FontAwesomeIcon className={cx('icon_facebook')} icon={faFacebook} />
+                        </div>
+                        <FacebookLogin
+                            appId="657634382595918"
+                            autoLoad={false}
+                            textButton="Login with Facebook"
+                            cssClass={cx('facebook_css')}
+                            size="metro"
+                            fields="name,email,picture"
+                            onClick={componentClicked}
+                            callback={responseFacebook}
+                        />
+                    </div>
+
                     <GoogleLogin
-                        className={cx('google_login')}
                         clientId={clientId}
                         onSuccess={responseSuccesGoogle}
                         onFailure={responseErrorGoogle}
@@ -153,58 +218,9 @@ function SignIn(props) {
                             <span>Login with Google</span>
                         </div>
                     </GoogleLogin>
-                    ,
                 </div>
-            </div>
-
-            <div className={cx('info')}>
-                <input
-                    type="text"
-                    value={username}
-                    name="username"
-                    placeholder="UseName"
-                    onChange={(e) => setUsername(e.target.value)}
-                    className={cx('input_text')}
-                ></input>
-            </div>
-            <div className={cx('info')}>
-                <input
-                    type={watchPass ? 'text' : 'password'}
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    name="password"
-                    className={cx('input_text')}
-                ></input>
-                <Tippy
-                    placement="bottom"
-                    render={(attrs) => (
-                        <div className={cx('box_tooltip')} tabIndex="-1" {...attrs}>
-                            Check password
-                        </div>
-                    )}
-                >
-                    <FontAwesomeIcon
-                        className={cx('icon_checkPass')}
-                        icon={faEye}
-                        onClick={() => setWatchPass(!watchPass)}
-                        style={{ cursor: 'pointer' }}
-                    />
-                </Tippy>
-            </div>
-
-            <button type="submit" className={cx('btn_submit')}>
-                Sign in
-            </button>
-            <div className={cx('sign_up-hear')}>
-                <span>
-                    Not have an account ?{' '}
-                    <Link style={{ color: 'blue', cursor: 'pointer' }} to="/register">
-                        Sign up here
-                    </Link>
-                </span>
-            </div>
-        </form>
+            </form>
+        </div>
     );
 }
 export default SignIn;

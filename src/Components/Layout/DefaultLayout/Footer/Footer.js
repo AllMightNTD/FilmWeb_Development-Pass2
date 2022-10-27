@@ -38,7 +38,7 @@ const footer_List = [
 function Footer() {
     return (
         <div className={cx('footer')}>
-            {/* <div className={cx('footer_container')}>
+            <div className={cx('footer_container')}>
                 <div className={cx('container-fluid text-3xl mb-5 underline')}>
                     <Link to="/" className={cx('title_film')}>
                         NTD_FILM
@@ -69,7 +69,7 @@ function Footer() {
                         <FontAwesomeIcon icon={faYoutube} />
                     </a>
                 </div>
-            </div> */}
+            </div>
         </div>
     );
 }

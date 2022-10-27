@@ -73,6 +73,7 @@ function WatchMovie() {
                         controls
                     ></video>
 
+                    {/* ẩn hiện nút skip video  */}
                     {checkHideButtonSkip ? (
                         <div className={cx('button_skip')} onClick={handleSkipAdvertisement}>
                             {checkSkip ? <button>Skip</button> : <button>{number}</button>}
@@ -81,6 +82,7 @@ function WatchMovie() {
                         <></>
                     )}
                 </div>
+                {/* Quảng cáo */}
                 <a href="https://www.i9bet333.com/signup" className={cx('link_advisement')}>
                     <img className={cx('advisement_F8')} src="https://phimmoichills.net/newchill/tk22_pc.gif"></img>
                 </a>

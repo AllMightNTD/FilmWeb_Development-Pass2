@@ -133,7 +133,7 @@ function SideBar({ checkHide }) {
                             onClick={handleOpenViewSearch}
                         ></img>
                     </div>
-                    <span>{user.userName}</span>
+                    <span className={cx('user_name')}>{user.userName}</span>
                 </div>
             ) : (
                 <>
@@ -147,13 +147,17 @@ function SideBar({ checkHide }) {
                     </Link>
                 </>
             )}
-            <Link to="#" className={cx('sidebar_item')} onClick={SignOut}>
-                {' '}
-                <div className={cx('left_menu-icon')} onClick={handleOpenViewSearch}>
-                    <FontAwesomeIcon icon={faRightToBracket} />
-                </div>
-                <span>Log_out</span>
-            </Link>
+            {user ? (
+                <Link to="#" className={cx('sidebar_item')} onClick={SignOut}>
+                    {' '}
+                    <div className={cx('left_menu-icon')} onClick={handleOpenViewSearch}>
+                        <FontAwesomeIcon icon={faRightToBracket} />
+                    </div>
+                    <span>Log_out</span>
+                </Link>
+            ) : (
+                <></>
+            )}
         </div>
     );
 }
