@@ -67,25 +67,6 @@ class HandleAccountController {
                 username,
                 password,
             });
-            // Tạo mã OTP
-            const OTP = generatorOTP();
-            // Mã hóa mã OTP
-            const tokenOTP = await bcrypt.hash(OTP, 10);
-
-            // Lưu mã OTP
-            const newVerifyEmail = new VerifyEmail({
-                tokenOtp: tokenOTP,
-                owner: user._id,
-            });
-            newVerifyEmail.save();
-
-            // Gửi email xác thực , mã OTP
-            mailTransport().sendMail({
-                from: 'emailverification@gmail.com',
-                to: user.email,
-                subject: 'Verify your email account',
-                html: `<h1>${OTP}</h1>`,
-            });
 
             // Check mã OTP từ người dùng
 
@@ -107,7 +88,6 @@ class HandleAccountController {
             throw error;
         }
     }
-    handleChangePassword(req, res, next) {}
 
     // Login with google
     // [POST] /api/googleLogin
@@ -256,24 +236,101 @@ class HandleAccountController {
         }
     }
 
-    // async verifyEmail(req, res, next) {
-    //     const { userId, otp } = req.body;
-    //     if (!userId || !otp.trim()) {
-    //         res.send({
-    //             status: 'error',
-    //             error: 'incorrect otp code',
-    //         });
-    //     }
-    //     if(!isValidObjectId(userId)){
-    //         res.send({
-    //             status: 'error',
-    //             error: 'incorrect otp code',
-    //         });
-    //     }
+    // [POST] /api/send-email
+    async sendEmail(req, res, next) {
+        try {
+            const { email } = req.body;
+            const data = AccountUser.findOne({ email }).lean();
+            if (data) {
+                // Lưu mã code và email vào CSDL
+                let otpcode = generatorOTP();
+                let OtpData = new VerifyEmail({
+                    email,
+                    code: otpcode,
+                    expireIn: new Date().getTime() + 300 * 1000,
+                });
+                // Lưu mã OTP và email vào CSDL
+                OtpData.save();
 
-    // }
-    async VerifyEmail(req, res, next) {
-        const { otp } = req.body;
+                // Gửi mã OTP cho email
+                mailTransport().sendMail(
+                    {
+                        from: 'emailverification@gmail.com',
+                        to: email,
+                        subject: 'Verify your email account',
+                        html: `<h1>${otpcode}</h1>`,
+                    },
+                    (error, info) => {
+                        // Không gửi đi được email
+                        if (error) {
+                            return res.json({ status: 'error', error: ` Not send OTP to email ${email} ` });
+                            // Gửi đi được email
+                        } else {
+                            console.log(info.messageId);
+                        }
+                    },
+                );
+                return res.json({
+                    status: 'ok',
+                });
+            } else {
+                return res.json({ status: 'error', error: 'email' });
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    // [POST] /api/change-password
+    async changePassword(req, res, next) {
+        try {
+            const { otpCode, email, password: plainTextpassword } = req.body;
+            console.log(otpCode);
+            console.log(email);
+
+            // Tìm user có email và otpCode đúng trong CSDL
+            let data = await VerifyEmail.findOne({ email, code: otpCode }).lean();
+            if (data) {
+                // Căn chỉnh thời gian nhập
+                let currentTime = new Date().getTime();
+                let diff = data.expireIn - currentTime;
+                if (diff < 0) {
+                    return res.json({ status: 'error', error: 'Invalid OTP' });
+                } else {
+                    console.log(data);
+
+                    // Tìm kiếm user theo email lấy được để cập nhật
+                    let user = await AccountUser.findOne({ email: email });
+
+                    // Kiểm tra password
+                    if (!plainTextpassword || typeof plainTextpassword !== 'string') {
+                        return res.json({ status: 'error', error: 'Invalid password' });
+                    }
+                    // Kiểm tra độ dài password có lớn hơn hoặc bằng 5 không
+                    if (plainTextpassword.length < 5) {
+                        return res.json({
+                            status: 'error',
+                            error: 'Password too small . Should be atleast 6 characters ',
+                        });
+                    }
+                    // Mã hóa password mới
+                    const passwordnew = await bcrypt.hash(plainTextpassword, 10);
+
+                    // Cập nhật password mới trong cơ sở dữ liệu
+                    user.updateOne({ password: passwordnew })
+                        .then(console.log('Done'))
+                        .catch((error) => console.log(error));
+                    return res.json({
+                        status: 'ok',
+                        data: user,
+                    });
+                }
+            } else {
+                return res.json({ status: 'error', error: 'Email and OTP invalid' });
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 }
 
