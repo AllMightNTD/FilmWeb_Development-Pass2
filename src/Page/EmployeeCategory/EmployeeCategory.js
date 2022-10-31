@@ -42,7 +42,7 @@ function EmployeeCategory() {
             <div className={cx('container-fluid')}>
                 <div className={cx('row')}>
                     {dataFilm.map((item, index) => (
-                        <div key={index} className={cx('col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 mb-4')}>
+                        <div key={index} className={cx('col-12 col-sm-4 col-md-4 col-lg-3 col-xl-2 mb-4')}>
                             <Link to={`/MovieDetail/${item.slug}`} className={cx('item_movie')}>
                                 <div className={cx('item_image')}>
                                     <img className={cx('image_movie')} src={item.image} />
@@ -66,7 +66,6 @@ function EmployeeCategory() {
                                                 <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
                                             </div>
                                         </div>
-                                        <FontAwesomeIcon icon={faCircleChevronRight} className={cx('next_icon')} />
                                     </div>
                                 </div>
                             </Link>

@@ -2,13 +2,14 @@
     width: 80%;
     position: relative;
     overflow: hidden;
-    border: 1px solid black;
+    border: 1px solid var(--primary-black);
     top: 80px;
     left: 50%;
     right: 50%;
     transform: translateX(-50%);
     border-radius: 5px;
     background-color: beige;
+    margin-bottom: 330px;
 }
 .container_form {
     display: flex;

@@ -54,7 +54,7 @@
 }
 .icon-bars {
     font-size: 25px;
-    color: #fff;
+    color: var(--primary-white);
 }
 .Menu_settings-box {
     width: 150px;
@@ -65,7 +65,7 @@
     flex-direction: column;
     border-radius: 5px;
     border: 1px solid #bfbfbf;
-    background-color: white;
+    background-color: var(--primary-white);
     box-shadow: 10px 10px 5px #aaaaaa;
     animation: fadeIn ease-in-out 0.5s;
 }
@@ -81,7 +81,7 @@
 .menu_setting-item {
     text-decoration: none;
     padding: 5px 10px;
-    color: black;
+    color: var(--primary-black);
 }
 .menu_setting-item:hover {
     background-color: #ccc;

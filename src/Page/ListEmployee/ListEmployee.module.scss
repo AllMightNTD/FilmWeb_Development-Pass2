@@ -1,8 +1,11 @@
 .list_film {
-    border: 1px solid black;
+    border: 1px solid var(--primary-black);
     background-color: beige;
     max-width: 1200px;
-    margin: 80px auto 60px auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 330px;
+    margin-top: 30px;
 }
 .Request_film {
     display: flex;
@@ -81,7 +84,7 @@
     font-weight: 400;
     border-radius: 5px;
     background-color: #ff3333;
-    color: #fff;
+    color: var(--primary-white);
     margin: 0 10px;
     padding: 6px 12px;
 }

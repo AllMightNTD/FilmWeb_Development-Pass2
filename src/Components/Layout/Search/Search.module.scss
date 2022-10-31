@@ -3,7 +3,7 @@
     width: 240px;
     height: 30px;
     padding-left: 12px;
-    background-color: #fff;
+    background-color: var(--primary-white);
     text-align: left;
     display: flex;
     border: 1px solid #4d4d4d;
@@ -73,7 +73,7 @@
     max-height: 350px;
     padding: 12px;
     overflow: auto;
-    background-color: #fff;
+    background-color: var(--primary-white);
     animation: fadeIn ease-in-out 0.3s;
     border-radius: 8px;
     box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;

@@ -89,125 +89,127 @@ function TrashEmployee() {
     }
 
     return (
-        <div className={cx('trash_container')}>
-            <form method="POST" action="http://localhost:5000/employee/handle-restore-data">
-                <a href="/listemployee" className={cx('list_film')} style={{ textDecoration: 'none' }}>
-                    <FontAwesomeIcon icon={faList} />
-                    <p>Danh sách phim</p>
-                </a>
-                <div className={cx('d-flex mb-4')} style={{ alignItems: 'center' }}>
-                    <Form.Check
-                        type="checkbox"
-                        checked={checkedAll}
-                        id={`delete-checkbox`}
-                        label={`Chon tat ca`}
-                        style={{ marginLeft: '20px' }}
-                        // Hàm xử lý check ALL được gọi khi click
-                        onChange={handleCheckAll}
-                    />
-                    <Form.Select
-                        aria-label="Default select example"
-                        className={cx('ml-4')}
-                        name="action"
-                        style={{ width: '200px', marginLeft: '10px', marginRight: '10px' }}
-                        required
-                    >
-                        <option value="">--Hành Động --</option>
-                        <option value="restore">Khôi Phục</option>
-                    </Form.Select>
-                    <button
-                        id="checkall-submit-btn"
-                        type="submit"
-                        class="btn btn-sm btn-primary ml-4"
-                        // disabled : ẩn hoặc hiên (ẩn : không submit được)
-                        disabled={isDisabled}
-                    >
-                        Thực Hiện
-                    </button>
-                </div>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Creat Time</th>
-                            <th>Setting</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {dataTrash.length > 0 ? (
-                            dataTrash.map((dataItem, index) => (
-                                <tr key={index}>
-                                    <input
-                                        className="ml-4 mt-4"
-                                        type="checkbox"
-                                        // Value là id
-                                        value={dataItem._id}
-                                        // Đặt name là 1 mảng
-                                        name="usersID[]"
-                                    />
-                                    <th>{index + 1}</th>
-                                    <th>{dataItem.name}</th>
-                                    <th>{dataItem.createdAt}</th>
-                                    <th>
-                                        <div style={{ display: 'flex' }}>
-                                            <form
-                                                method="POST"
-                                                action={`http://localhost:5000/employee/${dataItem._id}/restore?_method=PATCH`}
-                                            >
-                                                <Button className={cx('btn btn-danger')} type="submit">
-                                                    Khôi phục
+        <div className={cx('container')}>
+            <div className={cx('trash_container')}>
+                <form method="POST" action="http://localhost:5000/employee/handle-restore-data">
+                    <a href="/listemployee" className={cx('list_film')} style={{ textDecoration: 'none' }}>
+                        <FontAwesomeIcon icon={faList} />
+                        <p>Danh sách phim</p>
+                    </a>
+                    <div className={cx('d-flex mb-4')} style={{ alignItems: 'center' }}>
+                        <Form.Check
+                            type="checkbox"
+                            checked={checkedAll}
+                            id={`delete-checkbox`}
+                            label={`Chon tat ca`}
+                            style={{ marginLeft: '20px' }}
+                            // Hàm xử lý check ALL được gọi khi click
+                            onChange={handleCheckAll}
+                        />
+                        <Form.Select
+                            aria-label="Default select example"
+                            className={cx('ml-4')}
+                            name="action"
+                            style={{ width: '200px', marginLeft: '10px', marginRight: '10px' }}
+                            required
+                        >
+                            <option value="">--Hành Động --</option>
+                            <option value="restore">Khôi Phục</option>
+                        </Form.Select>
+                        <button
+                            id="checkall-submit-btn"
+                            type="submit"
+                            class="btn btn-sm btn-primary ml-4"
+                            // disabled : ẩn hoặc hiên (ẩn : không submit được)
+                            disabled={isDisabled}
+                        >
+                            Thực Hiện
+                        </button>
+                    </div>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Creat Time</th>
+                                <th>Setting</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dataTrash.length > 0 ? (
+                                dataTrash.map((dataItem, index) => (
+                                    <tr key={index}>
+                                        <input
+                                            className="ml-4 mt-4"
+                                            type="checkbox"
+                                            // Value là id
+                                            value={dataItem._id}
+                                            // Đặt name là 1 mảng
+                                            name="usersID[]"
+                                        />
+                                        <th>{index + 1}</th>
+                                        <th>{dataItem.name}</th>
+                                        <th>{dataItem.createdAt}</th>
+                                        <th>
+                                            <div style={{ display: 'flex' }}>
+                                                <form
+                                                    method="POST"
+                                                    action={`http://localhost:5000/employee/${dataItem._id}/restore?_method=PATCH`}
+                                                >
+                                                    <Button className={cx('btn btn-danger')} type="submit">
+                                                        Khôi phục
+                                                    </Button>
+                                                </form>
+
+                                                {/* Khi click vào button xóa  */}
+                                                {/* Gọi đến link trong action với phương thức DELETE */}
+                                                {/* Bên database nhận lại id và xóa theo ID */}
+                                                <Button
+                                                    type="submit"
+                                                    variant="danger"
+                                                    onClick={() => handleData(dataItem._id)}
+                                                >
+                                                    Xóa Vĩnh Viễn
                                                 </Button>
-                                            </form>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                ))
+                            ) : (
+                                <p>
+                                    Thùng rác trống
+                                    <Link to="/listemployee">Quay lại danh sách phim</Link>
+                                </p>
+                            )}
+                        </tbody>
+                    </Table>
 
-                                            {/* Khi click vào button xóa  */}
-                                            {/* Gọi đến link trong action với phương thức DELETE */}
-                                            {/* Bên database nhận lại id và xóa theo ID */}
-                                            <Button
-                                                type="submit"
-                                                variant="danger"
-                                                onClick={() => handleData(dataItem._id)}
-                                            >
-                                                Xóa Vĩnh Viễn
-                                            </Button>
-                                        </div>
-                                    </th>
-                                </tr>
-                            ))
-                        ) : (
-                            <p>
-                                Thùng rác trống
-                                <Link to="/listemployee">Quay lại danh sách phim</Link>
-                            </p>
-                        )}
-                    </tbody>
-                </Table>
-
-                {
-                    <Modal show={show} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>Hành động này sẽ không thể khôi phục . Bạn có chắc muốn xóa ???</Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Hủy
-                            </Button>
-
-                            {/* Xóa vĩnh viễn với id */}
-                            <form
-                                method="POST"
-                                action={`http://localhost:5000/employee/${idforce}/force?_method=DELETE`}
-                            >
-                                <Button variant="danger" type="submit">
-                                    Xóa
+                    {
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Modal heading</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Hành động này sẽ không thể khôi phục . Bạn có chắc muốn xóa ???</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Hủy
                                 </Button>
-                            </form>
-                        </Modal.Footer>
-                    </Modal>
-                }
-            </form>
+
+                                {/* Xóa vĩnh viễn với id */}
+                                <form
+                                    method="POST"
+                                    action={`http://localhost:5000/employee/${idforce}/force?_method=DELETE`}
+                                >
+                                    <Button variant="danger" type="submit">
+                                        Xóa
+                                    </Button>
+                                </form>
+                            </Modal.Footer>
+                        </Modal>
+                    }
+                </form>
+            </div>
         </div>
     );
 }

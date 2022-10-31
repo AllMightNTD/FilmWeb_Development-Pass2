@@ -6,7 +6,7 @@
     padding-left: 50px;
     max-height: 306px;
     box-shadow: 0 0 5px #aaaaaa;
-    background-color: black;
+    background-color: var(--primary-black);
 }
 .footer_container {
     max-width: 1200px;
@@ -33,7 +33,7 @@
     align-items: center;
 
     a {
-        color: black;
+        color: var(--primary-black);
         font-size: 20px;
         margin-right: 10px;
     }

@@ -10,6 +10,7 @@ const { isValidObjectId } = require('mongoose');
 const client = new OAuth2Client('70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com');
 
 class HandleAccountController {
+    // [POST] /api/googleLogin
     async handleLogin(req, res, next) {
         try {
             const { username, password } = req.body;

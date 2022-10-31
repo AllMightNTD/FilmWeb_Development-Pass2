@@ -1,8 +1,14 @@
+.container {
+    padding-left: 50px;
+}
 .create_film {
     max-width: 1200px;
-    border: 1px solid black;
+    border: 1px solid var(--primary-black);
     background-color: beige;
-    margin: 80px auto 60px auto;
+    margin-bottom: 330px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .container_form {
@@ -13,15 +19,39 @@
 .form_block {
     display: flex;
 
+    .form_block-1 {
+        overflow: hidden;
+        max-width: 300px;
+    }
     .form_block-2 {
+        max-width: 300px;
+
         padding-left: 15px;
     }
+    .form_block-3 {
+        margin-left: 50px;
+        min-width: 200px;
+    }
+    .image_preview {
+        margin-left: 40px;
+
+        img {
+            width: 100%;
+            object-fit: cover;
+        }
+    }
 }
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 760px) {
     .form_block {
         flex-direction: column;
         .form_block-2 {
             padding-left: 0;
+        }
+        .form_block-3 {
+            margin-left: 0;
+        }
+        .image_preview {
+            margin-left: 0;
         }
     }
 }
@@ -32,7 +62,7 @@
     align-items: center;
 }
 .text_input {
-    width: 470px;
+    width: 100%;
 }
 // .scrollable {
 //     overflow: auto;
@@ -40,3 +70,113 @@
 //     height: 80px; /* adjust height depending on number of options to display */
 //     border: 1px silver solid;
 // }
+
+// Item movie
+.item_movie {
+    text-decoration: none;
+    display: block;
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 260px;
+    height: 475px;
+    box-shadow: 0 0 5px #aaaaaaaa;
+}
+.item_movie:hover {
+    box-shadow: 0 0 20px #aaaaaaaa;
+}
+.item_movie:hover .image_movie {
+    transform: scale(1.1);
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.item_image {
+    width: 100%;
+    height: 377px;
+    overflow: hidden;
+    .image_movie {
+        width: 100%;
+        height: 100%;
+        transition: all 0.2s ease-in-out;
+        object-fit: cover;
+    }
+}
+
+.infor_item-movie {
+    background-color: var(--primary-black);
+    padding: 12px 16px;
+    height: 100%;
+    .title_movie-item {
+        font-size: 18px;
+        font-weight: 700;
+        width: 120px;
+        white-space: nowrap;
+        -webkit-line-clamp: 1; /* số dòng hiển thị */
+        -webkit-box-orient: horizontal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--primary-white);
+        line-height: 18px;
+        margin-bottom: 4px;
+    }
+    .actor_movie-item {
+        font-size: 14px;
+        width: 20px;
+        white-space: nowrap;
+        -webkit-line-clamp: 1; /* số dòng hiển thị */
+        -webkit-box-orient: horizontal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #aaaaaa;
+        font-weight: 500;
+        line-height: 16px;
+    }
+}
+
+// Time and Stars
+.time_zone-item {
+    display: flex;
+    position: relative;
+    margin-top: 4px;
+    padding-left: 2px;
+    align-items: center;
+
+    .all_block-zone {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        .time_item {
+            display: flex;
+            align-items: center;
+            .clock_icons {
+                color: #aaaaaa;
+                margin-top: 4px;
+                margin-right: 4px;
+            }
+
+            .time {
+                margin-top: 2px;
+                font-size: 14px;
+                color: #aaaaaa;
+                font-weight: 550;
+            }
+        }
+    }
+
+    .stars_movie-item {
+        display: flex;
+        padding-left: 16px;
+        align-items: center;
+
+        .star_icon {
+            font-size: 12px;
+            color: #ffcc00;
+        }
+    }
+}
