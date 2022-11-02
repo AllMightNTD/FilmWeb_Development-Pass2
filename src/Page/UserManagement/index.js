@@ -45,7 +45,6 @@ function UserAdminCheck() {
     ];
     const [currentIndex, setCurrentIndex] = useState(0);
     const quizDataSet = quizData[currentIndex];
-
     const [valueChecked, setValueChecked] = useState('');
 
     const handleSubmitAnswer = () => {
@@ -58,12 +57,13 @@ function UserAdminCheck() {
             }
         }
     };
-    if (valueChecked === quizDataSet.correct) {
+    // Đi đến được câu cuối cùng
+    if (currentIndex === quizData.length) {
+        alert('Congratulations, you have answered all the questions correctly. You are the Admin');
+        navigate('/listUser');
+        // Chuyển tiếp câu (tăng currentIndex nếu trả lời đúng)
+    } else if (valueChecked === quizDataSet.correct) {
         setCurrentIndex(currentIndex + 1);
-    }
-    if (currentIndex + 1 === quizData.length) {
-        alert('Bạn da vuotj qua');
-        navigate('/');
     }
 
     return (

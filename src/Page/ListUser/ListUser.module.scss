@@ -1,0 +1,24 @@
+.list_film {
+    border: 1px solid var(--primary-black);
+    background-color: beige;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6px;
+    margin-bottom: 480px;
+    margin-top: 30px;
+}
+
+// Độ rộng mobile
+@media screen and (max-width: 734px) {
+    .list_film {
+        height: 900px;
+    }
+}
+.Pagination_page {
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}

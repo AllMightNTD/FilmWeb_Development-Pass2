@@ -6,10 +6,46 @@ const { OAuth2Client } = require('google-auth-library');
 const { generatorOTP } = require('../middleware/otpMail');
 const { mailTransport } = require('../middleware/otpMail');
 const { isValidObjectId } = require('mongoose');
+const PAGE_SIZE = 6;
 
 const client = new OAuth2Client('70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com');
 
 class HandleAccountController {
+    listUser(req, res, next) {
+        var page = req.query.page;
+        if (page) {
+            // Get page
+            // Chuyển sang int
+            page = parseInt(page);
+            // Số lượng bỏ qua
+            var skipNumber = (page - 1) * PAGE_SIZE;
+            AccountUser.find({})
+                .skip(skipNumber)
+                // Số lượng giới hạn
+                .limit(PAGE_SIZE)
+                .then((users) => {
+                    // Lấy dữ liệu trong model user truyền vào home
+
+                    //  Biến nó thành Object Literal từ Object Constructor
+
+                    // Trọc sang view (render sang view ) truyền data lấy từ model sang view
+                    // view đọc file , logic và render ra màn hình từ đó trọc về browser
+                    res.json(users);
+                })
+                .catch((error) => next(error));
+        } else {
+            AccountUser.find({}, function (err, users) {
+                if (!err) {
+                    res.send(users);
+                } else {
+                    res.status(500).json({ error: 'message' });
+                }
+            });
+
+            // res.render('home')
+        }
+    }
+
     // [POST] /api/googleLogin
     async handleLogin(req, res, next) {
         try {

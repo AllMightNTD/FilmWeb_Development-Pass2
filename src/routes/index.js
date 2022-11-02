@@ -11,6 +11,7 @@ import SignIn from '../Page/SingUpAndLogin/SignIn';
 import SignUp from '../Page/SingUpAndLogin/SignUp';
 import ForgotPass from '../Page/SingUpAndLogin/ForgotPass';
 import UserAdminCheck from '../Page/UserManagement';
+import ListUser from '../Page/ListUser/ListUser';
 const publicRoutes = [
     { path: '/', component: Employee },
     { path: '/Employee', component: Employee },
@@ -25,6 +26,7 @@ const publicRoutes = [
     { path: '/forgotPass', component: ForgotPass },
     { path: '/checkAdmin', component: UserAdminCheck },
     { path: '/trash', component: TrashEmployee },
+    { path: '/listUser', component: ListUser },
 ];
 
 const privateRoutes = [];
