@@ -63,7 +63,7 @@ function ForgotPass() {
         }
     }
     return (
-        <>
+        <div className={cx('container')}>
             {checkSuccess ? (
                 <form className={cx('form_sending-email')} method="POST" onSubmit={handleSubmit}>
                     <FontAwesomeIcon className={cx('icon_mail')} icon={faEnvelope} />
@@ -141,7 +141,7 @@ function ForgotPass() {
                     </button>
                 </form>
             )}
-        </>
+        </div>
     );
 }
 

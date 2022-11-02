@@ -1,0 +1,47 @@
+.container {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 400px;
+    padding: 20px;
+    padding-top: 20px;
+    border-radius: 6px;
+    height: 50px;
+    background-color: var(--primary-white);
+    display: flex;
+    align-items: center;
+    animation: TranTo ease-in-out 0.5s, fadeout linear 1s;
+    overflow: hidden;
+
+    .icon {
+        font-size: 25px;
+        color: #00ff00;
+    }
+    .content {
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-bottom: 20px;
+        h4 {
+            font-size: 16px;
+            color: var(--primary-black);
+            margin-bottom: 0;
+        }
+    }
+}
+
+@keyframes TranTo {
+    from {
+        opacity: 0;
+        right: -200px;
+    }
+    to {
+        opacity: 1;
+        right: 20px;
+    }
+}
+
+@keyframes fadeout {
+    to {
+        opacity: 0;
+    }
+}

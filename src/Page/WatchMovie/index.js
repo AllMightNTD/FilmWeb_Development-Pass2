@@ -1,13 +1,20 @@
 import style from './WatchMovie.module.scss';
 import classNames from 'classnames/bind';
-import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag, faStar } from '@fortawesome/free-solid-svg-icons';
-import { data } from 'jquery';
+import { faCircleChevronRight, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import ProductCard from '../Employee/MovieCard';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(style);
 function WatchMovie() {
     const params = useParams();
@@ -15,13 +22,14 @@ function WatchMovie() {
 
     const [dataWatch, setdataWatch] = useState([]);
     console.log(slug);
+    const [datapopular, setDatapopular] = useState([]);
 
     useEffect(() => {
         axios
             .get(`http://localhost:5000/employee/${slug}`)
             .then((response) => setdataWatch(response ? response.data : []))
             .catch((error) => console.log(error));
-    }, []);
+    }, [slug]);
 
     console.log(dataWatch);
 
@@ -41,6 +49,20 @@ function WatchMovie() {
             }
         }, 1000);
     }, [number]);
+    useEffect(() => {
+        axios
+            // page = 2 => trang thứ 2 , chứa tối đa 2 phần tử
+            .get(`http://localhost:5000`)
+            .then((response) => {
+                console.log(response.data);
+                setDatapopular(response ? response.data : []);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+        // Truyền page , trang thứ mấy lên
+    }, []);
 
     console.log(checkSkip);
 
@@ -124,6 +146,47 @@ function WatchMovie() {
                     <div className={cx('description_movie')}>
                         <p className={cx('descibe_item')}>{dataWatch.describe}</p>[
                         <a href={`/MovieDetail/${dataWatch.slug}`}>Xem thêm</a>]
+                    </div>
+                    <div className={cx('container-popular')}>
+                        <Swiper
+                            freeMode={true}
+                            grapCursor={true}
+                            modules={[Navigation, Pagination, Scrollbar, A11y]}
+                            navigation
+                            pagination={{ clickable: true }}
+                            scrollbar={{ draggable: true }}
+                            onSwiper={(swiper) => console.log(swiper)}
+                            onSlideChange={() => console.log('slide change')}
+                            className={cx('mySwiper')}
+                            breakpoints={{
+                                0: {
+                                    slidesPerView: 1,
+                                    spaceBetween: 10,
+                                },
+                                480: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                },
+                                768: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 15,
+                                },
+                                1024: {
+                                    slidesPerView: 4,
+                                    spaceBetween: 15,
+                                },
+                                1280: {
+                                    slidesPerView: 4,
+                                    spaceBetween: 20,
+                                },
+                            }}
+                        >
+                            {datapopular.map((data, index) => (
+                                <SwiperSlide key={index}>
+                                    <ProductCard data={data} key={index} />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
                     </div>
                 </div>
             </div>

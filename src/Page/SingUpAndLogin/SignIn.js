@@ -14,7 +14,7 @@ import { useContext } from 'react';
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
 import FacebookLogin from 'react-facebook-login';
-import ForgotPass from './ForgotPass';
+import ToastSuccess from '../../Accessibilyty';
 function SignIn(props) {
     const cx = classNames.bind(style);
 
@@ -23,6 +23,8 @@ function SignIn(props) {
 
     const { dispatch } = useContext(AppContext);
     const navigate = useNavigate();
+
+    const [checkSuccess, setCheckSuccess] = useState(false);
 
     // Đăng nhập với tài khoản
     async function handleSubmitSignIn(event) {
@@ -38,7 +40,6 @@ function SignIn(props) {
             }),
         }).then((res) => res.json());
         if (result.status === 'ok') {
-            alert('Sign In Successfully');
             const { token, userName } = result.data;
             console.log('Got the token', token);
             console.log('Got the data', userName);
@@ -130,6 +131,11 @@ function SignIn(props) {
     const handleRenderViewForgotPass = () => {
         setCheckForgotPass(!checkForgotPass);
     };
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setCheckSuccess(false);
+    //     }, 5000);
+    // });
 
     return (
         <div className={cx('container')}>

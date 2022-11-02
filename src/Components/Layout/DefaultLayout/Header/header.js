@@ -38,7 +38,7 @@ function Header() {
                 </div>
                 <div className={cx('menu_container')}>
                     <ul className={cx('menu-list')}>
-                        <Link to="#" className={cx('menu-list_item')}>
+                        <Link to="/" className={cx('menu-list_item')}>
                             Home
                         </Link>
                         <Link to="#" className={cx('menu-list_item')}>

@@ -75,7 +75,7 @@ function SideBar({ checkHide }) {
             ) : (
                 <></>
             )}
-            <Link to="#" className={cx('sidebar_item')}>
+            <Link to="/" className={cx('sidebar_item')}>
                 {' '}
                 <div className={cx('left_menu-icon')} onClick={handleOpenViewSearch}>
                     <FontAwesomeIcon icon={faHouse} />
@@ -89,7 +89,7 @@ function SideBar({ checkHide }) {
                 </div>
                 <Search />
             </div>
-            <Link to="#" className={cx('sidebar_item')}>
+            <Link to="/checkAdmin" className={cx('sidebar_item')}>
                 {' '}
                 <div className={cx('left_menu-icon')} onClick={handleOpenViewSearch}>
                     <FontAwesomeIcon icon={faUsers} />

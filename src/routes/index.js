@@ -10,6 +10,7 @@ import WatchMovie from '../Page/WatchMovie';
 import SignIn from '../Page/SingUpAndLogin/SignIn';
 import SignUp from '../Page/SingUpAndLogin/SignUp';
 import ForgotPass from '../Page/SingUpAndLogin/ForgotPass';
+import UserAdminCheck from '../Page/UserManagement';
 const publicRoutes = [
     { path: '/', component: Employee },
     { path: '/Employee', component: Employee },
@@ -22,6 +23,7 @@ const publicRoutes = [
     { path: '/register', component: SignUp },
     { path: '/login', component: SignIn },
     { path: '/forgotPass', component: ForgotPass },
+    { path: '/checkAdmin', component: UserAdminCheck },
     { path: '/trash', component: TrashEmployee },
 ];
 
