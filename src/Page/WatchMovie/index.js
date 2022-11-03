@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faStar, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { faCircleChevronRight, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -78,6 +78,11 @@ function WatchMovie() {
         setCheckHideButtonSkip(false);
     };
 
+    const [isContainerActive, setIsContainerActive] = useState(false);
+    const handleBackground = () => {
+        setIsContainerActive(!isContainerActive);
+    };
+
     return (
         <div className={cx('container')}>
             <div className={cx('main_film')}>
@@ -134,7 +139,15 @@ function WatchMovie() {
                         <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
                     </div>
                     <div className={cx('button_feelings')}>
-                        <button>Thích</button>
+                        <button
+                            // Đổi màu khi like và không like
+                            className={cx(`btn_like${isContainerActive ? ' discoloration' : ''}`)}
+                            id="btn_like"
+                            onClick={handleBackground}
+                        >
+                            <FontAwesomeIcon icon={faThumbsUp} className={cx('icon_like')} />
+                            Thích
+                        </button>
                         <button>Chia sẻ</button>
                     </div>
                     <button className={cx('button_save')}>

@@ -4,12 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
 import style from './Employee.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
+import Tippy from '@tippyjs/react/headless';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import ProductCard from './MovieCard';
 import { faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faGratipay } from '@fortawesome/free-brands-svg-icons';
 
 function Employee() {
     const cx = classnames.bind(style);
@@ -135,6 +137,14 @@ function Employee() {
                                             </div>
                                         </div>
                                     </div>
+                                    <Tippy
+                                        placement="bottom-start"
+                                        render={(attrs) => (
+                                            <div className={cx('box_tooltip')} tabIndex="-1" {...attrs}>
+                                                Yêu Film
+                                            </div>
+                                        )}
+                                    ></Tippy>
                                 </Link>
                             </div>
                         ))}

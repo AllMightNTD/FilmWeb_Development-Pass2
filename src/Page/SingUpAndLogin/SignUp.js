@@ -18,6 +18,7 @@ function SignUp(props) {
     const [watchPass, setWatchPass] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmpassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     async function handleSubmit(event) {
         event.preventDefault();
@@ -32,6 +33,7 @@ function SignUp(props) {
                 username,
                 password,
                 email,
+                confirmpassword,
             }),
         }).then((res) => res.json());
         if (result.status === 'ok') {
@@ -81,6 +83,32 @@ function SignUp(props) {
                         name="password"
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Password"
+                        className={cx('input_text')}
+                        required
+                    ></input>
+                    <Tippy
+                        placement="bottom"
+                        render={(attrs) => (
+                            <div className={cx('box_tooltip')} tabIndex="-1" {...attrs}>
+                                Check password
+                            </div>
+                        )}
+                    >
+                        <FontAwesomeIcon
+                            className={cx('icon_checkPass')}
+                            icon={faEye}
+                            onClick={() => setWatchPass(!watchPass)}
+                            style={{ cursor: 'pointer' }}
+                        />
+                    </Tippy>
+                </div>
+                <div className={cx('info')}>
+                    <input
+                        type={watchPass ? 'text' : 'password'}
+                        value={confirmpassword}
+                        name="confirmpassword"
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        placeholder="Confirm password"
                         className={cx('input_text')}
                         required
                     ></input>

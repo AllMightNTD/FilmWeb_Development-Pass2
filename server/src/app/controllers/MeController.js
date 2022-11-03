@@ -6,6 +6,8 @@ class MeController {
     // List employee
     // Số dữ liệu xóa : countDocumentDeleted (count)
     // Trả về 1 object bao gồm 1 mảng và 1 count
+
+    // [GET] /me/storedEmployee
     storedemployee(req, res, next) {
         var page = req.query.page;
         if (page) {
@@ -41,6 +43,7 @@ class MeController {
         }
     }
 
+    // [USE] /me/deleteCount
     DeletedCountMusic(req, res, next) {
         Music.countDocumentsDeleted({}, function (err, deletedCount) {
             if (!err) {
@@ -51,6 +54,7 @@ class MeController {
         });
     }
 
+    // [USE] /me/trash
     // Tìm danh sách đã xóa bằng findDeleted
     trashemployee(req, res, next) {
         Music.findDeleted({})
@@ -60,6 +64,8 @@ class MeController {
             })
             .catch((error) => next(error));
     }
+
+    // [USE] /me/:category
     // showCategory
     showCategory(req, res, next) {
         var page = req.query.page;

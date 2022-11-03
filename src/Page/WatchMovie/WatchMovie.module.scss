@@ -143,6 +143,20 @@
             background-color: #1877f2;
             margin-right: 10px;
         }
+        .btn_like {
+            padding: 0px 10px;
+            border-radius: 5px;
+            color: var(--primary-white);
+            background-color: #dddddd;
+            margin-right: 10px;
+        }
+        // Đổi màu khi like và không like
+        .btn_like.discoloration {
+            background-color: #1877f2;
+        }
+        .icon_like {
+            margin-right: 4px;
+        }
     }
     .button_save {
         .icon_save {

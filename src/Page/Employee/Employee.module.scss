@@ -72,6 +72,7 @@
 .item_movie {
     text-decoration: none;
     display: block;
+    position: relative;
     border-radius: 6px;
     overflow: hidden;
     width: 100%;
@@ -132,6 +133,15 @@
         color: #aaaaaa;
         font-weight: 500;
         line-height: 16px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 

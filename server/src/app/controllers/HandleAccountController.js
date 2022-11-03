@@ -11,6 +11,7 @@ const PAGE_SIZE = 6;
 const client = new OAuth2Client('70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com');
 
 class HandleAccountController {
+    // [GET] /accounts/listUser
     listUser(req, res, next) {
         var page = req.query.page;
         if (page) {
@@ -76,7 +77,7 @@ class HandleAccountController {
     // [POST] /api/register'
     async handleRegister(req, res, next) {
         console.log(req.body);
-        const { email, username, password: plainTextpassword } = req.body;
+        const { email, username, password: plainTextpassword, confirmpassword } = req.body;
         if (!email || typeof email !== 'string') {
             return res.json({ status: 'error', error: 'Invalid email' });
         }
@@ -87,10 +88,17 @@ class HandleAccountController {
         if (!plainTextpassword || typeof plainTextpassword !== 'string') {
             return res.json({ status: 'error', error: 'Invalid password' });
         }
+        if (!confirmpassword || typeof confirmpassword !== 'string') {
+            return res.json({ status: 'error', error: 'Invalid confirm password' });
+        }
         // Kiểm tra độ dài password có lớn hơn hoặc bằng 5 không
-        if (plainTextpassword.length < 5) {
+        if (plainTextpassword.length < 6) {
             return res.json({ status: 'error', error: 'Password too small . Should be atleast 6 characters ' });
         }
+        if (confirmpassword != plainTextpassword) {
+            return res.json({ status: 'error', error: 'Enter the wrong password, please re-enter' });
+        }
+        // Kiểm tra email
         if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
             return res.json({ status: 'error', error: 'Invalid email' });
         }
@@ -277,7 +285,8 @@ class HandleAccountController {
     async sendEmail(req, res, next) {
         try {
             const { email } = req.body;
-            const data = AccountUser.findOne({ email }).lean();
+            // Thiếu await là dell chạy được
+            const data = await AccountUser.findOne({ email: email }).lean();
             if (data) {
                 // Lưu mã code và email vào CSDL
                 let otpcode = generatorOTP();
@@ -311,7 +320,11 @@ class HandleAccountController {
                     status: 'ok',
                 });
             } else {
-                return res.json({ status: 'error', error: 'email' });
+                console.log('Không có');
+                res.json({
+                    status: 'error',
+                    error: 'Không tồn tại gmail',
+                });
             }
         } catch (error) {
             console.log(error.message);
@@ -321,12 +334,12 @@ class HandleAccountController {
     // [POST] /api/change-password
     async changePassword(req, res, next) {
         try {
-            const { otpCode, email, password: plainTextpassword } = req.body;
+            const { otpCode, email, password: plainTextpassword, confirmpassword } = req.body;
             console.log(otpCode);
             console.log(email);
 
             // Tìm user có email và otpCode đúng trong CSDL
-            let data = await VerifyEmail.findOne({ email, code: otpCode }).lean();
+            let data = await VerifyEmail.findOne({ email, code: otpCode });
             if (data) {
                 // Căn chỉnh thời gian nhập
                 let currentTime = new Date().getTime();
@@ -339,15 +352,28 @@ class HandleAccountController {
                     // Tìm kiếm user theo email lấy được để cập nhật
                     let user = await AccountUser.findOne({ email: email });
 
+                    // Kiểm tra tồn tại
+                    if (!plainTextpassword || typeof plainTextpassword !== 'string') {
+                        return res.json({ status: 'error', error: 'Invalid password' });
+                    }
+                    if (!confirmpassword || typeof confirmpassword !== 'string') {
+                        return res.json({ status: 'error', error: 'Invalid confirm password' });
+                    }
                     // Kiểm tra password
                     if (!plainTextpassword || typeof plainTextpassword !== 'string') {
                         return res.json({ status: 'error', error: 'Invalid password' });
                     }
-                    // Kiểm tra độ dài password có lớn hơn hoặc bằng 5 không
-                    if (plainTextpassword.length < 5) {
+                    // Kiểm tra độ dài password có lớn hơn hoặc bằng 6 không
+                    if (plainTextpassword.length < 6) {
                         return res.json({
                             status: 'error',
                             error: 'Password too small . Should be atleast 6 characters ',
+                        });
+                    }
+                    if (confirmpassword != plainTextpassword) {
+                        return res.json({
+                            status: 'error',
+                            error: 'Password is incorrect, please re-enter',
                         });
                     }
                     // Mã hóa password mới
