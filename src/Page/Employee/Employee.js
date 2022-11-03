@@ -11,7 +11,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import ProductCard from './MovieCard';
 import { faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
-import { faGratipay } from '@fortawesome/free-brands-svg-icons';
+import Image from '../../Components/Image';
 
 function Employee() {
     const cx = classnames.bind(style);
@@ -114,7 +114,7 @@ function Employee() {
                             <div key={index} className={cx('col-12 col-sm-4 col-md-4 col-lg-3 col-xl-2 mb-4')}>
                                 <Link to={`/MovieDetail/${item.slug}`} className={cx('item_movie')}>
                                     <div className={cx('item_image')}>
-                                        <img className={cx('image_movie')} src={item.image} />
+                                        <Image className={cx('image_movie')} src={item.image} />
                                     </div>
                                     <div className={cx('infor_item-movie')}>
                                         <h5 className={cx('title_movie-item')}>{item.name}</h5>

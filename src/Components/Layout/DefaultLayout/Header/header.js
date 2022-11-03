@@ -8,8 +8,18 @@ import { Link } from 'react-router-dom';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
+import {
+    faArrowRightToBracket,
+    faCaretDown,
+    faList,
+    faMoon,
+    faPlus,
+    faSquarePlus,
+    faSun,
+    faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 import AccountAndBar from './AccountAndBar';
+import Image from '../../../Image';
 const cx = classnames.bind(style);
 
 function Header() {
@@ -69,36 +79,40 @@ function Header() {
                                         className={cx('menu_setting-item')}
                                         style={{ textDecoration: 'none' }}
                                     >
-                                        Information
+                                        <FontAwesomeIcon icon={faList} className={cx('icon')} />
+                                        <span>List Film</span>
                                     </Link>
                                     <Link
                                         to="/create"
                                         className={cx('menu_setting-item')}
                                         style={{ textDecoration: 'none' }}
                                     >
-                                        Create
+                                        <FontAwesomeIcon icon={faPlus} className={cx('icon')} />
+                                        <span>Create</span>
                                     </Link>
                                     <div className={cx('menu_setting-item')} onClick={() => SignOut()}>
-                                        <a style={{ textDecoration: 'none', color: 'black' }} href="#">
+                                        <FontAwesomeIcon icon={faArrowRightToBracket} className={cx('icon')} />
+                                        <span style={{ textDecoration: 'none', color: 'black' }} href="#">
                                             Sign Out
-                                        </a>
+                                        </span>
                                     </div>
                                     <Link
                                         to="/trash"
                                         className={cx('menu_setting-item')}
                                         style={{ textDecoration: 'none' }}
                                     >
-                                        Trash
+                                        <FontAwesomeIcon icon={faTrash} className={cx('icon')} />
+                                        <span>Trash</span>
                                     </Link>
                                 </div>
                             )}
                         >
                             <div className={cx('profile_container')}>
                                 <div className={cx('profile_info')} onClick={handleHideShow}>
-                                    <img
+                                    <Image
                                         src="https://upload.wikimedia.org/wikipedia/commons/9/90/Spiderman.JPG"
                                         className={cx('profile-picture')}
-                                    ></img>
+                                    ></Image>
                                     <div className={cx('profile_text-container')}>
                                         <span className={cx('profile_text')}>{user.userName}</span>
                                         <FontAwesomeIcon icon={faCaretDown} className={cx('icon_bars')} />

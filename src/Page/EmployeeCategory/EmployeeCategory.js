@@ -4,9 +4,10 @@ import classnames from 'classnames/bind';
 import { useParams } from 'react-router-dom';
 import style from './EmployeeCategory.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleChevronRight, faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
+import Image from '../../Components/Image';
 function EmployeeCategory() {
     const cx = classnames.bind(style);
     const params = useParams();
@@ -45,7 +46,7 @@ function EmployeeCategory() {
                         <div key={index} className={cx('col-12 col-sm-4 col-md-4 col-lg-3 col-xl-2 mb-4')}>
                             <Link to={`/MovieDetail/${item.slug}`} className={cx('item_movie')}>
                                 <div className={cx('item_image')}>
-                                    <img className={cx('image_movie')} src={item.image} />
+                                    <Image className={cx('image_movie')} src={item.image} />
                                 </div>
                                 <div className={cx('infor_item-movie')}>
                                     <h5 className={cx('title_movie-item')}>{item.name}</h5>

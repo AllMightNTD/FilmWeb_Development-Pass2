@@ -17,7 +17,7 @@ import style from './Sidebar.module.scss';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../../Search';
-import useWindowDemension from '../../../../hooks/useWindowDemension';
+import Image from '../../../Image';
 import { useEffect, useContext } from 'react';
 
 const cx = classNames.bind(style);
@@ -50,6 +50,7 @@ function SideBar({ checkHide }) {
         }
     }, [checkHide]);
 
+    // Xử lý mở to ra để xem hết
     const handleOpenViewSearch = () => {
         setCheckView(true);
     };
@@ -127,11 +128,11 @@ function SideBar({ checkHide }) {
             {user ? (
                 <div className={cx('sidebar_item')}>
                     <div className={cx('left_menu-icon')}>
-                        <img
+                        <Image
                             src="https://upload.wikimedia.org/wikipedia/commons/9/90/Spiderman.JPG"
                             className={cx('profile-picture')}
                             onClick={handleOpenViewSearch}
-                        ></img>
+                        ></Image>
                     </div>
                     <span className={cx('user_name')}>{user.userName}</span>
                 </div>

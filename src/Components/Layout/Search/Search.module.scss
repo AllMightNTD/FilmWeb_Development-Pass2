@@ -28,7 +28,7 @@
         content: '';
         position: absolute;
         top: 5px;
-        right: var(--search-button-width);
+        right: 50px;
         height: 20px;
         width: 1px;
         background-color: #999999;
@@ -43,7 +43,7 @@
 }
 .clear {
     position: absolute;
-    right: calc(var(--search-button-width) + 12px);
+    right: 62px;
     border: none;
     outline: none;
     top: 50%;
@@ -52,7 +52,7 @@
 }
 
 .search_button {
-    width: var(--search-button-width);
+    width: 50px;
     height: 100%;
     border: none;
     background-color: transparent;

@@ -2,12 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
-import { faUser, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import style from './AccountAndBar.module.scss';
 import classnames from 'classnames/bind';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 const cx = classnames.bind(style);
 function AccountAndBar() {
     const [visible, setVisible] = useState(false);
