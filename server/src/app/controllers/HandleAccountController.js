@@ -59,12 +59,12 @@ class HandleAccountController {
             }
             if (await bcrypt.compare(password, user.password)) {
                 const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET_KEY);
-                console.log(token);
                 return res.json({
                     status: 'ok',
                     data: {
                         token,
                         userName: user.username,
+                        id: user._id,
                     },
                 });
             }
@@ -269,7 +269,7 @@ class HandleAccountController {
                 const user = await AccountUser.findOne({ _id: req.user.id });
 
                 // Set dữ liệu cho object user đấy
-                data.user = { userName: user.username };
+                data.user = { userName: user.username, id: user._id };
                 console.log(data);
             }
             res.status(200).json({

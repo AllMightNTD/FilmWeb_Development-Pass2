@@ -26,7 +26,10 @@ function Header() {
     const { state, dispatch } = useContext(AppContext);
     // Lấy state ra : chính là cái user , object trong đó có username
     const { user } = state;
-    console.log(user);
+    // if (user) {
+    //     console.log(user.userName);
+    //     console.log(user.id);
+    // }
     const SignOut = () => {
         // Xoas token
         // Cho dispatch ve null

@@ -29,18 +29,19 @@ function MovieDetail() {
             .get(`http://localhost:5000/employee/${slug}`)
             .then((response) => setDataFilm(response ? response.data : []))
             .catch((error) => console.log(error));
-
+    }, [slug]);
+    useEffect(() => {
         axios
             .get(`http://localhost:5000`)
             .then((res) => setDataNewFilm(res ? res.data : []))
             .catch((error) => console.log(error));
     }, []);
 
-    console.log(dataNewFilm);
+    // console.log(dataNewFilm);
 
     // Data sau khi cắt
     const splice = dataNewFilm.slice(0, noOfElement);
-    console.log(splice);
+    // console.log(splice);
 
     // Add thêm phần tử để hiển thị
     const loadMore = () => {

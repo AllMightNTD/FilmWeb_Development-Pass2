@@ -36,7 +36,6 @@ function SideBar({ checkHide }) {
 
     // Lấy state ra : chính là cái user , object trong đó có username
     const { user } = state;
-    console.log(user);
     var myStyles = {};
 
     console.log(checkHide);
@@ -66,8 +65,6 @@ function SideBar({ checkHide }) {
     }
 
     console.log(myStyles);
-
-    console.log(user);
 
     return (
         <div className={cx('sidebar')} style={myStyles}>

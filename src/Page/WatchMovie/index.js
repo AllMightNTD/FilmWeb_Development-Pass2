@@ -21,16 +21,21 @@ function WatchMovie() {
     const { slug } = params;
     const [dataWatch, setdataWatch] = useState([]);
     const [datapopular, setDatapopular] = useState([]);
-
+    const [likeNumber, setLikeNumber] = useState([]);
+    const [isContainerActive, setIsContainerActive] = useState(false);
+    const { state, dispatch } = useContext(AppContext);
+    // Lấy state ra : chính là cái user , object trong đó có username
+    var { user } = state;
+    var id;
+    if (user) {
+        id = user.id;
+    }
     useEffect(() => {
         axios
             .get(`http://localhost:5000/employee/${slug}`)
             .then((response) => setdataWatch(response ? response.data : []))
             .catch((error) => console.log(error));
     }, [slug]);
-    console.log(dataWatch);
-
-    console.log(dataWatch.likes);
     const [number, setNumber] = useState(5);
     const [checkSkip, setCheckSkip] = useState(false);
     const [checkSkipFilm, setCheckSkipFilm] = useState(false);
@@ -38,6 +43,7 @@ function WatchMovie() {
     // Check hiển thị / ẩn nút skip
     const [checkHideButtonSkip, setCheckHideButtonSkip] = useState(true);
 
+    // Quảng cáo
     useEffect(() => {
         setTimeout(() => {
             setNumber(number - 1);
@@ -48,12 +54,12 @@ function WatchMovie() {
         }, 1000);
     }, [number]);
 
+    // Lấy ra danh sách phim khác
     useEffect(() => {
         axios
             // page = 2 => trang thứ 2 , chứa tối đa 2 phần tử
             .get(`http://localhost:5000`)
             .then((response) => {
-                console.log(response.data);
                 setDatapopular(response ? response.data : []);
             })
             .catch(function (error) {
@@ -63,46 +69,67 @@ function WatchMovie() {
         // Truyền page , trang thứ mấy lên
     }, []);
 
-    console.log(checkSkip);
-
-    console.log(number);
-
     const filmGood =
         'https://scontent.cdninstagram.com/v/t39.25447-2/10000000_1529846804145158_7067454641157942414_n.mp4?_nc_cat=100&vs=bf14758b81a3dc4d&_nc_vs=HBksFQAYJEdJQ1dtQUFHWkZJM1kyOEZBSTZzWnhpTnBCUmlibWRqQUFBRhUAAsgBABUAGCRHSUNXbUFEemJFTkhLVDhDQUY0T1FNTWpzZXgyYnJGcUFBQUYVAgLIAQBLB4gScHJvZ3Jlc3NpdmVfcmVjaXBlATENc3Vic2FtcGxlX2ZwcwAQdm1hZl9lbmFibGVfbnN1YgAgbWVhc3VyZV9vcmlnaW5hbF9yZXNvbHV0aW9uX3NzaW0AKGNvbXB1dGVfc3NpbV9vbmx5X2F0X29yaWdpbmFsX3Jlc29sdXRpb24AHXVzZV9sYW5jem9zX2Zvcl92cW1fdXBzY2FsaW5nABFkaXNhYmxlX3Bvc3RfcHZxcwAVACUAHAAAJuSv9rLp%2BYsCFZBOKAJDMxgLdnRzX3ByZXZpZXccF0Csm1Jul41QGClkYXNoX2k0bGl0ZWJhc2ljXzVzZWNnb3BfaHEyX2ZyYWdfMl92aWRlbxIAGBh2aWRlb3MudnRzLmNhbGxiYWNrLnByb2Q4ElZJREVPX1ZJRVdfUkVRVUVTVBsPiBVvZW1fdGFyZ2V0X2VuY29kZV90YWcGb2VwX2hkE29lbV9yZXF1ZXN0X3RpbWVfbXMBMAxvZW1fY2ZnX3J1bGUHdW5tdXRlZBNvZW1fcm9pX3JlYWNoX2NvdW50ATARb2VtX2lzX2V4cGVyaW1lbnQADG9lbV9yb2lfbm90ZQtwcm9ncmVzc2l2ZRFvZW1fcm9pX3VzZXJfdGllcgAeb2VtX3JvaV9wcmVkaWN0ZWRfd2F0Y2hfdGltZV9zATAWb2VtX3JvaV9yZWNpcGVfYmVuZWZpdAUwLjAwMCVvZW1fcm9pX3N0YXRpY19iZW5lZml0X2Nvc3RfZXZhbHVhdG9yC3Byb2dyZXNzaXZlDG9lbV92aWRlb19pZBA1MDQwMjEyOTE2MDg1MzU4Em9lbV92aWRlb19hc3NldF9pZBAxMjk4MDMwNzg0MzExODc4FW9lbV92aWRlb19yZXNvdXJjZV9pZA81ODkyMzIxMTk2NjM2MDIcb2VtX3NvdXJjZV92aWRlb19lbmNvZGluZ19pZA83ODk3NTAzMDg5Mjc2NjkOdnRzX3JlcXVlc3RfaWQPZGEzNDNkM2M2NTc3NGZiJQIcHBwV8OYXGwFVAAIbAVUAAhwVAgAAABaAurcDACXEARsHiAFzAzQ2MQJjZAoyMDIyLTEwLTEzA3JjYgEwA2FwcAVWaWRlbwJjdBlDT05UQUlORURfUE9TVF9BVFRBQ0hNRU5UE29yaWdpbmFsX2R1cmF0aW9uX3MIMzY2MS43MTgCdHMVcHJvZ3Jlc3NpdmVfZW5jb2RpbmdzAA%3D%3D&ccb=1-7&_nc_sid=41a7d5&_nc_ohc=JUFIoWaZ06cAX_jQq0t&_nc_ht=scontent-dus1-1.xx&edm=APRAPSkEAAAA&oh=00_AT_nD3vc34xEojk3LkNx-kJ5znnNqGP2T1JkcQC7w6UJcg&oe=634D9936&_nc_rid=826149214188751';
     const advertisement = 'https://sponsor.imacdn.com/ff/i999-360.mp4';
 
+    // Xử lý bỏ qua quảng cáo
     const handleSkipAdvertisement = () => {
         setCheckSkipFilm(true);
         setCheckSkip(false);
         setCheckHideButtonSkip(false);
     };
-
-    const [isContainerActive, setIsContainerActive] = useState(false);
     // Xử lý like Film
-    function handleLikeFilm(id) {
-        try {
-            fetch('http://localhost:5000/likenumber/likeFilm', {
-                method: 'put',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    idFilm: dataWatch._id,
-                }),
+    function handleLikeFilm() {
+        setIsContainerActive(true);
+        fetch('http://localhost:5000/likenumber/likeFilm', {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                idFilm: id,
+                id: dataWatch._id,
+            }),
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                // Kết quả like trả về theo id
+                // Kết quả like trả về theo id
+                console.log(result);
+                // // Set data ứng với thằng id kia dữ liệu mới => cập nhật cái likes
+                setdataWatch(result);
             })
-                .then((res) => res.json())
-                .then((result) => {
-                    console.log(result);
-                });
-        } catch (error) {
-            console.log(error);
-        }
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
-    const { state, dispatch } = useContext(AppContext);
-    // Lấy state ra : chính là cái user , object trong đó có username
-    const { user } = state;
-    console.log(user);
+    // Xử lý unlike Film
+    function handleUnlikeFilm() {
+        setIsContainerActive(false);
+        fetch('http://localhost:5000/likenumber/unlikeFilm', {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                idFilm: id,
+                id: dataWatch._id,
+            }),
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                // Kết quả like trả về theo id
+                console.log(result);
+                // // Set data ứng với thằng id kia dữ liệu mới => cập nhật cái likes
+                setdataWatch(result);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
     return (
         <div className={cx('container')}>
             <div className={cx('main_film')}>
@@ -165,8 +192,7 @@ function WatchMovie() {
                             <button
                                 // Đổi màu khi like và không like
                                 className={cx(`btn_like${isContainerActive ? ' discoloration' : ''}`)}
-                                type="submit"
-                                onClick={handleLikeFilm}
+                                onClick={isContainerActive ? handleUnlikeFilm : handleLikeFilm}
                             >
                                 <FontAwesomeIcon icon={faHeart} className={cx('icon_like')} />
                                 Thích

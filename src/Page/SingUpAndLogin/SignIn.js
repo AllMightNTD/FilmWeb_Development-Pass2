@@ -40,12 +40,11 @@ function SignIn(props) {
             }),
         }).then((res) => res.json());
         if (result.status === 'ok') {
-            const { token, userName } = result.data;
-            console.log('Got the token', token);
-            console.log('Got the data', userName);
+            // Lấy ra token và userName
+            const { token, userName, id } = result.data;
             localStorage.setItem('token', token);
             // Ban du lieu ra cha
-            dispatch({ type: 'CURRENT_USER', payload: { userName } });
+            dispatch({ type: 'CURRENT_USER', payload: { userName, id } });
             // Thực hiện chuyển trang sau khi đăng nhập
             navigate('/employee');
         } else {
@@ -69,12 +68,19 @@ function SignIn(props) {
         }).then((res) => res.json());
         if (result.status === 'ok') {
             alert('Sign In Successfully');
+            console.log(result.data);
             const { token, userName } = result.data;
-            console.log('Got the token', token);
-            console.log('Got the data', userName);
             localStorage.setItem('token', token);
             // Ban du lieu ra cha
-            dispatch({ type: 'CURRENT_USER', payload: { userName } });
+            dispatch({
+                type: 'CURRENT_USER',
+                payload: {
+                    user: {
+                        userName: userName,
+                        id: result.data.id,
+                    },
+                },
+            });
             // Thực hiện chuyển trang sau khi đăng nhập
             navigate('/employee');
         } else {
@@ -111,8 +117,6 @@ function SignIn(props) {
         if (result.status === 'ok') {
             alert('Sign In Successfully');
             const { token, userName } = result.data;
-            console.log('Got the token', token);
-            console.log('Got the data', userName);
             localStorage.setItem('token', token);
             // Ban du lieu ra cha
             dispatch({ type: 'CURRENT_USER', payload: { userName } });

@@ -2,9 +2,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import classnames from 'classnames/bind';
 import style from './CreatEmployee.module.scss';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleChevronRight, faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
+import AppContext from '../../Components/AppConText';
 
 const cx = classnames.bind(style);
 
@@ -13,6 +14,13 @@ function CreatEmployee() {
     const [nameValue, setNameValue] = useState();
     const [directorValue, setDirectorValue] = useState();
     const [timeMovieValue, setTimemovieValue] = useState();
+    const { state, dispatch } = useContext(AppContext);
+    const { user } = state;
+    console.log(user);
+    var id;
+    if (user) {
+        id = user.id;
+    }
 
     return (
         <div className={cx('container')}>
@@ -112,6 +120,17 @@ function CreatEmployee() {
                                     type="text"
                                     placeholder="VideoID"
                                     name="videoID"
+                                    className={cx('text_input')}
+                                />
+                            </Form.Group>
+
+                            <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
+                                <Form.Label>PostBy</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="postedBy"
+                                    value={id}
+                                    name="postedBy"
                                     className={cx('text_input')}
                                 />
                             </Form.Group>

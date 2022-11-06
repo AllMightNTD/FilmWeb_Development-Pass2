@@ -33,8 +33,10 @@ function DefaultLayout({ children }) {
                 // const { userName } = response.data;
                 // Object chứa name
                 const { userName } = response.data.data.user;
+                const id = response.data.data.user.id;
+                console.log(id);
                 // Lấy ra và lưu vào state
-                dispatch({ type: 'CURRENT_USER', payload: { userName } });
+                dispatch({ type: 'CURRENT_USER', payload: { userName, id } });
             }
         } catch (error) {
             console.log(error);

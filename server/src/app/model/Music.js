@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 
 const Music = new Schema(
     {
+        postedBy: String,
         name: String,
         director: String,
         writer: String,
