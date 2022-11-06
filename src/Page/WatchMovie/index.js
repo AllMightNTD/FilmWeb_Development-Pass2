@@ -1,12 +1,12 @@
 import style from './WatchMovie.module.scss';
 import classNames from 'classnames/bind';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import AppContext from '../../Components/AppConText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag, faStar, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import { faCircleChevronRight, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faHeart, faStar, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import ProductCard from '../Employee/MovieCard';
@@ -19,9 +19,7 @@ const cx = classNames.bind(style);
 function WatchMovie() {
     const params = useParams();
     const { slug } = params;
-
     const [dataWatch, setdataWatch] = useState([]);
-    console.log(slug);
     const [datapopular, setDatapopular] = useState([]);
 
     useEffect(() => {
@@ -30,9 +28,9 @@ function WatchMovie() {
             .then((response) => setdataWatch(response ? response.data : []))
             .catch((error) => console.log(error));
     }, [slug]);
-
     console.log(dataWatch);
 
+    console.log(dataWatch.likes);
     const [number, setNumber] = useState(5);
     const [checkSkip, setCheckSkip] = useState(false);
     const [checkSkipFilm, setCheckSkipFilm] = useState(false);
@@ -49,6 +47,7 @@ function WatchMovie() {
             }
         }, 1000);
     }, [number]);
+
     useEffect(() => {
         axios
             // page = 2 => trang thứ 2 , chứa tối đa 2 phần tử
@@ -79,10 +78,31 @@ function WatchMovie() {
     };
 
     const [isContainerActive, setIsContainerActive] = useState(false);
-    const handleBackground = () => {
-        setIsContainerActive(!isContainerActive);
-    };
+    // Xử lý like Film
+    function handleLikeFilm(id) {
+        try {
+            fetch('http://localhost:5000/likenumber/likeFilm', {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    idFilm: dataWatch._id,
+                }),
+            })
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log(result);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
+    const { state, dispatch } = useContext(AppContext);
+    // Lấy state ra : chính là cái user , object trong đó có username
+    const { user } = state;
+    console.log(user);
     return (
         <div className={cx('container')}>
             <div className={cx('main_film')}>
@@ -122,6 +142,7 @@ function WatchMovie() {
                     </div>
                 </div>
                 <div className={cx('separate')}></div>
+                {/* Bày tỏ ý kiến về phim */}
                 <div className={cx('express_opinion-movie')}>
                     <h3>
                         Đánh giá phim <span>(50,72đ / 1000 lượt)</span>
@@ -138,18 +159,29 @@ function WatchMovie() {
                         <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
                         <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
                     </div>
-                    <div className={cx('button_feelings')}>
-                        <button
-                            // Đổi màu khi like và không like
-                            className={cx(`btn_like${isContainerActive ? ' discoloration' : ''}`)}
-                            id="btn_like"
-                            onClick={handleBackground}
-                        >
-                            <FontAwesomeIcon icon={faThumbsUp} className={cx('icon_like')} />
-                            Thích
-                        </button>
-                        <button>Chia sẻ</button>
-                    </div>
+                    {user ? (
+                        <div className={cx('button_feelings')}>
+                            {' '}
+                            <button
+                                // Đổi màu khi like và không like
+                                className={cx(`btn_like${isContainerActive ? ' discoloration' : ''}`)}
+                                type="submit"
+                                onClick={handleLikeFilm}
+                            >
+                                <FontAwesomeIcon icon={faHeart} className={cx('icon_like')} />
+                                Thích
+                                <div className={cx('number_like')}>{dataWatch.likes.length}</div>
+                            </button>
+                            <button>Chia sẻ</button>
+                        </div>
+                    ) : (
+                        <div className={cx('Need_to-login')}>
+                            {' '}
+                            <Link to="/login" className={cx('btn_noLogin')}>
+                                You need to login to comment
+                            </Link>
+                        </div>
+                    )}
                     <button className={cx('button_save')}>
                         <FontAwesomeIcon icon={faFlag} className={cx('icon_save')} />
                         Lưu vào facebook

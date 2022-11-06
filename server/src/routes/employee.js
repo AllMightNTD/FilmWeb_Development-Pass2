@@ -30,6 +30,5 @@ router.patch('/:id/restore', employeeController.restoreEmployee);
 router.delete('/:id/force', employeeController.deleteForever);
 // Show theo slug
 router.use('/:slug', employeeController.show);
-
 // export nó ra ngoài
 module.exports = router;

@@ -87,6 +87,35 @@ class EmployeeController {
                 res.json({ message: 'Action Valid' });
         }
     }
+
+    // // Xử lý like film
+    // handleLikeData(req, res, next) {
+    //     console.log(req.body);
+    // }
+    // handleUnlikeData(req, res, next) {
+    //     try {
+    //         Music.findByIdAndUpdate(
+    //             req.body.filmId,
+    //             {
+    //                 $pull: { likes: req.user._id },
+    //             },
+    //             {
+    //                 new: true,
+    //             },
+    //         ).exec((err, result) => {
+    //             if (err) {
+    //                 return res.status(422).json({ error: err });
+    //             } else {
+    //                 res.json(result);
+    //             }
+    //         });
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+    // likeFilm(req, res, next) {
+    //     console.log(req.body);
+    // }
 }
 
 module.exports = new EmployeeController();

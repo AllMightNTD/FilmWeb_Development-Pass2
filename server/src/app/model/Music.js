@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 var slug = require('mongoose-slug-generator');
 var mongooseDelete = require('mongoose-delete');
+const { ObjectId } = mongoose.Schema.Types;
 
 const Schema = mongoose.Schema;
 
@@ -17,6 +18,7 @@ const Music = new Schema(
         category: String,
         // Random Slug : Tải slug generator
         slug: { type: String, slug: 'name', unique: true },
+        likes: [{ type: ObjectId, ref: 'Users' }],
     },
     {
         timestamps: true,

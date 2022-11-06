@@ -115,6 +115,7 @@
 }
 
 // express_opinion-movie
+// Bày tỏ ý kiến về phim
 .express_opinion-movie {
     h3 {
         font-size: 20px;
@@ -151,8 +152,16 @@
             margin-right: 10px;
         }
         // Đổi màu khi like và không like
-        .btn_like.discoloration {
+        .btn_like.discoloration .icon_like {
             background-color: #1877f2;
+        }
+        .number_like {
+            height: 12px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            font-size: 14px;
         }
         .icon_like {
             margin-right: 4px;
@@ -209,7 +218,22 @@
         }
     }
 }
-
+.Need_to-login {
+    width: 100%;
+    display: flex;
+}
+.btn_noLogin {
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin: 0 auto;
+    color: var(--primary-white);
+    background-color: #ff0000;
+    transition: background-color 0.5s;
+    &:hover {
+        color: var(--primary-white);
+        background-color: #1877f2;
+    }
+}
 @media screen and (max-width: 465px) {
     .group_setting {
         justify-content: flex-start !important;
