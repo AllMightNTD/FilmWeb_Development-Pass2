@@ -145,25 +145,27 @@
             margin-right: 10px;
         }
         .btn_like {
-            padding: 0px 10px;
+            display: flex;
+            min-width: 106px;
+            padding: 5px 10px;
+            align-items: center;
             border-radius: 5px;
-            color: var(--primary-white);
-            background-color: #dddddd;
+            background-color: #e5525e;
             margin-right: 10px;
         }
-        // Đổi màu khi like và không like
-        .btn_like.discoloration {
-            background-color: #1877f2;
-        }
         .number_like {
-            height: 12px;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            justify-content: center;
-            font-size: 14px;
+            background: #eee;
+            margin-top: 4px;
+            border-radius: 3px;
+            color: #666;
+            font-size: 10px;
+            margin-left: 5px;
+            padding: 0 5px;
         }
         .icon_like {
+            margin-right: 4px;
+        }
+        .icon_share {
             margin-right: 4px;
         }
     }

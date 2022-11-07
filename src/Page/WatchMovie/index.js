@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import AppContext from '../../Components/AppConText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag, faHeart, faStar, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faHeart, faShareNodes, faStar, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import ProductCard from '../Employee/MovieCard';
@@ -26,9 +26,9 @@ function WatchMovie() {
     const { state, dispatch } = useContext(AppContext);
     // Lấy state ra : chính là cái user , object trong đó có username
     var { user } = state;
-    var id;
+    var idUser;
     if (user) {
-        id = user.id;
+        idUser = user.id;
     }
     useEffect(() => {
         axios
@@ -88,8 +88,8 @@ function WatchMovie() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                idFilm: id,
-                id: dataWatch._id,
+                idUser: idUser,
+                idFilm: dataWatch._id,
             }),
         })
             .then((res) => res.json())
@@ -114,8 +114,8 @@ function WatchMovie() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                idFilm: id,
-                id: dataWatch._id,
+                idUser: idUser,
+                idFilm: dataWatch._id,
             }),
         })
             .then((res) => res.json())
@@ -191,14 +191,21 @@ function WatchMovie() {
                             {' '}
                             <button
                                 // Đổi màu khi like và không like
-                                className={cx(`btn_like${isContainerActive ? ' discoloration' : ''}`)}
+                                className={cx('btn_like')}
                                 onClick={isContainerActive ? handleUnlikeFilm : handleLikeFilm}
                             >
-                                <FontAwesomeIcon icon={faHeart} className={cx('icon_like')} />
+                                <FontAwesomeIcon
+                                    icon={faHeart}
+                                    className={cx('icon_like')}
+                                    style={{ color: `${isContainerActive ? 'red' : ''}` }}
+                                />
                                 Thích
                                 <div className={cx('number_like')}>{dataWatch.likes.length}</div>
                             </button>
-                            <button>Chia sẻ</button>
+                            <button>
+                                <FontAwesomeIcon icon={faShareNodes} className={cx('icon_share')} />
+                                Chia sẻ
+                            </button>
                         </div>
                     ) : (
                         <div className={cx('Need_to-login')}>

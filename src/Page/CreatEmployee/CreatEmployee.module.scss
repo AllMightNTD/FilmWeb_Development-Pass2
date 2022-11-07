@@ -180,3 +180,67 @@
         }
     }
 }
+.info_create {
+    display: flex;
+}
+// Avatar Value
+.Avartar {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 50px;
+    flex-direction: column;
+}
+.avartar_Director {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    span {
+        margin-top: 10px;
+        font-size: 16px;
+        width: 120px;
+        white-space: nowrap;
+        -webkit-line-clamp: 1; /* số dòng hiển thị */
+        -webkit-box-orient: horizontal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--primary-black);
+    }
+}
+.avartar_Writer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    span {
+        margin-top: 10px;
+        font-size: 16px;
+        width: 120px;
+        white-space: nowrap;
+        -webkit-line-clamp: 1; /* số dòng hiển thị */
+        -webkit-box-orient: horizontal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--primary-black);
+    }
+}
+.avartar_MainActor {
+    display: flex;
+    flex-direction: column;
+    span {
+        margin-top: 10px;
+        font-size: 16px;
+        width: 120px;
+        white-space: nowrap;
+        -webkit-line-clamp: 1; /* số dòng hiển thị */
+        -webkit-box-orient: horizontal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--primary-black);
+    }
+}
+.image_avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}

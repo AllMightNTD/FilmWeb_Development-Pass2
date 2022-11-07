@@ -6,12 +6,12 @@ class LikeNumberController {
     // Mỗi bài viết có 1 id của người đăng nhập
     async likeFilm(req, res, next) {
         console.log(req.body);
-        const id = req.body.id;
+        const idFilm = req.body.idFilm;
         try {
             await Music.findByIdAndUpdate(
-                id,
+                idFilm,
                 {
-                    $push: { likes: req.body.idFilm },
+                    $push: { likes: req.body.idUser },
                 },
                 {
                     new: true,
@@ -33,11 +33,11 @@ class LikeNumberController {
     async unlikeFilm(req, res, next) {
         try {
             console.log(req.body);
-            const id = req.body.id;
+            const idFilm = req.body.idFilm;
             await Music.findByIdAndUpdate(
-                id,
+                idFilm,
                 {
-                    $pull: { likes: req.body.idFilm },
+                    $pull: { likes: req.body.idUser },
                 },
                 {
                     new: true,

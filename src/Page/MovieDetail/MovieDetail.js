@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import UseWindowDemension from '../../hooks/useWindowDemension';
+import Image from '../../Components/Image';
 const cx = classNames.bind(style);
 
 function MovieDetail() {
@@ -131,30 +132,21 @@ function MovieDetail() {
                                     <div className={cx('info_founder')}>
                                         <span className={cx('title')}>Writer</span>
                                         <div className={cx('info_content')}>
-                                            <img
-                                                className={cx('avatar')}
-                                                src="https://i0.wp.com/maxblizz.com/wp-content/uploads/2022/01/spiderman-scaled.jpg?resize=1200%2C800&ssl=1"
-                                            ></img>
+                                            <Image className={cx('avatar')} src={dataFilm.avatarWriter}></Image>
                                             <span className={cx('writer')}>{dataFilm.writer}</span>
                                         </div>
                                     </div>
                                     <div className={cx('info_founder')}>
                                         <span className={cx('title')}>Director</span>
                                         <div className={cx('info_content')}>
-                                            <img
-                                                className={cx('avatar')}
-                                                src="https://i0.wp.com/maxblizz.com/wp-content/uploads/2022/01/spiderman-scaled.jpg?resize=1200%2C800&ssl=1"
-                                            ></img>
+                                            <Image className={cx('avatar')} src={dataFilm.avatarDirector}></Image>
                                             <span className={cx('writer')}>{dataFilm.director}</span>
                                         </div>
                                     </div>
                                     <div className={cx('info_founder')}>
                                         <span className={cx('title')}>Main actor</span>
                                         <div className={cx('info_content')}>
-                                            <img
-                                                className={cx('avatar')}
-                                                src="https://i0.wp.com/maxblizz.com/wp-content/uploads/2022/01/spiderman-scaled.jpg?resize=1200%2C800&ssl=1"
-                                            ></img>
+                                            <Image className={cx('avatar')} src={dataFilm.avatarMainActor}></Image>
                                             <span className={cx('writer')}>{dataFilm.mainActor}</span>
                                         </div>
                                     </div>

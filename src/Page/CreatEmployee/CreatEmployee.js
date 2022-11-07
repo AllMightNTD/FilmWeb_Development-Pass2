@@ -6,6 +6,7 @@ import { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleChevronRight, faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
 import AppContext from '../../Components/AppConText';
+import Image from '../../Components/Image';
 
 const cx = classnames.bind(style);
 
@@ -14,6 +15,11 @@ function CreatEmployee() {
     const [nameValue, setNameValue] = useState();
     const [directorValue, setDirectorValue] = useState();
     const [timeMovieValue, setTimemovieValue] = useState();
+    const [avatarDirector, setAvatarDirector] = useState();
+    const [avatarWriter, setAvatarWriter] = useState();
+    const [avatarMainActor, setAvatarMainActor] = useState();
+    const [writer, setWriter] = useState();
+    const [mainActor, setMainActor] = useState();
     const { state, dispatch } = useContext(AppContext);
     const { user } = state;
     console.log(user);
@@ -56,12 +62,36 @@ function CreatEmployee() {
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
+                                <Form.Label>AvatarDirector</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Director source..."
+                                    name="avatarDirector"
+                                    value={avatarDirector}
+                                    className={cx('text_input')}
+                                    onChange={(e) => setAvatarDirector(e.target.value)}
+                                />
+                            </Form.Group>
+                            <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
                                 <Form.Label>Writer</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Writer"
+                                    value={writer}
+                                    onChange={(e) => setWriter(e.target.value)}
                                     name="writer"
                                     className={cx('text_input')}
+                                />
+                            </Form.Group>
+                            <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
+                                <Form.Label>AvatarWriter</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={avatarWriter}
+                                    placeholder="Writer source ...."
+                                    name="avatarWriter"
+                                    className={cx('text_input')}
+                                    onChange={(e) => setAvatarWriter(e.target.value)}
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
@@ -83,7 +113,21 @@ function CreatEmployee() {
                                     type="text"
                                     placeholder="mainActor"
                                     name="mainActor"
+                                    value={mainActor}
+                                    onChange={(e) => setMainActor(e.target.value)}
                                     className={cx('text_input')}
+                                />
+                            </Form.Group>
+
+                            <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
+                                <Form.Label>AvatarMainActor</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder=" MainActor source..."
+                                    name="avatarMainActor"
+                                    value={avatarMainActor}
+                                    className={cx('text_input')}
+                                    onChange={(e) => setAvatarMainActor(e.target.value)}
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3 scrollable')} controlId="formBasicPassword">
@@ -101,7 +145,6 @@ function CreatEmployee() {
                                     <option value="ballad">Ballad</option>
                                 </Form.Select>
                             </Form.Group>
-
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
                                 <Form.Label>Image</Form.Label>
                                 <Form.Control
@@ -113,7 +156,6 @@ function CreatEmployee() {
                                     className={cx('text_input')}
                                 />
                             </Form.Group>
-
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
                                 <Form.Label>VideoID</Form.Label>
                                 <Form.Control
@@ -123,7 +165,6 @@ function CreatEmployee() {
                                     className={cx('text_input')}
                                 />
                             </Form.Group>
-
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
                                 <Form.Label>PostBy</Form.Label>
                                 <Form.Control
@@ -143,37 +184,80 @@ function CreatEmployee() {
                         </div>
                         <div className={cx('image_preview')}>
                             {imageValue ? (
-                                <div className={cx('item_movie')}>
-                                    <div className={cx('item_image')}>
-                                        <img className={cx('image_movie')} src={imageValue} />
-                                    </div>
-                                    <div className={cx('infor_item-movie')}>
-                                        <h5 className={cx('title_movie-item')}>{nameValue}</h5>
-                                        <span className={cx('actor_movie-item')}>{directorValue}</span>
-                                        <div className={cx('time_zone-item')}>
-                                            <div className={cx('all_block-zone')}>
-                                                <div className={cx('time_item')}>
+                                <div className={cx('info_create')}>
+                                    <div className={cx('item_movie')}>
+                                        <div className={cx('item_image')}>
+                                            <Image className={cx('image_movie')} src={imageValue} />
+                                        </div>
+                                        <div className={cx('infor_item-movie')}>
+                                            <h5 className={cx('title_movie-item')}>{nameValue}</h5>
+                                            <span className={cx('actor_movie-item')}>{directorValue}</span>
+                                            <div className={cx('time_zone-item')}>
+                                                <div className={cx('all_block-zone')}>
+                                                    <div className={cx('time_item')}>
+                                                        {imageValue ? (
+                                                            <FontAwesomeIcon
+                                                                icon={faClockRotateLeft}
+                                                                className={cx('clock_icons')}
+                                                            />
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        <span className={cx('time')}>{timeMovieValue}</span>
+                                                    </div>
                                                     {imageValue ? (
-                                                        <FontAwesomeIcon
-                                                            icon={faClockRotateLeft}
-                                                            className={cx('clock_icons')}
-                                                        />
+                                                        <div className={cx('stars_movie-item')}>
+                                                            <FontAwesomeIcon
+                                                                icon={faStar}
+                                                                className={cx('star_icon')}
+                                                            />
+                                                            <FontAwesomeIcon
+                                                                icon={faStar}
+                                                                className={cx('star_icon')}
+                                                            />
+                                                            <FontAwesomeIcon
+                                                                icon={faStar}
+                                                                className={cx('star_icon')}
+                                                            />
+                                                            <FontAwesomeIcon
+                                                                icon={faStar}
+                                                                className={cx('star_icon')}
+                                                            />
+                                                        </div>
                                                     ) : (
                                                         <></>
                                                     )}
-                                                    <span className={cx('time')}>{timeMovieValue}</span>
                                                 </div>
-                                                {imageValue ? (
-                                                    <div className={cx('stars_movie-item')}>
-                                                        <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
-                                                        <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
-                                                        <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
-                                                        <FontAwesomeIcon icon={faStar} className={cx('star_icon')} />
-                                                    </div>
-                                                ) : (
-                                                    <></>
-                                                )}
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div className={cx('Avartar')}>
+                                        <div className={cx('avartar_Director')}>
+                                            <div className={cx('image_avatar')}>
+                                                <Image
+                                                    className={cx('image_avatar')}
+                                                    src={avatarDirector}
+                                                    alt={directorValue}
+                                                />
+                                            </div>
+                                            <span>{directorValue}</span>
+                                        </div>
+                                        <div className={cx('avartar_Writer')}>
+                                            <div className={cx('image_avatar')}>
+                                                {' '}
+                                                <Image className={cx('image_avatar')} src={avatarWriter} alt={writer} />
+                                            </div>
+                                            <span>{writer}</span>
+                                        </div>
+                                        <div className={cx('avartar_MainActor')}>
+                                            <div className={cx('image_avatar')}>
+                                                <Image
+                                                    className={cx('image_avatar')}
+                                                    src={avatarMainActor}
+                                                    alt={mainActor}
+                                                ></Image>
+                                            </div>
+                                            <span>{mainActor}</span>
                                         </div>
                                     </div>
                                 </div>
