@@ -118,7 +118,7 @@ function Employee() {
                                     </div>
                                     <div className={cx('infor_item-movie')}>
                                         <h5 className={cx('title_movie-item')}>{item.name}</h5>
-                                        <span className={cx('actor_movie-item')}>{item.director}</span>
+                                        <p className={cx('actor_movie-item')}>{item.director}</p>
                                         <div className={cx('time_zone-item')}>
                                             <div className={cx('all_block-zone')}>
                                                 <div className={cx('time_item')}>
@@ -137,14 +137,6 @@ function Employee() {
                                             </div>
                                         </div>
                                     </div>
-                                    <Tippy
-                                        placement="bottom-start"
-                                        render={(attrs) => (
-                                            <div className={cx('box_tooltip')} tabIndex="-1" {...attrs}>
-                                                Yêu Film
-                                            </div>
-                                        )}
-                                    ></Tippy>
                                 </Link>
                             </div>
                         ))}

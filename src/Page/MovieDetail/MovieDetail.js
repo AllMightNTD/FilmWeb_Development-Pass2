@@ -54,7 +54,7 @@ function MovieDetail() {
     const { width, height } = UseWindowDemension();
 
     useEffect(() => {
-        if (width <= 818) {
+        if (width <= 840) {
             setImageElement(true);
         } else {
             setImageElement(false);
@@ -76,7 +76,7 @@ function MovieDetail() {
                             <img className={cx('content-img')} src={dataFilm.image} alt={dataFilm.name}></img>
                             <div className={cx('info')}>
                                 <h2 className={cx('name')}>{dataFilm.name}</h2>
-                                <div className={cx('stars')}>
+                                <div className={cx('stars-mobile')}>
                                     <FontAwesomeIcon className={cx('star_icon')} icon={faStar} />
                                     <FontAwesomeIcon className={cx('star_icon')} icon={faStar} />
                                     <FontAwesomeIcon className={cx('star_icon')} icon={faStar} />
@@ -169,8 +169,8 @@ function MovieDetail() {
                                                     <img className={cx('image_movie')} src={item.image} />
                                                 </div>
                                                 <div className={cx('infor_item-movie')}>
-                                                    <h5 className={cx('title_movie-item')}>{item.name}</h5>
-                                                    <span className={cx('actor_movie-item')}>{item.director}</span>
+                                                    <h3 className={cx('title_movie-item')}>{item.name}</h3>
+                                                    <p className={cx('actor_movie-item')}>{item.director}</p>
                                                 </div>
                                             </a>
                                         </div>

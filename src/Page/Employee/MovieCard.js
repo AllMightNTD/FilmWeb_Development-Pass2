@@ -39,7 +39,7 @@ function ProductCard({ data }) {
                         style={{
                             textAlign: 'center',
                             color: '#999999',
-                            maxWidth: '220px',
+                            Width: '220px',
                             overflow: 'hidden',
                             whiteSpace: 'nowrap',
                             textOverflow: 'ellipsis',

@@ -10,6 +10,7 @@ import { faFlag, faHeart, faShareNodes, faStar, faThumbsUp } from '@fortawesome/
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import ProductCard from '../Employee/MovieCard';
+import Image from '../../Components/Image';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -19,11 +20,18 @@ const cx = classNames.bind(style);
 function WatchMovie() {
     const params = useParams();
     const { slug } = params;
+
+    // Dữ liệu hiển thị để xem
     const [dataWatch, setdataWatch] = useState([]);
+
+    // Phim phổ biến khác
     const [datapopular, setDatapopular] = useState([]);
-    const [likeNumber, setLikeNumber] = useState([]);
     const [isContainerActive, setIsContainerActive] = useState(false);
     const { state, dispatch } = useContext(AppContext);
+
+    // ẩn hiện nút Đăng commnets
+    const [btnPost, setHideBtnPost] = useState(false);
+
     // Lấy state ra : chính là cái user , object trong đó có username
     var { user } = state;
     var idUser;
@@ -39,6 +47,8 @@ function WatchMovie() {
     const [number, setNumber] = useState(5);
     const [checkSkip, setCheckSkip] = useState(false);
     const [checkSkipFilm, setCheckSkipFilm] = useState(false);
+    // Value comments
+    const [valueComment, setValueComment] = useState('');
 
     // Check hiển thị / ẩn nút skip
     const [checkHideButtonSkip, setCheckHideButtonSkip] = useState(true);
@@ -130,6 +140,12 @@ function WatchMovie() {
             });
     }
 
+    // Xử lý đăng tải bình luận
+    const handleSubmitCommnets = (e) => {
+        e.preventDefault();
+        console.log('123');
+    };
+
     return (
         <div className={cx('container')}>
             <div className={cx('main_film')}>
@@ -174,6 +190,7 @@ function WatchMovie() {
                     <h3>
                         Đánh giá phim <span>(50,72đ / 1000 lượt)</span>
                     </h3>
+                    {/* Số sao đánh giá */}
                     <div className={cx('star_group')}>
                         <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
                         <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
@@ -187,6 +204,7 @@ function WatchMovie() {
                         <FontAwesomeIcon icon={faStar} className={cx('icon_star')} />
                     </div>
                     {user ? (
+                        // Btn like and share
                         <div className={cx('button_feelings')}>
                             {' '}
                             <button
@@ -208,6 +226,7 @@ function WatchMovie() {
                             </button>
                         </div>
                     ) : (
+                        // Không có tài khoản => hiện cần login
                         <div className={cx('Need_to-login')}>
                             {' '}
                             <Link to="/login" className={cx('btn_noLogin')}>
@@ -215,16 +234,66 @@ function WatchMovie() {
                             </Link>
                         </div>
                     )}
+                    {/* Btn lưu vào facebook */}
                     <button className={cx('button_save')}>
                         <FontAwesomeIcon icon={faFlag} className={cx('icon_save')} />
                         Lưu vào facebook
                     </button>
                     <h1 className={cx('title_movie')}>{dataWatch.name}</h1>
                     <h4 className={cx('director')}>{dataWatch.director}</h4>
+                    {/* Mô tả phim */}
                     <div className={cx('description_movie')}>
-                        <p className={cx('descibe_item')}>{dataWatch.describe}</p>[
-                        <a href={`/MovieDetail/${dataWatch.slug}`}>Xem thêm</a>]
+                        <p className={cx('descibe_item')}>{dataWatch.describe}</p>
+                        {/* <a href={`/MovieDetail/${dataWatch.slug}`}>Xem thêm</a>] */}
                     </div>
+                    {/* Comments : bình luận về phim */}
+                    <div className={cx('Container-comments')}>
+                        <h4 className={cx('title')}>
+                            Mong rằng bạn sẽ tiếp tục ủng hộ bằng cách truy cập NTDFilm để ủng hộ team !
+                        </h4>
+                        <div className={cx('comments-group')}>
+                            <div className={cx('comments_about')}>
+                                <span>Bình luận</span>
+                                <div className={cx('comments-sort')}>
+                                    <span className={cx('text-sort')}>Sắp xếp theo</span>
+                                    <select required>
+                                        <option value="">Mới nhất</option>
+                                        <option value="love">Cũ nhất</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            {/* Đăng tải comments */}
+                            <form onSubmit={handleSubmitCommnets} className={cx('form_comments')}>
+                                <div className={cx('comments-main')}>
+                                    {/* {user ? <h4 className={cx('comments-by')}>{user.userName}</h4> : <></>} */}
+                                    <div className={cx('image_avatar-commnets')}>
+                                        <Image
+                                            className={cx('avatar')}
+                                            src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/307710303_418354093707451_3724584447684544601_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=5N_TV3FlOZsAX8N7pBN&tn=KYsvGxARGWrh8U0A&_nc_ht=scontent.fhan14-3.fna&oh=00_AfAZ351xvMDWDTniaWraBkrP7e1YXAJSK7dt5CKolOYwmw&oe=636FD9F3"
+                                        ></Image>
+                                    </div>
+                                    <div className={cx('post_comments')}>
+                                        <input
+                                            onChange={(e) => setValueComment(e.target.value)}
+                                            type="text"
+                                            value={valueComment}
+                                            className={cx('comment-text')}
+                                            placeholder="Comments..."
+                                        />
+
+                                        <div className={cx('block-submit')}>
+                                            {' '}
+                                            <button type="submit" className={cx('btn_submit-comments')}>
+                                                Đăng
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    {/* Các film phổ biến khác */}
                     <div className={cx('container-popular')}>
                         <Swiper
                             freeMode={true}
