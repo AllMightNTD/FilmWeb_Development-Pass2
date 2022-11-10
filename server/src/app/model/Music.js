@@ -22,6 +22,13 @@ const Music = new Schema(
         category: String,
         // Random Slug : Tải slug generator
         slug: { type: String, slug: 'name', unique: true },
+        comments: [
+            {
+                text: String,
+                nameUser: String,
+                postedBy: { type: ObjectId, ref: 'Users' },
+            },
+        ],
         likes: [{ type: ObjectId, ref: 'Users' }],
     },
     {

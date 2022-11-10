@@ -7,4 +7,5 @@ const likeNumberController = require('../app/controllers/LikeNumberController');
 // import EmployeeController vào để định nghĩa tuyến đường
 router.put('/likeFilm', likeNumberController.likeFilm);
 router.put('/unlikeFilm', likeNumberController.unlikeFilm);
+router.put('/comment', likeNumberController.Postcomment);
 module.exports = router;

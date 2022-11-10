@@ -29,24 +29,43 @@ function WatchMovie() {
     const [isContainerActive, setIsContainerActive] = useState(false);
     const { state, dispatch } = useContext(AppContext);
 
+    // Phân chia bình luận (comments)
+    const [noOfElement, setNoOfElement] = useState(4);
+    // Data sau khi cắt
+
     // ẩn hiện nút Đăng commnets
     const [btnPost, setHideBtnPost] = useState(false);
 
     // Lấy state ra : chính là cái user , object trong đó có username
     var { user } = state;
     var idUser;
+    var nameUser;
     if (user) {
         idUser = user.id;
+        nameUser = user.userName;
     }
+
+    // Lấy dữ liệu phim
     useEffect(() => {
         axios
             .get(`http://localhost:5000/employee/${slug}`)
             .then((response) => setdataWatch(response ? response.data : []))
             .catch((error) => console.log(error));
     }, [slug]);
+    console.log(dataWatch.comments);
     const [number, setNumber] = useState(5);
     const [checkSkip, setCheckSkip] = useState(false);
     const [checkSkipFilm, setCheckSkipFilm] = useState(false);
+    var DataCommentsplice = [];
+    if (dataWatch.comments) {
+        DataCommentsplice = dataWatch.comments.slice(0, noOfElement);
+    } else {
+        DataCommentsplice = dataWatch.comments;
+    }
+
+    const loadMore = () => {
+        setNoOfElement(noOfElement + noOfElement);
+    };
     // Value comments
     const [valueComment, setValueComment] = useState('');
 
@@ -106,8 +125,7 @@ function WatchMovie() {
             .then((result) => {
                 // Kết quả like trả về theo id
                 // Kết quả like trả về theo id
-                console.log(result);
-                // // Set data ứng với thằng id kia dữ liệu mới => cập nhật cái likes
+                console.log('Day la result', result);
                 setdataWatch(result);
             })
             .catch((error) => {
@@ -141,10 +159,32 @@ function WatchMovie() {
     }
 
     // Xử lý đăng tải bình luận
-    const handleSubmitCommnets = (e) => {
-        e.preventDefault();
-        console.log('123');
-    };
+    async function handleSubmitCommnets(text, postedBy, nameUser, idFilm) {
+        console.log('You clicked submit');
+
+        await fetch('http://localhost:5000/likenumber/comment', {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                text: text,
+                postedBy: postedBy,
+                nameUser: nameUser,
+                idFilm: idFilm,
+            }),
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                // Kết quả like trả về theo id
+                setValueComment('');
+                console.log(result);
+                setdataWatch(result);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
     return (
         <div className={cx('container')}>
@@ -264,7 +304,13 @@ function WatchMovie() {
                             </div>
 
                             {/* Đăng tải comments */}
-                            <form onSubmit={handleSubmitCommnets} className={cx('form_comments')}>
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    handleSubmitCommnets(valueComment, idUser, nameUser, dataWatch._id);
+                                }}
+                                className={cx('form_comments')}
+                            >
                                 <div className={cx('comments-main')}>
                                     {/* {user ? <h4 className={cx('comments-by')}>{user.userName}</h4> : <></>} */}
                                     <div className={cx('image_avatar-commnets')}>
@@ -277,11 +323,11 @@ function WatchMovie() {
                                         <input
                                             onChange={(e) => setValueComment(e.target.value)}
                                             type="text"
+                                            name="valueComment"
                                             value={valueComment}
                                             className={cx('comment-text')}
                                             placeholder="Comments..."
                                         />
-
                                         <div className={cx('block-submit')}>
                                             {' '}
                                             <button type="submit" className={cx('btn_submit-comments')}>
@@ -291,6 +337,36 @@ function WatchMovie() {
                                     </div>
                                 </div>
                             </form>
+                            {/* Check sự tồn tại */}
+                            {/* Cắt mảng bình luận thành mảng nhỏ */}
+                            {DataCommentsplice ? (
+                                DataCommentsplice.map((item, index) => (
+                                    <div key={index} className={cx('user_comments')}>
+                                        <div className={cx('image_avatar-commnets')}>
+                                            <Image
+                                                className={cx('avatar')}
+                                                src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/307710303_418354093707451_3724584447684544601_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=5N_TV3FlOZsAX8N7pBN&tn=KYsvGxARGWrh8U0A&_nc_ht=scontent.fhan14-3.fna&oh=00_AfAZ351xvMDWDTniaWraBkrP7e1YXAJSK7dt5CKolOYwmw&oe=636FD9F3"
+                                            ></Image>
+                                        </div>
+
+                                        <div className={cx('info')}>
+                                            {user ? <h4>{item.nameUser}</h4> : <></>}
+                                            <p>{item.text}</p>
+                                            <div className={cx('option')}>
+                                                <button className={cx('like')}>Thích</button>
+                                                <button className={cx('feedback')}>Phản hồi</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <></>
+                            )}
+                            <div className={cx('Load_add-comment')}>
+                                <button onClick={loadMore} className={cx('Load-more')}>
+                                    Tải thêm bình luận{' '}
+                                </button>
+                            </div>
                         </div>
                     </div>
                     {/* Các film phổ biến khác */}

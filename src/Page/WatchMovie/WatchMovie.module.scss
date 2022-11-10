@@ -341,3 +341,64 @@
         }
     }
 }
+
+// User comments
+.user_comments {
+    margin-top: 20px;
+    display: flex;
+
+    .image_avatar-commnets {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+
+        h4 {
+            font-size: 14px;
+            color: #4267b2;
+            font-weight: 700;
+            margin: 0;
+        }
+        p {
+            margin: 0;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        .option {
+            button {
+                border: none;
+                background-color: transparent;
+                color: #1877f2;
+                font-size: 12px;
+            }
+            .feedback {
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+// Load_add-comment
+.Load_add-comment {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    .Load-more {
+        padding: 5px 10px;
+        border-radius: 6px;
+        color: #fff;
+        background-color: #1877f2;
+    }
+}

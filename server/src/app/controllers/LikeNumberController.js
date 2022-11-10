@@ -54,5 +54,39 @@ class LikeNumberController {
             console.log(err.message);
         }
     }
+
+    // [POST] /likenumber/comment
+    async Postcomment(req, res, next) {
+        const { text, postedBy, nameUser } = req.body;
+        const idFilmsss = req.body.idFilm;
+        console.log(idFilmsss);
+        console.log(req.body);
+        const comment = {
+            text,
+            nameUser,
+            postedBy,
+        };
+        console.log(comment);
+        try {
+            await Music.findByIdAndUpdate(
+                idFilmsss,
+                {
+                    $push: { comments: comment },
+                },
+                {
+                    new: true,
+                },
+            ).exec((err, result) => {
+                if (err) {
+                    return res.status(422).json({ error: err });
+                } else {
+                    console.log(result);
+                    res.json(result);
+                }
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 }
 module.exports = new LikeNumberController();
