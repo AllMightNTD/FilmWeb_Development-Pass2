@@ -4,28 +4,30 @@ import React, { useContext, useState } from 'react';
 import classnames from 'classnames/bind';
 import 'tippy.js/dist/tippy.css'; // optional
 import style from './header.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Navigate } from 'react-router-dom';
 import {
     faArrowRightToBracket,
     faCaretDown,
     faList,
     faMoon,
     faPlus,
-    faSquarePlus,
     faSun,
     faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import AccountAndBar from './AccountAndBar';
 import Image from '../../../Image';
+import Search from './../../Search/index';
 const cx = classnames.bind(style);
 
 function Header() {
     const { state, dispatch } = useContext(AppContext);
     // Lấy state ra : chính là cái user , object trong đó có username
     const { user } = state;
+    const navigate = useNavigate();
     // if (user) {
     //     console.log(user.userName);
     //     console.log(user.id);
@@ -67,6 +69,9 @@ function Header() {
                             Trend
                         </Link>
                     </ul>
+                    <div className={cx('search')}>
+                        <Search width="340px" />
+                    </div>
                 </div>
                 {user ? (
                     <>

@@ -64,7 +64,6 @@ class MeController {
             })
             .catch((error) => next(error));
     }
-
     // [USE] /me/:category
     // showCategory
     showCategory(req, res, next) {

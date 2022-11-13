@@ -85,7 +85,9 @@ function SideBar({ checkHide }) {
                 <div className={cx('left_menu-icon')} onClick={handleOpenViewSearch}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </div>
-                <Search />
+                <div className={cx('search')}>
+                    <Search width="240px" />
+                </div>
             </div>
             <Link to="/checkAdmin" className={cx('sidebar_item')}>
                 {' '}

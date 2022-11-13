@@ -14,7 +14,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Pagination from 'react-bootstrap/Pagination';
 import UseWindowDemension from '../../hooks/useWindowDemension';
 import Container from 'react-bootstrap/Container';
-import $ from 'jquery';
+import $, { data } from 'jquery';
 function ListEmployee() {
     const cx = classnames.bind(style);
     const [dataFilm, setDataFilm] = useState([]);
@@ -41,7 +41,7 @@ function ListEmployee() {
 
     // DOM
     var usersItemcheckbox = $('input[name="usersID[]"');
-    console.log(usersItemcheckbox);
+
     const [page, setPage] = useState(1);
     const [active, setActive] = useState(1);
     let items = [];
@@ -63,22 +63,22 @@ function ListEmployee() {
         // Get link lấy ra dữ liệu là 1 object bao gồm 1 mảng và 1 count(số dữ liệu xóa )
         axios
             .get(`http://localhost:5000/me/storedEmloyee?page=${page}&type=less`)
-            .then((myData) => {
-                console.log(myData.data);
+            .then((response) => {
                 // Set data dữ liệu
-                setDataFilm(myData.data);
+
+                setDataFilm(response ? response.data : []);
             })
             .catch(function (error) {
                 console.log(error);
             });
     }, [page]);
+    console.log(dataFilm);
 
     useEffect(() => {
         // Get link lấy ra dữ liệu là 1 object bao gồm 1 mảng và 1 count(số dữ liệu xóa )
         axios
             .get(`http://localhost:5000/me/deleteCount`)
             .then((myData) => {
-                console.log(myData.data);
                 // Set data dữ liệu
                 setDeletedCount(myData.data);
             })

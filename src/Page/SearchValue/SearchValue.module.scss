@@ -1,84 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;400;500;600;700;800&family=Silkscreen:wght@400;700&display=swap');
-.container_main {
-    background-color: var(--primary-bg);
-    padding-bottom: 60px;
-    margin-bottom: 260px;
-}
 .container {
-    color: var(--primary-white);
+    background-color: red;
+    margin-bottom: 1000px;
 }
-
-.content-container {
-    margin-left: 50px;
-
-    .feature_content {
-        height: 50vh;
-        background-color: red;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--primary-bg)),
-            url('https://wallpapers.com/images/featured/captain-america-uymfdo8a063hcbxb.jpg');
-        object-fit: cover;
-        padding: 40px;
-
-        .feature_title {
-            font-size: 50px;
-            font-family: 'Silkscreen', 'sans-serif';
-        }
-        .feature_desc {
-            max-width: 500px;
-            color: lightgray;
-            margin: 30px 0;
-        }
-        .feature_btn {
-            background-color: #4dbf00;
-            color: var(--primary-white);
-            border: none;
-            outline: none;
-            padding: 10px 20px;
-            border-radius: 3px;
-            font-weight: bold;
-            cursor: pointer;
-            animation: color 0.3s;
-
-            &:hover {
-                background-color: red;
-            }
-        }
-    }
-}
-.slider_film {
-    margin-bottom: 10px;
-}
-.movie-title {
-    margin-left: 40px;
-}
-.movie_feature-container {
-    padding: 0 40px;
-}
-
-// Movie-popular
-.movie-popular {
+.container_category {
     width: 100%;
     padding-left: 80px;
     padding-right: 30px;
     margin: 30px auto 0 auto;
-}
-
-.movie-title-popular {
-    margin-left: 6px;
-    color: var(--primary-white);
+    margin-bottom: 330px;
 }
 
 // Movie Item
 .item_movie {
     text-decoration: none;
     display: block;
-    position: relative;
     border-radius: 6px;
     overflow: hidden;
     width: 100%;
     height: 475px;
+    box-shadow: 0 0 5px #aaaaaaaa;
 }
-
+.item_movie:hover {
+    box-shadow: 0 0 20px #aaaaaaaa;
+}
 .item_movie:hover .image_movie {
     transform: scale(1.1);
 }
@@ -117,12 +61,11 @@
         text-overflow: ellipsis;
         color: var(--primary-white);
         line-height: 18px;
+        margin-bottom: 4px;
     }
     .actor_movie-item {
         font-size: 14px;
-        width: 120px;
-        margin-top: 8px;
-        margin-bottom: 0;
+        width: 20px;
         white-space: nowrap;
         -webkit-line-clamp: 1; /* số dòng hiển thị */
         -webkit-box-orient: horizontal;
@@ -134,21 +77,12 @@
     }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
 // Time and Stars
 .time_zone-item {
     display: flex;
     position: relative;
+    margin-top: 4px;
     padding-left: 2px;
-    margin-top: 8px;
     align-items: center;
 
     .all_block-zone {
@@ -205,4 +139,9 @@
         left: 50%;
         transform: translateX(-50%);
     }
+}
+.title_search {
+    color: var(--primary-white);
+    margin-left: 8px;
+    margin-bottom: 20px;
 }

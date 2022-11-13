@@ -4,7 +4,6 @@ import style from './SearchVideoItem.module.scss';
 const cx = classNames.bind(style);
 
 function VideoItem({ data }) {
-    console.log(data);
     return (
         // Để thẻ Link bị load chậm
         <a href={`/MovieDetail/${data.slug}`} className={cx('wrapper')} style={{ textDecoration: 'none' }}>

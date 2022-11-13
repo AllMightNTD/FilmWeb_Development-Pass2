@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import AppContext from '../../Components/AppConText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag, faHeart, faShareNodes, faStar, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck, faFlag, faHeart, faShareNodes, faStar, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import ProductCard from '../Employee/MovieCard';
@@ -27,6 +27,8 @@ function WatchMovie() {
     // Phim phổ biến khác
     const [datapopular, setDatapopular] = useState([]);
     const [isContainerActive, setIsContainerActive] = useState(false);
+    // Xử lý thay đổi màu text Like
+    const [isActiveLikeComment, setActiveLikeComment] = useState(false);
     const { state, dispatch } = useContext(AppContext);
 
     // Phân chia bình luận (comments)
@@ -53,8 +55,11 @@ function WatchMovie() {
             .catch((error) => console.log(error));
     }, [slug]);
     console.log(dataWatch.comments);
+
+    // Check thời gian tự động bỏ qua quảng cáo
     const [number, setNumber] = useState(5);
     const [checkSkip, setCheckSkip] = useState(false);
+    // Bỏ qua quảng cáo
     const [checkSkipFilm, setCheckSkipFilm] = useState(false);
     var DataCommentsplice = [];
     if (dataWatch.comments) {
@@ -63,6 +68,7 @@ function WatchMovie() {
         DataCommentsplice = dataWatch.comments;
     }
 
+    // Funtion load thêm bình luận
     const loadMore = () => {
         setNoOfElement(noOfElement + noOfElement);
     };
@@ -156,6 +162,15 @@ function WatchMovie() {
             .catch((error) => {
                 console.log(error);
             });
+    }
+
+    // Xử lý like bình luận
+    function handleLikeComment() {
+        setActiveLikeComment(true);
+    }
+    // Xử lý bỏ like bình luận
+    function handleUnLikeComment() {
+        setActiveLikeComment(false);
     }
 
     // Xử lý đăng tải bình luận
@@ -350,10 +365,24 @@ function WatchMovie() {
                                         </div>
 
                                         <div className={cx('info')}>
-                                            {user ? <h4>{item.nameUser}</h4> : <></>}
-                                            <p>{item.text}</p>
+                                            <div className={cx('info_des')}>
+                                                {user ? <h4>{item.nameUser}</h4> : <></>}
+                                                <p>{item.text}</p>
+                                                <div className={cx('number_like-comments')}>
+                                                    <FontAwesomeIcon className={cx('icon_heart')} icon={faHeart} />
+                                                    <span className={cx('like_number')}>200</span>
+                                                </div>
+                                            </div>
                                             <div className={cx('option')}>
-                                                <button className={cx('like')}>Thích</button>
+                                                <button
+                                                    onClick={
+                                                        isActiveLikeComment ? handleUnLikeComment : handleLikeComment
+                                                    }
+                                                    className={cx('like')}
+                                                    style={{ color: `${isActiveLikeComment ? 'blue' : '#65676b'}` }}
+                                                >
+                                                    Thích
+                                                </button>
                                                 <button className={cx('feedback')}>Phản hồi</button>
                                             </div>
                                         </div>
@@ -362,11 +391,15 @@ function WatchMovie() {
                             ) : (
                                 <></>
                             )}
-                            <div className={cx('Load_add-comment')}>
-                                <button onClick={loadMore} className={cx('Load-more')}>
-                                    Tải thêm bình luận{' '}
-                                </button>
-                            </div>
+                            {DataCommentsplice && DataCommentsplice.length > 4 ? (
+                                <div className={cx('Load_add-comment')}>
+                                    <button onClick={loadMore} className={cx('Load-more')}>
+                                        Tải thêm bình luận{' '}
+                                    </button>
+                                </div>
+                            ) : (
+                                <></>
+                            )}
                         </div>
                     </div>
                     {/* Các film phổ biến khác */}

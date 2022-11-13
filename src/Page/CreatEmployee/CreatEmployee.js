@@ -4,6 +4,7 @@ import classnames from 'classnames/bind';
 import style from './CreatEmployee.module.scss';
 import { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 import { faCircleChevronRight, faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
 import AppContext from '../../Components/AppConText';
 import Image from '../../Components/Image';
@@ -11,16 +12,17 @@ import Image from '../../Components/Image';
 const cx = classnames.bind(style);
 
 function CreatEmployee() {
-    const [imageValue, setImage] = useState();
-    const [nameValue, setNameValue] = useState();
-    const [directorValue, setDirectorValue] = useState();
-    const [timeMovieValue, setTimemovieValue] = useState();
-    const [avatarDirector, setAvatarDirector] = useState();
-    const [avatarWriter, setAvatarWriter] = useState();
-    const [avatarMainActor, setAvatarMainActor] = useState();
-    const [writer, setWriter] = useState();
-    const [mainActor, setMainActor] = useState();
+    const [imageValue, setImage] = useState('');
+    const [nameValue, setNameValue] = useState('');
+    const [directorValue, setDirectorValue] = useState('');
+    const [timeMovieValue, setTimemovieValue] = useState('');
+    const [avatarDirector, setAvatarDirector] = useState('');
+    const [avatarWriter, setAvatarWriter] = useState('');
+    const [avatarMainActor, setAvatarMainActor] = useState('');
+    const [writer, setWriter] = useState('');
+    const [mainActor, setMainActor] = useState('');
     const { state, dispatch } = useContext(AppContext);
+    const navigate = useNavigate();
     const { user } = state;
     console.log(user);
     var id;
@@ -28,12 +30,107 @@ function CreatEmployee() {
         id = user.id;
     }
 
+    // Validate Form
+    const handleSubmitForm = (e) => {
+        e.prenventDefault();
+        if (
+            nameValue === '' ||
+            directorValue === '' ||
+            timeMovieValue === '' ||
+            avatarDirector === '' ||
+            avatarWriter === '' ||
+            avatarMainActor === ''
+        ) {
+            alert('K được để trống');
+            return false;
+        }
+    };
+    const onChangeName = (e) => {
+        const value = e.target.value;
+        if (value === '') {
+            alert('Tên phim không được để trống');
+        } else {
+            setNameValue(value);
+        }
+    };
+    const onChangeDirector = (e) => {
+        const value = e.target.value;
+        if (value === '') {
+            alert('Giám đốc không được để trống');
+        } else {
+            setDirectorValue(value);
+        }
+    };
+    const onChangeAvatarDirector = (e) => {
+        const value = e.target.value;
+        if (value === '') {
+            alert('Avatar giám đốc không được để trống');
+        } else if (value.slice(-3) != 'jpg' || 'png') {
+            alert('Sai định dạng ảnh');
+        } else {
+            setAvatarDirector(value);
+        }
+    };
+    const onChangeWriter = (e) => {
+        const value = e.target.value;
+        if (value === '') {
+            alert('Biên kịch không được để trống');
+        } else {
+            setWriter(value);
+        }
+    };
+    const onChangeAvatarWriter = (e) => {
+        const value = e.target.value;
+        if (value === '') {
+            alert('Avatar biên kịch không được để trống');
+        } else if (value.slice(-3) != 'jpg' || 'png') {
+            alert('Sai định dạng ảnh');
+        } else {
+            setAvatarWriter(value);
+        }
+    };
+    const onChangeMainActor = (e) => {
+        const value = e.target.value;
+        if (value === '') {
+            alert('Diễn viên chính không được để trống');
+        } else {
+            setMainActor(value);
+        }
+    };
+    const onChangeAvatarMainActor = (e) => {
+        const value = e.target.value;
+        if (value === '') {
+            alert('Avatar diễn viên chính  không được để trống');
+        } else if (value.slice(-3) != 'jpg' || 'png') {
+            alert('Sai định dạng ảnh');
+        } else {
+            setAvatarMainActor(value);
+        }
+    };
+    const onChangeImage = (e) => {
+        const value = e.target.value;
+        if (value.slice(-3) != 'jpg' || 'png') {
+            alert('Sai định dạng ảnh');
+        } else {
+            setImage(value);
+        }
+    };
+    const onChangeTimeMovie = (e) => {
+        const value = e.target.value;
+        if (value === '') {
+            alert('Time movie k được để trông');
+        } else {
+            setTimemovieValue(value);
+        }
+    };
+
     return (
         <div className={cx('container')}>
             <div className={cx('create_film')}>
                 <Form
                     method="POST"
                     action="http://localhost:5000/employee/saveEmployee"
+                    onSubmit={(e) => handleSubmitForm(e)}
                     className={cx('container_form')}
                 >
                     <div className={cx('form_block')}>
@@ -46,7 +143,7 @@ function CreatEmployee() {
                                     name="name"
                                     value={nameValue}
                                     className={cx('text_input')}
-                                    onChange={(e) => setNameValue(e.target.value)}
+                                    onChange={(e) => onChangeName(e)}
                                 />
                             </Form.Group>
 
@@ -58,7 +155,7 @@ function CreatEmployee() {
                                     name="director"
                                     value={directorValue}
                                     className={cx('text_input')}
-                                    onChange={(e) => setDirectorValue(e.target.value)}
+                                    onChange={(e) => onChangeDirector(e)}
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
@@ -69,7 +166,7 @@ function CreatEmployee() {
                                     name="avatarDirector"
                                     value={avatarDirector}
                                     className={cx('text_input')}
-                                    onChange={(e) => setAvatarDirector(e.target.value)}
+                                    onChange={(e) => onChangeAvatarDirector(e)}
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
@@ -78,7 +175,7 @@ function CreatEmployee() {
                                     type="text"
                                     placeholder="Writer"
                                     value={writer}
-                                    onChange={(e) => setWriter(e.target.value)}
+                                    onChange={(e) => onChangeWriter(e)}
                                     name="writer"
                                     className={cx('text_input')}
                                 />
@@ -91,7 +188,7 @@ function CreatEmployee() {
                                     placeholder="Writer source ...."
                                     name="avatarWriter"
                                     className={cx('text_input')}
-                                    onChange={(e) => setAvatarWriter(e.target.value)}
+                                    onChange={(e) => onChangeAvatarWriter(e)}
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
@@ -101,7 +198,7 @@ function CreatEmployee() {
                                     placeholder="timeMovie"
                                     name="timeMovie"
                                     value={timeMovieValue}
-                                    onChange={(e) => setTimemovieValue(e.target.value)}
+                                    onChange={(e) => onChangeTimeMovie(e)}
                                     className={cx('text_input')}
                                 />
                             </Form.Group>
@@ -114,7 +211,7 @@ function CreatEmployee() {
                                     placeholder="mainActor"
                                     name="mainActor"
                                     value={mainActor}
-                                    onChange={(e) => setMainActor(e.target.value)}
+                                    onChange={(e) => onChangeMainActor(e)}
                                     className={cx('text_input')}
                                 />
                             </Form.Group>
@@ -127,7 +224,7 @@ function CreatEmployee() {
                                     name="avatarMainActor"
                                     value={avatarMainActor}
                                     className={cx('text_input')}
-                                    onChange={(e) => setAvatarMainActor(e.target.value)}
+                                    onChange={(e) => onChangeAvatarMainActor(e)}
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3 scrollable')} controlId="formBasicPassword">
@@ -152,7 +249,7 @@ function CreatEmployee() {
                                     placeholder="Image"
                                     name="image"
                                     value={imageValue}
-                                    onChange={(e) => setImage(e.target.value)}
+                                    onChange={(e) => onChangeImage(e)}
                                     className={cx('text_input')}
                                 />
                             </Form.Group>

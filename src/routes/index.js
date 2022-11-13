@@ -12,6 +12,7 @@ import SignUp from '../Page/SingUpAndLogin/SignUp';
 import ForgotPass from '../Page/SingUpAndLogin/ForgotPass';
 import UserAdminCheck from '../Page/UserManagement';
 import ListUser from '../Page/ListUser/ListUser';
+import SearchValue from '../Page/SearchValue';
 const publicRoutes = [
     { path: '/', component: Employee },
     { path: '/Employee', component: Employee },
@@ -19,7 +20,7 @@ const publicRoutes = [
     { path: '/listEmployee', component: ListEmployee },
     { path: '/EditFilm/:id', component: UpdateFilm },
     { path: '/MovieDetail/:slug', component: MovieDetail },
-    { path: 'watch-movie/:slug', component: WatchMovie },
+    { path: '/watch-movie/:slug', component: WatchMovie },
     { path: '/the-loai/:category', component: EmployeeCategory },
     { path: '/register', component: SignUp },
     { path: '/login', component: SignIn },
@@ -27,6 +28,7 @@ const publicRoutes = [
     { path: '/checkAdmin', component: UserAdminCheck },
     { path: '/trash', component: TrashEmployee },
     { path: '/listUser', component: ListUser },
+    { path: '/search-film/:searchValue', component: SearchValue },
 ];
 
 const privateRoutes = [];

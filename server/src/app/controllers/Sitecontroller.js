@@ -1,4 +1,5 @@
 // Định nghĩa Controller
+const { query } = require('express');
 const Music = require('../model/Music');
 const PAGE_SIZE = 12;
 class Sitecontroller {
@@ -49,44 +50,24 @@ class Sitecontroller {
             // res.render('home')
         }
     }
-    search(req, res, next) {
-        Music.find()
-            .then((music) => {
-                // Gọi hàm chuyển sang Object từ handlerbar
-                var dataItem = music.filter((item) => {
-                    item.name = item.name.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
-                    item.name = item.name.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
-                    item.name = item.name.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
-                    item.name = item.name.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o');
-                    item.name = item.name.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
-                    item.name = item.name.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
-                    item.name = item.name.replace(/đ/g, 'd');
-                    item.name = item.name.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, 'A');
-                    item.name = item.name.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, 'E');
-                    item.name = item.name.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, 'I');
-                    item.name = item.name.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, 'O');
-                    item.name = item.name.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, 'U');
-                    item.name = item.name.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, 'Y');
-                    item.name = item.name.replace(/Đ/g, 'D');
-                    // Some system encode vietnamese combining accent as individual utf-8 characters
-                    // Một vài bộ encode coi các dấu mũ, dấu chữ như một kí tự riêng biệt nên thêm hai dòng này
-                    item.name = item.name.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ''); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
-                    item.name = item.name.replace(/\u02C6|\u0306|\u031B/g, ''); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
-                    // Remove extra spaces
-                    // Bỏ các khoảng trắng liền nhau
-                    item.name = item.name.replace(/ + /g, ' ');
-                    item.name = item.name.trim();
-                    // Remove punctuations
-                    // Bỏ dấu câu, kí tự đặc biệt
-                    item.name = item.name.replace(
-                        /!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g,
-                        ' ',
-                    );
-                    return item.name.toLowerCase().includes(req.query.q.toLowerCase());
+    // Tìm kiếm
+    async search(req, res, next) {
+        try {
+            let productsFilm = await Music.find({}).lean();
+            if (req.query.q) {
+                productsFilm = productsFilm.filter((x) => x.name.toLowerCase().includes(req.query.q.toLowerCase()));
+                return res.json({
+                    status: 'ok',
+                    data: {
+                        productsFilm,
+                    },
                 });
-                res.json(dataItem);
-            })
-            .catch(next);
+            } else {
+                console.log('Invalid');
+            }
+        } catch (err) {
+            console.log(err.message);
+        }
     }
 }
 
