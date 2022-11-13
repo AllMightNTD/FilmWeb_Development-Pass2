@@ -18,6 +18,7 @@ const Music = new Schema(
         avatarWriter: String,
         avatarDirector: String,
         avatarMainActor: String,
+        year: String,
         videoID: String,
         category: String,
         // Random Slug : Tải slug generator

@@ -40,6 +40,7 @@ function EmployeeCategory() {
     console.log(dataFilm);
     return (
         <div className={cx('container_category')}>
+            <h3 className={cx('title_list-movie')}>Thể loại: {category}</h3>
             <div className={cx('container-fluid')}>
                 <div className={cx('row')}>
                     {dataFilm.map((item, index) => (

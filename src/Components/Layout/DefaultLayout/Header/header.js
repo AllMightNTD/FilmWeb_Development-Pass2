@@ -1,8 +1,6 @@
 import AppContext from '../../../AppConText';
 import React, { useContext, useState } from 'react';
-
 import classnames from 'classnames/bind';
-import 'tippy.js/dist/tippy.css'; // optional
 import style from './header.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Tippy from '@tippyjs/react/headless';
@@ -43,6 +41,54 @@ function Header() {
         setVisible(!visible);
     };
 
+    const listSeries = [
+        {
+            name: 'love',
+        },
+        {
+            name: 'act',
+        },
+        {
+            name: 'detective',
+        },
+        {
+            name: 'legend',
+        },
+        {
+            name: 'music',
+        },
+        {
+            name: 'science',
+        },
+        {
+            name: 'history',
+        },
+        {
+            name: 'hero',
+        },
+        {
+            name: 'adventure',
+        },
+        {
+            name: 'cartoon',
+        },
+        {
+            name: 'war',
+        },
+        {
+            name: 'criminal',
+        },
+        {
+            name: 'horrified',
+        },
+        {
+            name: 'sport',
+        },
+        {
+            name: 'school',
+        },
+    ];
+
     return (
         <div className={cx('navbar')}>
             <div className={cx('navbar_container')}>
@@ -59,9 +105,20 @@ function Header() {
                         <Link to="#" className={cx('menu-list_item')}>
                             Movie
                         </Link>
-                        <Link to="#" className={cx('menu-list_item')}>
+
+                        <li className={cx('menu-list_item')}>
                             Series
-                        </Link>
+                            <div className={cx('menu_series')}>
+                                <ul>
+                                    {listSeries.map((item, index) => (
+                                        <a href={`/the-loai/${item.name}`} className={cx('series_item')}>
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </ul>
+                            </div>
+                        </li>
+
                         <Link to="#" className={cx('menu-list_item')}>
                             Popular
                         </Link>

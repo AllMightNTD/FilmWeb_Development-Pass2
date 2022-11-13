@@ -21,6 +21,7 @@ function CreatEmployee() {
     const [avatarMainActor, setAvatarMainActor] = useState('');
     const [writer, setWriter] = useState('');
     const [mainActor, setMainActor] = useState('');
+    const [year, setYear] = useState('');
     const { state, dispatch } = useContext(AppContext);
     const navigate = useNavigate();
     const { user } = state;
@@ -136,7 +137,7 @@ function CreatEmployee() {
                     <div className={cx('form_block')}>
                         <div className={cx('form_block-1')}>
                             <Form.Group className={cx('mb-3')} controlId="formBasicEmail">
-                                <Form.Label> Name</Form.Label>
+                                <Form.Label> Tên </Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Enter the name"
@@ -148,7 +149,7 @@ function CreatEmployee() {
                             </Form.Group>
 
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
-                                <Form.Label>Director</Form.Label>
+                                <Form.Label>Giám Đốc</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Director"
@@ -159,7 +160,7 @@ function CreatEmployee() {
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
-                                <Form.Label>AvatarDirector</Form.Label>
+                                <Form.Label>Avatar Giám Đốc</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Director source..."
@@ -170,7 +171,7 @@ function CreatEmployee() {
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
-                                <Form.Label>Writer</Form.Label>
+                                <Form.Label>Nhà Sáng Tác</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Writer"
@@ -181,7 +182,7 @@ function CreatEmployee() {
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
-                                <Form.Label>AvatarWriter</Form.Label>
+                                <Form.Label>Avatar Nhà Sáng Tác</Form.Label>
                                 <Form.Control
                                     type="text"
                                     value={avatarWriter}
@@ -192,7 +193,7 @@ function CreatEmployee() {
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
-                                <Form.Label>TimeMovie</Form.Label>
+                                <Form.Label>Thời gian chiếu</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="timeMovie"
@@ -202,10 +203,21 @@ function CreatEmployee() {
                                     className={cx('text_input')}
                                 />
                             </Form.Group>
+                            <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
+                                <Form.Label>Năm phát hành </Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="timeMovie"
+                                    name="year"
+                                    value={year}
+                                    onChange={(e) => setYear(e.target.value)}
+                                    className={cx('text_input')}
+                                />
+                            </Form.Group>
                         </div>
                         <div className={cx('form_block-2')}>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
-                                <Form.Label>Main Actor</Form.Label>
+                                <Form.Label>Nhân vật chính</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="mainActor"
@@ -217,7 +229,7 @@ function CreatEmployee() {
                             </Form.Group>
 
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
-                                <Form.Label>AvatarMainActor</Form.Label>
+                                <Form.Label>Avatar Nhân vật chính</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder=" MainActor source..."
@@ -228,7 +240,7 @@ function CreatEmployee() {
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3 scrollable')} controlId="formBasicPassword">
-                                <Form.Label>Category</Form.Label>
+                                <Form.Label>Thể loại</Form.Label>
                                 <Form.Select
                                     aria-label="Default select example"
                                     className={cx('ml-4')}
@@ -236,14 +248,25 @@ function CreatEmployee() {
                                     required
                                 >
                                     <option value="">--Thể Loại --</option>
-                                    <option value="love">Love</option>
-                                    <option value="rap">Rap</option>
-                                    <option value="pop">Pop</option>
-                                    <option value="ballad">Ballad</option>
+                                    <option value="love">Tình Cảm</option>
+                                    <option value="act">Hành Động</option>
+                                    <option value="detective">Trinh Thám</option>
+                                    <option value="legend">Thần Thoại</option>
+                                    <option value="music">Âm Nhạc</option>
+                                    <option value="science">Khoa Học</option>
+                                    <option value="history">Lịch Sử</option>
+                                    <option value="hero">Kiếm Hiệp</option>
+                                    <option value="adventure">Phiêu Lưu</option>
+                                    <option value="cartoon">Hoạt Hình</option>
+                                    <option value="war">Chiến Tranh</option>
+                                    <option value="criminal">Hình Sự</option>
+                                    <option value="horrified">Kinh Dị</option>
+                                    <option value="sport">Thể Thao</option>
+                                    <option value="school">Học Đường</option>
                                 </Form.Select>
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
-                                <Form.Label>Image</Form.Label>
+                                <Form.Label>Trang bìa</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Image"
@@ -263,7 +286,7 @@ function CreatEmployee() {
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
-                                <Form.Label>PostBy</Form.Label>
+                                <Form.Label>Người Đăng</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="postedBy"
@@ -275,7 +298,7 @@ function CreatEmployee() {
                         </div>
                         <div className={cx('form_block-3')}>
                             <Form.Group className={cx('mb-4')} controlId="formBasicPassword">
-                                <Form.Label>Description</Form.Label>
+                                <Form.Label>Mô tả phim</Form.Label>
                                 <Form.Control as="textarea" rows={4} placeholder="describe" name="describe" />
                             </Form.Group>
                         </div>
