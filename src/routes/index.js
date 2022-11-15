@@ -13,6 +13,8 @@ import ForgotPass from '../Page/SingUpAndLogin/ForgotPass';
 import UserAdminCheck from '../Page/UserManagement';
 import ListUser from '../Page/ListUser/ListUser';
 import SearchValue from '../Page/SearchValue';
+import FilmNation from '../Page/FilmNation/FilmNation';
+import ReleaseYear from '../Page/ReleaseYear/ReleaseYear';
 const publicRoutes = [
     { path: '/', component: Employee },
     { path: '/Employee', component: Employee },
@@ -22,6 +24,8 @@ const publicRoutes = [
     { path: '/MovieDetail/:slug', component: MovieDetail },
     { path: '/watch-movie/:slug', component: WatchMovie },
     { path: '/the-loai/:category', component: EmployeeCategory },
+    { path: '/quoc-gia/:Nation', component: FilmNation },
+    { path: '/nam-phat-hanh/:year', component: ReleaseYear },
     { path: '/register', component: SignUp },
     { path: '/login', component: SignIn },
     { path: '/forgotPass', component: ForgotPass },

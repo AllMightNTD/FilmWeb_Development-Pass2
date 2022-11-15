@@ -2,17 +2,17 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import classnames from 'classnames/bind';
 import { useParams } from 'react-router-dom';
-import style from './EmployeeCategory.module.scss';
+import style from './FilmNation.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
 import Image from '../../Components/Image';
-function EmployeeCategory() {
+function FilmNation() {
     const cx = classnames.bind(style);
     const params = useParams();
-    const { category } = params;
-    console.log(category);
+    const { Nation } = params;
+    console.log(Nation);
     const [dataFilm, setDataFilm] = useState([]);
     const [page, setPage] = useState(1);
     const [active, setActive] = useState(1);
@@ -33,14 +33,14 @@ function EmployeeCategory() {
     console.log(page);
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/me/the-loai/${category}?page=${page}&type=less`)
+            .get(`http://localhost:5000/me/quoc-gia/${Nation}?page=${page}&type=less`)
             .then((response) => setDataFilm(response ? response.data : []))
             .catch((error) => console.log(error));
     }, [page]);
     console.log(dataFilm);
     return (
         <div className={cx('container_category')}>
-            <h3 className={cx('title_list-movie')}>Thể loại: {category}</h3>
+            <h3 className={cx('title_list-movie')}>Quốc Gia: {Nation}</h3>
             <div className={cx('container-fluid')}>
                 <div className={cx('row')}>
                     {dataFilm.map((item, index) => (
@@ -85,4 +85,4 @@ function EmployeeCategory() {
     );
 }
 
-export default EmployeeCategory;
+export default FilmNation;

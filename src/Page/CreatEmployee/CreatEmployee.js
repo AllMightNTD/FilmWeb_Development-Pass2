@@ -32,98 +32,6 @@ function CreatEmployee() {
     }
 
     // Validate Form
-    const handleSubmitForm = (e) => {
-        e.prenventDefault();
-        if (
-            nameValue === '' ||
-            directorValue === '' ||
-            timeMovieValue === '' ||
-            avatarDirector === '' ||
-            avatarWriter === '' ||
-            avatarMainActor === ''
-        ) {
-            alert('K được để trống');
-            return false;
-        }
-    };
-    const onChangeName = (e) => {
-        const value = e.target.value;
-        if (value === '') {
-            alert('Tên phim không được để trống');
-        } else {
-            setNameValue(value);
-        }
-    };
-    const onChangeDirector = (e) => {
-        const value = e.target.value;
-        if (value === '') {
-            alert('Giám đốc không được để trống');
-        } else {
-            setDirectorValue(value);
-        }
-    };
-    const onChangeAvatarDirector = (e) => {
-        const value = e.target.value;
-        if (value === '') {
-            alert('Avatar giám đốc không được để trống');
-        } else if (value.slice(-3) != 'jpg' || 'png') {
-            alert('Sai định dạng ảnh');
-        } else {
-            setAvatarDirector(value);
-        }
-    };
-    const onChangeWriter = (e) => {
-        const value = e.target.value;
-        if (value === '') {
-            alert('Biên kịch không được để trống');
-        } else {
-            setWriter(value);
-        }
-    };
-    const onChangeAvatarWriter = (e) => {
-        const value = e.target.value;
-        if (value === '') {
-            alert('Avatar biên kịch không được để trống');
-        } else if (value.slice(-3) != 'jpg' || 'png') {
-            alert('Sai định dạng ảnh');
-        } else {
-            setAvatarWriter(value);
-        }
-    };
-    const onChangeMainActor = (e) => {
-        const value = e.target.value;
-        if (value === '') {
-            alert('Diễn viên chính không được để trống');
-        } else {
-            setMainActor(value);
-        }
-    };
-    const onChangeAvatarMainActor = (e) => {
-        const value = e.target.value;
-        if (value === '') {
-            alert('Avatar diễn viên chính  không được để trống');
-        } else if (value.slice(-3) != 'jpg' || 'png') {
-            alert('Sai định dạng ảnh');
-        } else {
-            setAvatarMainActor(value);
-        }
-    };
-    const onChangeImage = (e) => {
-        const value = e.target.value;
-        if (value.slice(-3) != 'jpg' || 'png') {
-            alert('Sai định dạng ảnh');
-        } else {
-            setImage(value);
-        }
-    };
-    const onChangeTimeMovie = (e) => {
-        const value = e.target.value;
-        if (value === '') {
-            alert('Time movie k được để trông');
-        } else {
-            setTimemovieValue(value);
-        }
-    };
 
     return (
         <div className={cx('container')}>
@@ -131,7 +39,6 @@ function CreatEmployee() {
                 <Form
                     method="POST"
                     action="http://localhost:5000/employee/saveEmployee"
-                    onSubmit={(e) => handleSubmitForm(e)}
                     className={cx('container_form')}
                 >
                     <div className={cx('form_block')}>
@@ -144,7 +51,7 @@ function CreatEmployee() {
                                     name="name"
                                     value={nameValue}
                                     className={cx('text_input')}
-                                    onChange={(e) => onChangeName(e)}
+                                    onChange={(e) => setNameValue(e.target.value)}
                                 />
                             </Form.Group>
 
@@ -156,7 +63,7 @@ function CreatEmployee() {
                                     name="director"
                                     value={directorValue}
                                     className={cx('text_input')}
-                                    onChange={(e) => onChangeDirector(e)}
+                                    onChange={(e) => setDirectorValue(e.target.value)}
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
@@ -167,7 +74,7 @@ function CreatEmployee() {
                                     name="avatarDirector"
                                     value={avatarDirector}
                                     className={cx('text_input')}
-                                    onChange={(e) => onChangeAvatarDirector(e)}
+                                    onChange={(e) => setAvatarDirector(e.target.value)}
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
@@ -176,7 +83,7 @@ function CreatEmployee() {
                                     type="text"
                                     placeholder="Writer"
                                     value={writer}
-                                    onChange={(e) => onChangeWriter(e)}
+                                    onChange={(e) => setWriter(e.target.value)}
                                     name="writer"
                                     className={cx('text_input')}
                                 />
@@ -189,7 +96,7 @@ function CreatEmployee() {
                                     placeholder="Writer source ...."
                                     name="avatarWriter"
                                     className={cx('text_input')}
-                                    onChange={(e) => onChangeAvatarWriter(e)}
+                                    onChange={(e) => setAvatarWriter(e.target.value)}
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
@@ -199,20 +106,35 @@ function CreatEmployee() {
                                     placeholder="timeMovie"
                                     name="timeMovie"
                                     value={timeMovieValue}
-                                    onChange={(e) => onChangeTimeMovie(e)}
+                                    onChange={(e) => setTimemovieValue(e.target.value)}
                                     className={cx('text_input')}
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
                                 <Form.Label>Năm phát hành </Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="timeMovie"
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    className={cx('ml-4')}
                                     name="year"
-                                    value={year}
-                                    onChange={(e) => setYear(e.target.value)}
-                                    className={cx('text_input')}
-                                />
+                                    required
+                                >
+                                    <option value="">--Năm Phát Hành --</option>
+                                    <option value="2021">Năm 2021</option>
+                                    <option value="2020">Năm 2020</option>
+                                    <option value="2019">Năm 2019</option>
+                                    <option value="2018">Năm 2018</option>
+                                    <option value="2017">Năm 2017</option>
+                                    <option value="2016">Năm 2016</option>
+                                    <option value="2015">Năm 2015</option>
+                                    <option value="2014">Năm 2014</option>
+                                    <option value="2013">Năm 2013</option>
+                                    <option value="2012">Năm 2012</option>
+                                    <option value="2011">Năm 2011</option>
+                                    <option value="2010">Năm 2010</option>
+                                    <option value="2009">Năm 2009</option>
+                                    <option value="2008">Năm 2008</option>
+                                    <option value="2007">Năm 2007</option>
+                                </Form.Select>
                             </Form.Group>
                         </div>
                         <div className={cx('form_block-2')}>
@@ -223,7 +145,7 @@ function CreatEmployee() {
                                     placeholder="mainActor"
                                     name="mainActor"
                                     value={mainActor}
-                                    onChange={(e) => onChangeMainActor(e)}
+                                    onChange={(e) => setMainActor(e.target.value)}
                                     className={cx('text_input')}
                                 />
                             </Form.Group>
@@ -236,7 +158,7 @@ function CreatEmployee() {
                                     name="avatarMainActor"
                                     value={avatarMainActor}
                                     className={cx('text_input')}
-                                    onChange={(e) => onChangeAvatarMainActor(e)}
+                                    onChange={(e) => setAvatarMainActor(e.target.value)}
                                 />
                             </Form.Group>
                             <Form.Group className={cx('mb-3 scrollable')} controlId="formBasicPassword">
@@ -265,6 +187,61 @@ function CreatEmployee() {
                                     <option value="school">Học Đường</option>
                                 </Form.Select>
                             </Form.Group>
+                            <Form.Group className={cx('mb-3 scrollable')} controlId="formBasicPassword">
+                                <Form.Label>Quốc gia</Form.Label>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    className={cx('ml-4')}
+                                    name="Nation"
+                                    required
+                                >
+                                    <option value="">--Quốc gia --</option>
+                                    <option value="America">Mỹ</option>
+                                    <option value="Korea">Hàn Quốc</option>
+                                    <option value="Taiwan">Đài Loan</option>
+                                    <option value="China">Trung Quốc</option>
+                                    <option value="ThaiLand">Thái Lan</option>
+                                    <option value="JaPan">Nhật Bản</option>
+                                    <option value="HongKong">Hồng Kông</option>
+                                    <option value="India">Ấn Độ</option>
+                                    <option value="France">Pháp</option>
+                                    <option value="EngLand">Anh</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Germany">Đức</option>
+                                    <option value="Spain">Tây Ban Nha</option>
+                                    <option value="Russia">Nga</option>
+                                    <option value="Australia">Úc</option>
+                                </Form.Select>
+                            </Form.Group>
+                            {/* Tình trạng phim  */}
+                            <Form.Group className={cx('mb-3 scrollable')} controlId="formBasicPassword">
+                                <Form.Label>Tình Trạng Phim</Form.Label>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    className={cx('ml-4')}
+                                    name="statusMovie"
+                                    required
+                                >
+                                    <option value="">--Tình Trạng --</option>
+                                    <option value="Oddmovie-2021">Phim lẻ Năm 2021</option>
+                                    <option value="Oddmovie-2020">Phim lẻ Năm 2020</option>
+                                    <option value="Oddmovie-2019">Phim lẻ Năm 2019</option>
+                                    <option value="Oddmovie-2018">Phim lẻ Năm 2018</option>
+                                    <option value="Oddmovie-2017">Phim lẻ Năm 2017</option>
+                                    <option value="Oddmovie-2016">Phim lẻ Năm 2016</option>
+                                    <option value="Oddmovie-2015">Phim lẻ Năm 2015</option>
+                                    <option value="Oddmovie-2014">Phim lẻ Năm 2014</option>
+                                    <option value="Oddmovie-2013">Phim lẻ Năm 2013</option>
+                                    <option value="Oddmovie-2012">Phim lẻ Năm 2012</option>
+                                    <option value="SerieMovie-ChiNa">Phim Bộ Trung Quốc</option>
+                                    <option value="SerieMovie-Taiwan">Phim Bộ Đài Loan</option>
+                                    <option value="SerieMovie-America">Phim Bộ Mỹ</option>
+                                    <option value="SerieMovie-Korea">Phim Bộ Hàn Quốc</option>
+                                    <option value="SerieMovie-Japan">Phim Bộ Nhật Bản</option>
+                                    <option value="SerieMovie-ThaiLand">Phim Bộ Thái Lan</option>
+                                    <option value="SerieMovie-India">Phim Bộ Ấn Độ</option>
+                                </Form.Select>
+                            </Form.Group>
                             <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
                                 <Form.Label>Trang bìa</Form.Label>
                                 <Form.Control
@@ -272,7 +249,7 @@ function CreatEmployee() {
                                     placeholder="Image"
                                     name="image"
                                     value={imageValue}
-                                    onChange={(e) => onChangeImage(e)}
+                                    onChange={(e) => setImage(e.target.value)}
                                     className={cx('text_input')}
                                 />
                             </Form.Group>

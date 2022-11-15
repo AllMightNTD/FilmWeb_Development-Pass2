@@ -97,6 +97,72 @@ class MeController {
                 .catch(next);
         }
     }
+    // GET /quoc-gia/:nation
+    showNation(req, res, next) {
+        var page = req.query.page;
+        console.log(req.params.Nation);
+        if (page) {
+            // Get page
+            // Chuyển sang int
+            page = parseInt(page);
+            // Số lượng bỏ qua
+            var skipNumber = (page - 1) * PAGE_SIZE;
+            Music.find({ Nation: req.params.nation })
+                .skip(skipNumber)
+                // Số lượng giới hạn
+                .limit(PAGE_SIZE)
+                .then((musics) => {
+                    // Lấy dữ liệu trong model user truyền vào home
+
+                    //  Biến nó thành Object Literal từ Object Constructor
+
+                    // Trọc sang view (render sang view ) truyền data lấy từ model sang view
+                    // view đọc file , logic và render ra màn hình từ đó trọc về browser
+                    res.json(musics);
+                })
+                .catch((error) => next(error));
+        } else {
+            Music.find({ Nation: req.params.Nation })
+                .then((music) => {
+                    // Gọi hàm chuyển sang Object từ handlerbar
+                    res.send(music);
+                })
+                .catch(next);
+        }
+    }
+    // GET /nam-phat-hanh/:year
+    showYear(req, res, next) {
+        var page = req.query.page;
+        console.log(req.params.year);
+        if (page) {
+            // Get page
+            // Chuyển sang int
+            page = parseInt(page);
+            // Số lượng bỏ qua
+            var skipNumber = (page - 1) * PAGE_SIZE;
+            Music.find({ year: req.params.year })
+                .skip(skipNumber)
+                // Số lượng giới hạn
+                .limit(PAGE_SIZE)
+                .then((musics) => {
+                    // Lấy dữ liệu trong model user truyền vào home
+
+                    //  Biến nó thành Object Literal từ Object Constructor
+
+                    // Trọc sang view (render sang view ) truyền data lấy từ model sang view
+                    // view đọc file , logic và render ra màn hình từ đó trọc về browser
+                    res.json(musics);
+                })
+                .catch((error) => next(error));
+        } else {
+            Music.find({ year: req.params.year })
+                .then((music) => {
+                    // Gọi hàm chuyển sang Object từ handlerbar
+                    res.send(music);
+                })
+                .catch(next);
+        }
+    }
 }
 
 module.exports = new MeController();

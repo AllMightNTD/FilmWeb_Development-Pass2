@@ -14,6 +14,10 @@ router.use('/trash', mecontrol.trashemployee);
 // Số lượng xóa
 router.use('/deleteCount', mecontrol.DeletedCountMusic);
 // Show theo thể loại
-router.use('/:category', mecontrol.showCategory);
+router.use('/the-loai/:category', mecontrol.showCategory);
+// Show theo quốc gia
+router.use('/quoc-gia/:nation', mecontrol.showNation);
+// Show theo năm phát hành
+router.use('/nam-phat-hanh/:year', mecontrol.showYear);
 // export nó ra ngoài
 module.exports = router;

@@ -88,7 +88,98 @@ function Header() {
             name: 'school',
         },
     ];
-
+    const listNation = [
+        {
+            Nation: 'America',
+        },
+        {
+            Nation: 'Korea',
+        },
+        {
+            Nation: 'Taiwan',
+        },
+        {
+            Nation: 'China',
+        },
+        {
+            Nation: 'ThaiLand',
+        },
+        {
+            Nation: 'JaPan',
+        },
+        {
+            Nation: 'HongKong',
+        },
+        {
+            Nation: 'India',
+        },
+        {
+            Nation: 'Canada',
+        },
+        {
+            Nation: 'France',
+        },
+        {
+            Nation: 'HongKong',
+        },
+        {
+            Nation: 'EngLand',
+        },
+        {
+            Nation: 'Germany',
+        },
+        {
+            Nation: 'Spain',
+        },
+        {
+            Nation: 'Russia',
+        },
+        {
+            nation: 'Australia',
+        },
+    ];
+    const listOddMovie = [
+        {
+            name: 'Năm 2021',
+            year: '2021',
+        },
+        {
+            name: 'Năm 2020',
+            year: '2020',
+        },
+        {
+            name: 'Năm 2019',
+            year: '2019',
+        },
+        {
+            name: 'Năm 2018',
+            year: '2018',
+        },
+        {
+            name: 'Năm 2017',
+            year: '2017',
+        },
+        {
+            name: 'Năm 2016',
+            year: '2016',
+        },
+        {
+            name: 'Năm 2015',
+            year: '2015',
+        },
+        {
+            name: 'Năm 2014',
+            year: '2014',
+        },
+        {
+            name: 'Năm 2013',
+            year: '2013',
+        },
+        {
+            name: 'Năm 2012',
+            year: '2012',
+        },
+    ];
     return (
         <div className={cx('navbar')}>
             <div className={cx('navbar_container')}>
@@ -99,17 +190,35 @@ function Header() {
                 </div>
                 <div className={cx('menu_container')}>
                     <ul className={cx('menu-list')}>
-                        <Link to="/" className={cx('menu-list_item')}>
-                            Home
-                        </Link>
-                        <Link to="#" className={cx('menu-list_item')}>
-                            Movie
-                        </Link>
+                        <li to="#" className={cx('menu-list_item')}>
+                            Release Year
+                            <div className={cx('menu_series')}>
+                                <ul className={cx('list_series')}>
+                                    {listOddMovie.map((item, index) => (
+                                        <a href={`/nam-phat-hanh/${item.year}`} className={cx('series_item')}>
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </ul>
+                            </div>
+                        </li>
+                        <li to="#" className={cx('menu-list_item')}>
+                            Nation
+                            <div className={cx('menu_series')}>
+                                <ul className={cx('list_series')}>
+                                    {listNation.map((item, index) => (
+                                        <a href={`/quoc-gia/${item.Nation}`} className={cx('series_item')}>
+                                            {item.Nation}
+                                        </a>
+                                    ))}
+                                </ul>
+                            </div>
+                        </li>
 
                         <li className={cx('menu-list_item')}>
-                            Series
+                            Category
                             <div className={cx('menu_series')}>
-                                <ul>
+                                <ul className={cx('list_series')}>
                                     {listSeries.map((item, index) => (
                                         <a href={`/the-loai/${item.name}`} className={cx('series_item')}>
                                             {item.name}
@@ -120,10 +229,10 @@ function Header() {
                         </li>
 
                         <Link to="#" className={cx('menu-list_item')}>
-                            Popular
+                            Odd Movie
                         </Link>
                         <Link to="#" className={cx('menu-list_item')}>
-                            Trend
+                            Series
                         </Link>
                     </ul>
                     <div className={cx('search')}>
