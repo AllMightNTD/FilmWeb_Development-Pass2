@@ -19,5 +19,6 @@ router.use('/the-loai/:category', mecontrol.showCategory);
 router.use('/quoc-gia/:nation', mecontrol.showNation);
 // Show theo năm phát hành
 router.use('/nam-phat-hanh/:year', mecontrol.showYear);
+router.use('/tinh-trang/:statusMovie', mecontrol.showStatusMovie);
 // export nó ra ngoài
 module.exports = router;

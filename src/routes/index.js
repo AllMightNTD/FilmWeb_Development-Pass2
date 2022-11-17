@@ -15,6 +15,8 @@ import ListUser from '../Page/ListUser/ListUser';
 import SearchValue from '../Page/SearchValue';
 import FilmNation from '../Page/FilmNation/FilmNation';
 import ReleaseYear from '../Page/ReleaseYear/ReleaseYear';
+import OddMovie from '../Page/OddMovie/OddMovie';
+import SeriesMovie from '../Page/SeriesMovie/SeriesMovie';
 const publicRoutes = [
     { path: '/', component: Employee },
     { path: '/Employee', component: Employee },
@@ -26,6 +28,8 @@ const publicRoutes = [
     { path: '/the-loai/:category', component: EmployeeCategory },
     { path: '/quoc-gia/:Nation', component: FilmNation },
     { path: '/nam-phat-hanh/:year', component: ReleaseYear },
+    { path: '/phim-le/:statusMovie', component: OddMovie },
+    { path: '/phim-bo/:statusMovie', component: SeriesMovie },
     { path: '/register', component: SignUp },
     { path: '/login', component: SignIn },
     { path: '/forgotPass', component: ForgotPass },

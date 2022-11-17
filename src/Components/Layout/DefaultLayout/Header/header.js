@@ -41,7 +41,8 @@ function Header() {
         setVisible(!visible);
     };
 
-    const listSeries = [
+    // List Thể Loại
+    const ListCategory = [
         {
             name: 'love',
         },
@@ -88,6 +89,7 @@ function Header() {
             name: 'school',
         },
     ];
+    // List Quốc Gia
     const listNation = [
         {
             Nation: 'America',
@@ -138,7 +140,8 @@ function Header() {
             nation: 'Australia',
         },
     ];
-    const listOddMovie = [
+    // List Năm Phát Hành
+    const ListReleaseYear = [
         {
             name: 'Năm 2021',
             year: '2021',
@@ -180,6 +183,80 @@ function Header() {
             year: '2012',
         },
     ];
+    // List phim lẻ
+    const ListOddMovie = [
+        {
+            name: 'Phim lẻ 2021',
+            statusMovie: 'Oddmovie-2021',
+        },
+        {
+            name: 'Phim lẻ 2020',
+            statusMovie: 'Oddmovie-2020',
+        },
+        {
+            name: 'Phim lẻ 2019',
+            statusMovie: 'Oddmovie-2019',
+        },
+        {
+            name: 'Phim lẻ 2018',
+            statusMovie: 'Oddmovie-2018',
+        },
+        {
+            name: 'Phim lẻ 2017',
+            statusMovie: 'Oddmovie-2017',
+        },
+        {
+            name: 'Phim lẻ 2016',
+            statusMovie: 'Oddmovie-2016',
+        },
+        {
+            name: 'Phim lẻ 2015',
+            statusMovie: 'Oddmovie-2015',
+        },
+        {
+            name: 'Phim lẻ 2014',
+            statusMovie: 'Oddmovie-2014',
+        },
+        {
+            name: 'Phim lẻ 2013',
+            statusMovie: 'Oddmovie-2013',
+        },
+        {
+            name: 'Phim lẻ 2012',
+            statusMovie: 'Oddmovie-2012',
+        },
+    ];
+    // List phim bộ
+    const ListSeriesMovie = [
+        {
+            name: 'Phim Bộ Trung Quốc',
+            statusMovie: 'SerieMovie-ChiNa',
+        },
+        {
+            name: 'Phim Bộ Đài Loan',
+            statusMovie: 'SerieMovie-Taiwan',
+        },
+        {
+            name: 'Phim Bộ Mỹ',
+            statusMovie: 'SerieMovie-America',
+        },
+        {
+            name: 'Phim Bộ Hàn Quốc',
+            statusMovie: 'SerieMovie-Korea',
+        },
+        {
+            name: 'Phim Bộ Nhật Bản',
+            statusMovie: 'SerieMovie-Japan',
+        },
+        {
+            name: 'Phim Bộ Thái Lan',
+            statusMovie: 'SerieMovie-ThaiLand',
+        },
+        {
+            name: 'Phim Bộ Ấn Độ',
+            statusMovie: 'SerieMovie-India',
+        },
+    ];
     return (
         <div className={cx('navbar')}>
             <div className={cx('navbar_container')}>
@@ -190,11 +267,11 @@ function Header() {
                 </div>
                 <div className={cx('menu_container')}>
                     <ul className={cx('menu-list')}>
-                        <li to="#" className={cx('menu-list_item')}>
+                        <li className={cx('menu-list_item')}>
                             Release Year
                             <div className={cx('menu_series')}>
                                 <ul className={cx('list_series')}>
-                                    {listOddMovie.map((item, index) => (
+                                    {ListReleaseYear.map((item, index) => (
                                         <a href={`/nam-phat-hanh/${item.year}`} className={cx('series_item')}>
                                             {item.name}
                                         </a>
@@ -202,7 +279,7 @@ function Header() {
                                 </ul>
                             </div>
                         </li>
-                        <li to="#" className={cx('menu-list_item')}>
+                        <li className={cx('menu-list_item')}>
                             Nation
                             <div className={cx('menu_series')}>
                                 <ul className={cx('list_series')}>
@@ -219,7 +296,7 @@ function Header() {
                             Category
                             <div className={cx('menu_series')}>
                                 <ul className={cx('list_series')}>
-                                    {listSeries.map((item, index) => (
+                                    {ListCategory.map((item, index) => (
                                         <a href={`/the-loai/${item.name}`} className={cx('series_item')}>
                                             {item.name}
                                         </a>
@@ -228,12 +305,30 @@ function Header() {
                             </div>
                         </li>
 
-                        <Link to="#" className={cx('menu-list_item')}>
-                            Odd Movie
-                        </Link>
-                        <Link to="#" className={cx('menu-list_item')}>
+                        <li className={cx('menu-list_item')}>
+                            Oddmovie
+                            <div className={cx('menu_series')}>
+                                <ul className={cx('list_series')}>
+                                    {ListOddMovie.map((item, index) => (
+                                        <a href={`/phim-le/${item.statusMovie}`} className={cx('series_item')}>
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </ul>
+                            </div>
+                        </li>
+                        <li className={cx('menu-list_item')}>
                             Series
-                        </Link>
+                            <div className={cx('menu_series')}>
+                                <ul className={cx('list_series')}>
+                                    {ListSeriesMovie.map((item, index) => (
+                                        <a href={`/phim-bo/${item.statusMovie}`} className={cx('series_item')}>
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                     <div className={cx('search')}>
                         <Search width="340px" />

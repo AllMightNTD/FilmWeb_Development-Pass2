@@ -163,6 +163,40 @@ class MeController {
                 .catch(next);
         }
     }
+
+    // GET /tinh-trang/:statusMovie
+    showStatusMovie(req, res, next) {
+        var page = req.query.page;
+        console.log(req.params.statusMovie);
+        if (page) {
+            // Get page
+            // Chuyển sang int
+            page = parseInt(page);
+            // Số lượng bỏ qua
+            var skipNumber = (page - 1) * PAGE_SIZE;
+            Music.find({ statusMovie: req.params.statusMovie })
+                .skip(skipNumber)
+                // Số lượng giới hạn
+                .limit(PAGE_SIZE)
+                .then((musics) => {
+                    // Lấy dữ liệu trong model user truyền vào home
+
+                    //  Biến nó thành Object Literal từ Object Constructor
+
+                    // Trọc sang view (render sang view ) truyền data lấy từ model sang view
+                    // view đọc file , logic và render ra màn hình từ đó trọc về browser
+                    res.json(musics);
+                })
+                .catch((error) => next(error));
+        } else {
+            Music.find({ statusMovie: req.params.statusMovie })
+                .then((music) => {
+                    // Gọi hàm chuyển sang Object từ handlerbar
+                    res.send(music);
+                })
+                .catch(next);
+        }
+    }
 }
 
 module.exports = new MeController();
