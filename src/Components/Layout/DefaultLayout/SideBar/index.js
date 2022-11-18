@@ -148,7 +148,7 @@ function SideBar({ checkHide }) {
                 </>
             )}
             {user ? (
-                <Link to="#" className={cx('sidebar_item')} onClick={SignOut}>
+                <Link to="/employee" className={cx('sidebar_item')} onClick={SignOut}>
                     {' '}
                     <div className={cx('left_menu-icon')} onClick={handleOpenViewSearch}>
                         <FontAwesomeIcon icon={faRightToBracket} />

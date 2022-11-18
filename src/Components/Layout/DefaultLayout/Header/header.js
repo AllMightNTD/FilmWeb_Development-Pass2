@@ -15,6 +15,7 @@ import {
     faPlus,
     faSun,
     faTrash,
+    faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import AccountAndBar from './AccountAndBar';
 import Image from '../../../Image';
@@ -343,6 +344,12 @@ function Header() {
                             placement="bottom"
                             render={(attrs) => (
                                 <div className={cx('Menu_settings-box')} tabIndex="-1" {...attrs}>
+                                    <Link to="/Myprofile" className={cx('menu_setting-item')}>
+                                        <FontAwesomeIcon icon={faUser} className={cx('icon')} />
+                                        <span style={{ textDecoration: 'none', color: 'black' }} href="#">
+                                            My Profile
+                                        </span>
+                                    </Link>
                                     <Link
                                         to="/listEmployee"
                                         className={cx('menu_setting-item')}
@@ -359,12 +366,6 @@ function Header() {
                                         <FontAwesomeIcon icon={faPlus} className={cx('icon')} />
                                         <span>Create</span>
                                     </Link>
-                                    <div className={cx('menu_setting-item')} onClick={() => SignOut()}>
-                                        <FontAwesomeIcon icon={faArrowRightToBracket} className={cx('icon')} />
-                                        <span style={{ textDecoration: 'none', color: 'black' }} href="#">
-                                            Sign Out
-                                        </span>
-                                    </div>
                                     <Link
                                         to="/trash"
                                         className={cx('menu_setting-item')}
@@ -372,6 +373,13 @@ function Header() {
                                     >
                                         <FontAwesomeIcon icon={faTrash} className={cx('icon')} />
                                         <span>Trash</span>
+                                    </Link>
+
+                                    <Link to="/employee" className={cx('menu_setting-item')} onClick={() => SignOut()}>
+                                        <FontAwesomeIcon icon={faArrowRightToBracket} className={cx('icon')} />
+                                        <span style={{ textDecoration: 'none', color: 'black' }} href="#">
+                                            Sign Out
+                                        </span>
                                     </Link>
                                 </div>
                             )}

@@ -10,7 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import ProductCard from './MovieCard';
-import { faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faClockRotateLeft, faPlay, faStar } from '@fortawesome/free-solid-svg-icons';
 import Image from '../../Components/Image';
 
 function Employee() {
@@ -136,6 +136,9 @@ function Employee() {
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div className={cx('container_play')}>
+                                        <FontAwesomeIcon className={cx('icon_play')} icon={faPlay} />
                                     </div>
                                 </Link>
                             </div>

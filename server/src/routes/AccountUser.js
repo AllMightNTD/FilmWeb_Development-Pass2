@@ -9,6 +9,7 @@ router.post('/api/googleLogin', handleAccount.googleLogin);
 router.post('/api/send-email', handleAccount.sendEmail);
 router.post('/api/change-password', handleAccount.changePassword);
 router.post('/api/facebookLogin', handleAccount.facebookLogin);
+router.post('/api/MyPost', handleAccount.myPost);
 router.get('/listUser', handleAccount.listUser);
 // Check current user ( check token gửi đi xem có tồn tại hay không)
 // Render lại qua getCurrentUser

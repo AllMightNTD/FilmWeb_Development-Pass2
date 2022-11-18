@@ -1,0 +1,80 @@
+.container_main {
+    padding-left: 50px;
+    background-color: var(--primary-white);
+    padding-top: 60px;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+.container {
+    position: absolute;
+    width: 1000px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    margin: 0 auto;
+    transform: translateX(-50%);
+}
+
+.user {
+    display: flex;
+}
+.avatar {
+    width: 150px;
+    height: 150px;
+
+    .image_avatar {
+        width: 100%;
+        border-radius: 50%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.info {
+    margin-left: 50px;
+    padding-top: 20px;
+    .name {
+        font-size: 22px;
+        line-height: 22px;
+    }
+    .email {
+        margin-top: 20px;
+        line-height: 16px;
+        font-size: 16px;
+    }
+}
+
+.option {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.option_list {
+    display: flex;
+    list-style: none;
+    .option_item {
+        margin-right: 40px;
+    }
+}
+.option_info {
+    display: flex;
+}
+.btn_my-post {
+    padding: 5px 10px;
+    color: var(--primary-white);
+    border-radius: 6px;
+    background-color: greenyellow;
+}
+
+.btn_Editprofile {
+    padding: 5px 10px;
+    color: #fff;
+    border-radius: 6px;
+    margin-left: 20px;
+    background-color: #ff3333;
+}

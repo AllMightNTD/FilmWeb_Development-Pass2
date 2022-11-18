@@ -34,9 +34,10 @@ function DefaultLayout({ children }) {
                 // Object chứa name
                 const { userName } = response.data.data.user;
                 const id = response.data.data.user.id;
+                const email = response.data.data.user.email;
                 console.log(id);
                 // Lấy ra và lưu vào state
-                dispatch({ type: 'CURRENT_USER', payload: { userName, id } });
+                dispatch({ type: 'CURRENT_USER', payload: { userName, id, email } });
             }
         } catch (error) {
             console.log(error);

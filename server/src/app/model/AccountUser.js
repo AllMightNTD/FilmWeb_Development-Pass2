@@ -9,6 +9,7 @@ const userAccount = new Schema(
         email: { type: String, required: [true, 'Name must be required'], unique: true, trim: true },
         username: { type: String, required: [true, 'Name must be required'], unique: true, trim: true },
         password: { type: String, trim: true },
+        avatar: { type: String },
     },
     { collection: 'usersAccounts' },
     {

@@ -17,6 +17,7 @@ import FilmNation from '../Page/FilmNation/FilmNation';
 import ReleaseYear from '../Page/ReleaseYear/ReleaseYear';
 import OddMovie from '../Page/OddMovie/OddMovie';
 import SeriesMovie from '../Page/SeriesMovie/SeriesMovie';
+import Myprofile from '../Page/MyProfile';
 const publicRoutes = [
     { path: '/', component: Employee },
     { path: '/Employee', component: Employee },
@@ -29,6 +30,7 @@ const publicRoutes = [
     { path: '/quoc-gia/:Nation', component: FilmNation },
     { path: '/nam-phat-hanh/:year', component: ReleaseYear },
     { path: '/phim-le/:statusMovie', component: OddMovie },
+    { path: '/Myprofile', component: Myprofile },
     { path: '/phim-bo/:statusMovie', component: SeriesMovie },
     { path: '/register', component: SignUp },
     { path: '/login', component: SignIn },

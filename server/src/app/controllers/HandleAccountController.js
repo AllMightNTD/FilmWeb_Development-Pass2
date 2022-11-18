@@ -6,6 +6,7 @@ const { OAuth2Client } = require('google-auth-library');
 const { generatorOTP } = require('../middleware/otpMail');
 const { mailTransport } = require('../middleware/otpMail');
 const { isValidObjectId } = require('mongoose');
+const Music = require('../model/Music');
 const PAGE_SIZE = 6;
 
 const client = new OAuth2Client('70938607416-qpjajlmeu6i5shtmum9kfvr7ti83a6tj.apps.googleusercontent.com');
@@ -269,7 +270,7 @@ class HandleAccountController {
                 const user = await AccountUser.findOne({ _id: req.user.id });
 
                 // Set dữ liệu cho object user đấy
-                data.user = { userName: user.username, id: user._id };
+                data.user = { userName: user.username, id: user._id, email: user.email };
                 console.log(data);
             }
             res.status(200).json({
@@ -390,6 +391,27 @@ class HandleAccountController {
                 }
             } else {
                 return res.json({ status: 'error', error: 'Email and OTP invalid' });
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    async myPost(req, res, next) {
+        const { idUser } = req.body;
+        try {
+            const data = await Music.find({ postedBy: idUser });
+            console.log(data);
+            if (data) {
+                res.json({
+                    status: 'ok',
+                    data: data,
+                });
+            } else {
+                res.json({
+                    status: 'error',
+                    error: 'Không có bài đăng nào ',
+                });
             }
         } catch (error) {
             console.log(error.message);
