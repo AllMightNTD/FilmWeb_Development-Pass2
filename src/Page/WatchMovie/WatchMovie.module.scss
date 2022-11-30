@@ -412,6 +412,12 @@
             .feedback {
                 margin-left: 10px;
             }
+            .delete_comments {
+                margin-left: 10px;
+            }
+            .repair_comments {
+                margin-left: 10px;
+            }
         }
     }
 }
@@ -429,5 +435,23 @@
         border-radius: 6px;
         color: #fff;
         background-color: #1877f2;
+    }
+}
+
+.option_bars {
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #f0f2f5;
     }
 }

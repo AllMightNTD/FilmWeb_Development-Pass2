@@ -2,6 +2,7 @@
     padding-left: 50px;
     background-color: var(--primary-white);
     padding-top: 60px;
+
     width: 100%;
     min-height: 100vh;
     position: relative;
@@ -77,4 +78,49 @@
     border-radius: 6px;
     margin-left: 20px;
     background-color: #ff3333;
+}
+.btn_settings {
+    font-size: 25px;
+    background-color: transparent;
+    margin-left: 10px;
+}
+
+.Modal_settings {
+    position: fixed;
+    border: 1px solid #333;
+    width: 300px;
+    top: 2%;
+    background-color: #eeeeee;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 6px;
+    overflow: hidden;
+    animation: fadeIn ease-in-out 0.5s;
+
+    .setting_list {
+        list-style: none;
+        text-align: center;
+        padding-left: 0px;
+        margin-bottom: 0;
+    }
+    .setting_item {
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid #ccc;
+        transition: background-color 0.5s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #ccc;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

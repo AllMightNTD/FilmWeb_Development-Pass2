@@ -88,5 +88,29 @@ class LikeNumberController {
             console.log(error.message);
         }
     }
+
+    // [DELETE] /:idComment/deleteCommnet
+    async deleteComment(req, res, next) {
+        try {
+            console.log(req.params.idComment);
+            const post = await Music.findById(req.params.idFilm);
+
+            if (post) {
+                // Lấy ra vị trí xóa trong mảng
+                // Vị trí mà nó có cái idComment bằng với id của dữ liệu
+                const removeIndex = post.comments
+                    .map((comment) => comment._id.toString())
+                    .indexOf(req.params.idComment);
+                console.log(removeIndex);
+                // Xóa dữ liệu trong mảng comments
+                post.comments.splice(removeIndex, 1);
+                await post.save();
+                return res.redirect(`http://localhost:3000/watch-movie/${post.slug}`);
+            }
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
 }
 module.exports = new LikeNumberController();

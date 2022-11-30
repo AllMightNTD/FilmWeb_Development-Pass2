@@ -6,6 +6,8 @@ import Table from 'react-bootstrap/Table';
 import Image from '../../Components/Image';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(style);
 function Myprofile() {
     const { state, dispatch } = useContext(AppContext);
@@ -13,6 +15,7 @@ function Myprofile() {
     const { user } = state;
     console.log(user);
     const [dataPost, setDataPost] = useState([]);
+    const [checkModal, setCheckModal] = useState(false);
     const [check, setCheck] = useState(false);
 
     var idUser;
@@ -68,6 +71,9 @@ function Myprofile() {
                                     </button>
                                 </form>
                                 <button className={cx('btn_Editprofile')}>Edit Profile</button>
+                                <button className={cx('btn_settings')} onClick={() => setCheckModal(!checkModal)}>
+                                    <FontAwesomeIcon icon={faGear} />
+                                </button>
                             </div>
                         </div>
                     ) : (
@@ -107,6 +113,27 @@ function Myprofile() {
                                 }
                             </tbody>
                         </Table>
+                    </div>
+                ) : (
+                    <></>
+                )}
+                {checkModal ? (
+                    <div className={cx('Modal_settings')}>
+                        <ul className={cx('setting_list')}>
+                            <li className={cx('setting_item')}>Change password</li>
+                            <li className={cx('setting_item')}>QR Code</li>
+                            <li className={cx('setting_item')}>Apps and Websites</li>
+                            <li className={cx('setting_item')}>Notifications</li>
+                            <li className={cx('setting_item')}>Privacy and Security</li>
+
+                            <li className={cx('setting_item')}>Login Activity </li>
+                            <li className={cx('setting_item')}>Emails from Facebook</li>
+
+                            <li className={cx('setting_item')}>Log Out</li>
+                            <li className={cx('setting_item')} onClick={() => setCheckModal(false)}>
+                                Cancel
+                            </li>
+                        </ul>
                     </div>
                 ) : (
                     <></>

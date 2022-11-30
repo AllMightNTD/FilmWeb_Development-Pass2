@@ -8,4 +8,6 @@ const likeNumberController = require('../app/controllers/LikeNumberController');
 router.put('/likeFilm', likeNumberController.likeFilm);
 router.put('/unlikeFilm', likeNumberController.unlikeFilm);
 router.put('/comment', likeNumberController.Postcomment);
+// Xóa mềm (xóa ở giao diện , k xóa ở dữ liệu)
+router.delete('/:idFilm/:idComment/deleteComment', likeNumberController.deleteComment);
 module.exports = router;
