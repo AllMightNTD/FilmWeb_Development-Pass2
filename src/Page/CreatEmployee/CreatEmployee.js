@@ -13,6 +13,7 @@ const cx = classnames.bind(style);
 
 function CreatEmployee() {
     const [imageValue, setImage] = useState('');
+    const [thumbnailMovie, setThumbnailMovie] = useState('');
     const [nameValue, setNameValue] = useState('');
     const [directorValue, setDirectorValue] = useState('');
     const [timeMovieValue, setTimemovieValue] = useState('');
@@ -119,6 +120,7 @@ function CreatEmployee() {
                                     required
                                 >
                                     <option value="">--Năm Phát Hành --</option>
+                                    <option value="2022">Năm 2022</option>
                                     <option value="2021">Năm 2021</option>
                                     <option value="2020">Năm 2020</option>
                                     <option value="2019">Năm 2019</option>
@@ -250,6 +252,18 @@ function CreatEmployee() {
                                     name="image"
                                     value={imageValue}
                                     onChange={(e) => setImage(e.target.value)}
+                                    className={cx('text_input')}
+                                />
+                            </Form.Group>
+
+                            <Form.Group className={cx('mb-3')} controlId="formBasicPassword">
+                                <Form.Label>Ảnh nổi</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="ThumbnailMovie"
+                                    name="thumbnailMovie"
+                                    value={thumbnailMovie}
+                                    onChange={(e) => setThumbnailMovie(e.target.value)}
                                     className={cx('text_input')}
                                 />
                             </Form.Group>

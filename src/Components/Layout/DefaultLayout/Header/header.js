@@ -144,6 +144,10 @@ function Header() {
     // List Năm Phát Hành
     const ListReleaseYear = [
         {
+            name: 'Năm 2022',
+            year: '2022',
+        },
+        {
             name: 'Năm 2021',
             year: '2021',
         },
@@ -186,6 +190,10 @@ function Header() {
     ];
     // List phim lẻ
     const ListOddMovie = [
+        {
+            name: 'Phim lẻ 2022',
+            statusMovie: 'Oddmovie-2022',
+        },
         {
             name: 'Phim lẻ 2021',
             statusMovie: 'Oddmovie-2021',

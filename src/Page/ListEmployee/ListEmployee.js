@@ -221,6 +221,7 @@ function ListEmployee() {
                     </tbody>
                 </Table>
 
+                {/* Modal cảnh báo  */}
                 {
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>

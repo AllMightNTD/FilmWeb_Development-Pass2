@@ -439,7 +439,7 @@ function WatchMovie() {
                                 <></>
                             )}
 
-                            {DataCommentsplice && DataCommentsplice.length > 4 ? (
+                            {DataCommentsplice && DataCommentsplice.length >= 4 ? (
                                 <div className={cx('Load_add-comment')}>
                                     <button onClick={loadMore} className={cx('Load-more')}>
                                         Tải thêm bình luận{' '}

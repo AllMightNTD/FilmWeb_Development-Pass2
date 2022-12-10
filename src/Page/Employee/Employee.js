@@ -18,6 +18,7 @@ function Employee() {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
     const [active, setActive] = useState(1);
+    const [movieThumbnail, setMovieThumbnail] = useState([]);
     let items = [];
     for (let number = 1; number <= 5; number++) {
         items.push(
@@ -40,6 +41,7 @@ function Employee() {
             .then((response) => {
                 console.log(response.data);
                 setData(response ? response.data : []);
+                setMovieThumbnail(response.data[Math.floor(Math.random() * response.data.length)]);
             })
             .catch(function (error) {
                 // handle error
@@ -52,12 +54,18 @@ function Employee() {
         <div className={cx('container_main')}>
             <div className={cx('container')}>
                 <div className={cx('content-container')}>
-                    <div className={cx('feature_content')}>
-                        <h1 className={cx('feature_title')}>STAR WAR</h1>
-                        <p className={cx('feature_desc')}>
-                            Loremsdaskdjhaskhdaksdhaskdhaskdhaskdhsakdhaskdhkasdhaskhdkashdkahdkas
-                        </p>
-                        <Link to="#" className={cx('feature_btn')}>
+                    <div
+                        className={cx('feature_content')}
+                        style={{
+                            background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--primary-bg)) , url(${movieThumbnail.thumbnailMovie})`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    >
+                        <h1 className={cx('feature_title')}>{movieThumbnail.name}</h1>
+                        <p className={cx('feature_desc')}>{movieThumbnail.director}</p>
+                        <Link to={`/MovieDetail/${movieThumbnail.slug}`} className={cx('feature_btn')}>
                             WATCH
                         </Link>
                     </div>

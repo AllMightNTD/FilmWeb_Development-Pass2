@@ -66,10 +66,7 @@ function MovieDetail() {
             <main className={cx('main_data')}>
                 <div className={cx('top_main-image')}>
                     {/* Ảnh lớn */}
-                    <img
-                        className={cx('image_detail')}
-                        src="https://anhdephd.vn/wp-content/uploads/2022/04/hinh-nen-nguoi-nhen-spider-man-1.jpg"
-                    ></img>
+                    <Image className={cx('image_detail')} src={dataFilm.thumbnailMovie}></Image>
                     {imageElement ? (
                         // Hiển thị trên mobile , nằm trong ảnh lớn
                         <div className={cx('left_main-content-mobile')}>

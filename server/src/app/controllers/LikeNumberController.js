@@ -94,7 +94,6 @@ class LikeNumberController {
         try {
             console.log(req.params.idComment);
             const post = await Music.findById(req.params.idFilm);
-
             if (post) {
                 // Lấy ra vị trí xóa trong mảng
                 // Vị trí mà nó có cái idComment bằng với id của dữ liệu

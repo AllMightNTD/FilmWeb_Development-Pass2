@@ -11,6 +11,7 @@ const Music = new Schema(
         name: String,
         director: String,
         writer: String,
+        thumbnailMovie: String,
         timeMovie: String,
         describe: String,
         mainActor: String,
