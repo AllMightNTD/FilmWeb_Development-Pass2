@@ -289,6 +289,10 @@ function CreatEmployee() {
                         </div>
                         <div className={cx('form_block-3')}>
                             <Form.Group className={cx('mb-4')} controlId="formBasicPassword">
+                                <Form.Label>Choose the video File</Form.Label>
+                                <Form.Control type="file" name="videoFile" />
+                            </Form.Group>
+                            <Form.Group className={cx('mb-4')} controlId="formBasicPassword">
                                 <Form.Label>Mô tả phim</Form.Label>
                                 <Form.Control as="textarea" rows={4} placeholder="describe" name="describe" />
                             </Form.Group>

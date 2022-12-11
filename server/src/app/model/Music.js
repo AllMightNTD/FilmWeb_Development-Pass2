@@ -23,6 +23,7 @@ const Music = new Schema(
         statusMovie: String,
         year: String,
         videoID: String,
+        videoFile: String,
         category: String,
         // Random Slug : Tải slug generator
         slug: { type: String, slug: 'name', unique: true },
