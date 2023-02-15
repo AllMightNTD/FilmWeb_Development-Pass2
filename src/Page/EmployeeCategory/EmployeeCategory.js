@@ -33,11 +33,10 @@ function EmployeeCategory() {
     console.log(page);
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/me/the-loai/${category}?page=${page}&type=less`)
+            .get(`http://localhost:2000/me/the-loai/${category}?page=${page}&type=less`)
             .then((response) => setDataFilm(response ? response.data : []))
             .catch((error) => console.log(error));
     }, [page]);
-    console.log(dataFilm);
     return (
         <div className={cx('container_category')}>
             <h3 className={cx('title_list-movie')}>Thể loại: {category}</h3>

@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import style from './TrashEmployee.module.scss';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { Link, useResolvedPath } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,7 +25,7 @@ function TrashEmployee() {
     };
     useEffect(() => {
         axios
-            .get('http://localhost:5000/me/trash')
+            .get('http://localhost:2000/me/trash')
             .then((response) => setDataTrash(response ? response.data : []))
             .catch(function (error) {
                 // handle error
@@ -50,7 +50,7 @@ function TrashEmployee() {
         setCheckedAll(!checkedAll);
         setDisabled(!isDisabled);
 
-        if (checkedAll == false) {
+        if (checkedAll=== false) {
             // setDisabled(false);
             usersItemcheckbox.prop('checked', true);
             // Nếu checkedAll được check => hiện button submit
@@ -65,9 +65,9 @@ function TrashEmployee() {
         // Select ra các thằng đang checked và đếm số
         // Nếu nó bằng với số lượng checkItem => setCheckedAll = true
         // Ngược lại là false
-        var isCheckedAll = usersItemcheckbox.length === $('input[name="usersID[]"]:checked').length;
+        var isCheckedAll = usersItemcheckbox.length=== $('input[name="usersID[]"]:checked').length;
         // Không bằng
-        if (isCheckedAll == false) {
+        if (isCheckedAll=== false) {
             setCheckedAll(false);
             // Bằng
         } else {
@@ -91,7 +91,7 @@ function TrashEmployee() {
     return (
         <div className={cx('container')}>
             <div className={cx('trash_container')}>
-                <form method="POST" action="http://localhost:5000/employee/handle-restore-data">
+                <form method="POST" action="http://localhost:2000/employee/handle-restore-data">
                     <a href="/listemployee" className={cx('list_film')} style={{ textDecoration: 'none' }}>
                         <FontAwesomeIcon icon={faList} />
                         <p>Danh sách phim</p>
@@ -155,7 +155,7 @@ function TrashEmployee() {
                                             <div style={{ display: 'flex' }}>
                                                 <form
                                                     method="POST"
-                                                    action={`http://localhost:5000/employee/${dataItem._id}/restore?_method=PATCH`}
+                                                    action={`http://localhost:2000/employee/${dataItem._id}/restore?_method=PATCH`}
                                                 >
                                                     <Button className={cx('btn btn-danger')} type="submit">
                                                         Khôi phục
@@ -199,7 +199,7 @@ function TrashEmployee() {
                                 {/* Xóa vĩnh viễn với id */}
                                 <form
                                     method="POST"
-                                    action={`http://localhost:5000/employee/${idforce}/force?_method=DELETE`}
+                                    action={`http://localhost:2000/employee/${idforce}/force?_method=DELETE`}
                                 >
                                     <Button variant="danger" type="submit">
                                         Xóa

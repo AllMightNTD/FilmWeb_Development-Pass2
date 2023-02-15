@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useRef, useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
@@ -10,7 +9,6 @@ import style from './Search.module.scss';
 import axios from 'axios';
 import { useDebounce } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 function Search({ width }) {
@@ -33,11 +31,6 @@ function Search({ width }) {
         }
     };
 
-    const handleClearSearch = () => {
-        setsearchValue('');
-        setSearchResult([]);
-        inputRef.current.focus();
-    };
 
     useEffect(() => {
         if (!debounce.trim()) {
@@ -45,7 +38,7 @@ function Search({ width }) {
         }
         setLoading(true);
         axios
-            .get(`http://localhost:5000/search?q=${encodeURIComponent(debounce)}&type=less`)
+            .get(`http://localhost:2000/search?q=${encodeURIComponent(debounce)}&type=less`)
             .then((response) => {
                 // Dữ liệu get ra được
                 setSearchResult(response ? response.data.data.productsFilm : []);
@@ -61,7 +54,7 @@ function Search({ width }) {
     async function handleSubmitSearch(event) {
         event.preventDefault();
 
-        const result = await fetch('http://localhost:5000/optionFilm/searchresult', {
+        const result = await fetch('http://localhost:2000/optionFilm/searchresult', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -83,7 +76,7 @@ function Search({ width }) {
         <Tippy
             interactive
             // Có dữ liệu , có truyền tìm kiếm thì mới hiển thị
-            visible={showResult && searchResult.length > 0 && searchValue != '' ? true : false}
+            visible={showResult && searchResult.length > 0 && searchValue !== '' ? true : false}
             render={(attrs) => (
                 // Để ý cái dấu {} phải có từ return
                 // Còn dấu ( ) thì không return

@@ -4,15 +4,12 @@ import { useParams } from 'react-router-dom';
 import style from './MovieDetail.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import UseWindowDemension from '../../hooks/useWindowDemension';
 import {
     faCirclePlay,
     faFilm,
     faStar,
-    faCircleChevronRight,
-    faClockRotateLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import UseWindowDemension from '../../hooks/useWindowDemension';
 import Image from '../../Components/Image';
 const cx = classNames.bind(style);
 
@@ -27,13 +24,13 @@ function MovieDetail() {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/employee/${slug}`)
+            .get(`http://localhost:2000/employee/${slug}`)
             .then((response) => setDataFilm(response ? response.data : []))
             .catch((error) => console.log(error));
     }, [slug]);
     useEffect(() => {
         axios
-            .get(`http://localhost:5000`)
+            .get(`http://localhost:2000`)
             .then((res) => setDataNewFilm(res ? res.data : []))
             .catch((error) => console.log(error));
     }, []);

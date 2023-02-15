@@ -65,7 +65,9 @@
 
         .btn_play {
             text-decoration: none;
-            display: block;
+            display: flex;
+            align-items: center;
+            text-align: center;
             cursor: pointer;
             padding: 5px 20px;
             border-radius: 20px;

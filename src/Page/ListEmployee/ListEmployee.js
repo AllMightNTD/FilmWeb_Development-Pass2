@@ -1,6 +1,6 @@
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import classnames from 'classnames/bind';
@@ -10,11 +10,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Pagination from 'react-bootstrap/Pagination';
 import UseWindowDemension from '../../hooks/useWindowDemension';
-import Container from 'react-bootstrap/Container';
-import $, { data } from 'jquery';
+import $ from 'jquery';
 function ListEmployee() {
     const cx = classnames.bind(style);
     const [dataFilm, setDataFilm] = useState([]);
@@ -62,7 +60,7 @@ function ListEmployee() {
     useEffect(() => {
         // Get link lấy ra dữ liệu là 1 object bao gồm 1 mảng và 1 count(số dữ liệu xóa )
         axios
-            .get(`http://localhost:5000/me/storedEmloyee?page=${page}&type=less`)
+            .get(`http://localhost:2000/me/storedEmloyee?page=${page}&type=less`)
             .then((response) => {
                 // Set data dữ liệu
 
@@ -77,7 +75,7 @@ function ListEmployee() {
     useEffect(() => {
         // Get link lấy ra dữ liệu là 1 object bao gồm 1 mảng và 1 count(số dữ liệu xóa )
         axios
-            .get(`http://localhost:5000/me/deleteCount`)
+            .get(`http://localhost:2000/me/deleteCount`)
             .then((myData) => {
                 // Set data dữ liệu
                 setDeletedCount(myData.data);
@@ -91,7 +89,7 @@ function ListEmployee() {
     // Xử lý click vào checkAll
     const handleCheckAll = () => {
         setCheckedAll(!checkedAll);
-        if (checkedAll == false) {
+        if (checkedAll === false) {
             setDisabled(false);
             usersItemcheckbox.prop('checked', true);
         } else {
@@ -106,7 +104,7 @@ function ListEmployee() {
         // Không bằng nhau thì bỏ check
         var isCheckedAll = usersItemcheckbox.length === $('input[name="usersID[]"]:checked').length;
         console.log(isCheckedAll);
-        if (isCheckedAll == false) {
+        if (isCheckedAll === false) {
             setCheckedAll(false);
         } else {
             setCheckedAll(true);
@@ -139,7 +137,7 @@ function ListEmployee() {
 
     return (
         <div className={cx('list_film')}>
-            <form method="POST" action="http://localhost:5000/employee/handle-form-action">
+            <form method="POST" action="http://localhost:2000/employee/handle-form-action">
                 <div className={cx('Request_film')}>
                     <a href="/trash" className={cx('trash_film')} style={{ textDecoration: 'none' }}>
                         <h3>
@@ -232,7 +230,7 @@ function ListEmployee() {
                             <Button variant="secondary" onClick={handleClose}>
                                 Hủy
                             </Button>
-                            <form method="POST" action={`http://localhost:5000/employee/${id}?_method=DELETE`}>
+                            <form method="POST" action={`http://localhost:2000/employee/${id}?_method=DELETE`}>
                                 <Button variant="danger" type="submit">
                                     Xóa
                                 </Button>

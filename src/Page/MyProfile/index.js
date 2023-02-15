@@ -4,7 +4,6 @@ import AppContext from '../../Components/AppConText';
 import { useContext } from 'react';
 import Table from 'react-bootstrap/Table';
 import Image from '../../Components/Image';
-import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
@@ -25,7 +24,7 @@ function Myprofile() {
 
     async function handleSubmitSignIn(event) {
         event.preventDefault();
-        const result = await fetch('http://localhost:5000/accounts/api/MyPost', {
+        const result = await fetch('http://localhost:2000/accounts/api/MyPost', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +48,7 @@ function Myprofile() {
                     <div className={cx('avatar')}>
                         {user ? (
                             <Image
-                                src="https://scontent.fhan2-1.fna.fbcdn.net/v/t39.30808-6/307710303_418354093707451_3724584447684544601_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=mLRf4N1IDhIAX_XvXcI&_nc_ht=scontent.fhan2-1.fna&oh=00_AfAVExNUGRPbSK8C2MO3cvA_-tPy0FB4dWaqZUakurYsrA&oe=637BB773"
+                                src="https://upload.wikimedia.org/wikipedia/commons/9/90/Spiderman.JPG"
                                 className={cx('image_avatar')}
                             ></Image>
                         ) : (

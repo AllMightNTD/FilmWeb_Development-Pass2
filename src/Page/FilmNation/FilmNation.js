@@ -33,7 +33,7 @@ function FilmNation() {
     console.log(page);
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/me/quoc-gia/${Nation}?page=${page}&type=less`)
+            .get(`http://localhost:2000/me/quoc-gia/${Nation}?page=${page}&type=less`)
             .then((response) => setDataFilm(response ? response.data : []))
             .catch((error) => console.log(error));
     }, [page]);

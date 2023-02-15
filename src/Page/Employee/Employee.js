@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
 import style from './Employee.module.scss';
 import Pagination from 'react-bootstrap/Pagination';
-import Tippy from '@tippyjs/react/headless';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -20,24 +19,24 @@ function Employee() {
     const [active, setActive] = useState(1);
     const [movieThumbnail, setMovieThumbnail] = useState([]);
     let items = [];
-    for (let number = 1; number <= 5; number++) {
-        items.push(
-            <Pagination.Item key={number} active={number === active} onClick={() => handlePage(number)}>
-                {number}
-            </Pagination.Item>,
-        );
-    }
+    // for (let number = 1; number <= 5; number++) {
+    //     items.push(
+    //         <Pagination.Item key={number} active={number === active} onClick={() => handlePage(number)}>
+    //             {number}
+    //         </Pagination.Item>,
+    //     );
+    // }
 
-    const handlePage = (number) => {
-        setActive(number);
-        setPage(number);
-        console.log(number);
-    };
+    // const handlePage = (number) => {
+    //     setActive(number);
+    //     setPage(number);
+    //     console.log(number);
+    // };
     console.log(page);
     useEffect(() => {
         axios
             // page = 2 => trang thứ 2 , chứa tối đa 2 phần tử
-            .get(`http://localhost:5000?page=${page}&type=less`)
+            .get(`http://localhost:2000/storedEmloyee`)
             .then((response) => {
                 console.log(response.data);
                 setData(response ? response.data : []);
@@ -48,7 +47,7 @@ function Employee() {
                 console.log(error);
             });
         // Truyền page , trang thứ mấy lên
-    }, [page]);
+    }, []);
 
     return (
         <div className={cx('container_main')}>
@@ -56,18 +55,15 @@ function Employee() {
                 <div className={cx('content-container')}>
                     <div
                         className={cx('feature_content')}
-                        style={{
-                            background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--primary-bg)) , url(${movieThumbnail.thumbnailMovie})`,
-                            backgroundRepeat: 'no-repeat',
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                        }}
                     >
+                        <Image className={cx('thumb_nail')} src={movieThumbnail.thumbnailMovie ? movieThumbnail.thumbnailMovie :'https://thuthuatnhanh.com/wp-content/uploads/2022/04/Hinh-nen-nguoi-nhen.jpeg' }></Image>
+                        <div className={cx('feature_info')}>
                         <h1 className={cx('feature_title')}>{movieThumbnail.name}</h1>
                         <p className={cx('feature_desc')}>{movieThumbnail.director}</p>
                         <Link to={`/MovieDetail/${movieThumbnail.slug}`} className={cx('feature_btn')}>
                             WATCH
                         </Link>
+                        </div>
                     </div>
 
                     <div className={cx('slider_film')}>
@@ -153,12 +149,12 @@ function Employee() {
                         ))}
                     </div>
                 </div>
-                <div className={cx('Pagination_page')}>
+                {/* <div className={cx('Pagination_page')}>
                     <Pagination size="sm" className={cx('item_Pagi')}>
                         {items}
                     </Pagination>
                     <br />
-                </div>
+                </div> */}
             </div>
         </div>
     );

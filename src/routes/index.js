@@ -18,6 +18,7 @@ import ReleaseYear from '../Page/ReleaseYear/ReleaseYear';
 import OddMovie from '../Page/OddMovie/OddMovie';
 import SeriesMovie from '../Page/SeriesMovie/SeriesMovie';
 import Myprofile from '../Page/MyProfile';
+import MovieLove from '../Page/YourListMovieLove/MovieLove';
 const publicRoutes = [
     { path: '/', component: Employee },
     { path: '/Employee', component: Employee },
@@ -39,6 +40,7 @@ const publicRoutes = [
     { path: '/trash', component: TrashEmployee },
     { path: '/listUser', component: ListUser },
     { path: '/search-film/:searchValue', component: SearchValue },
+    {path :'/yourLoveMovie' , component:MovieLove}
 ];
 
 const privateRoutes = [];

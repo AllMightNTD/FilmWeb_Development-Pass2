@@ -16,7 +16,7 @@ function UpdateFilm() {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/employee/${id}/edit`)
+            .get(`http://localhost:2000/employee/${id}/edit`)
             .then((response) => setDataFilm(response ? response.data : []))
             .catch(function (error) {
                 // handle error
@@ -24,6 +24,71 @@ function UpdateFilm() {
             });
     }, []);
     console.log(dataFilm);
+
+    const CategoryMap = [
+        {
+            text:"Thể loại",
+            value:""
+        },
+        {
+            text:"Tình Cảm",
+            value:"love"
+        },
+        {
+            text:"Hành Động",
+            value:"act"
+        },
+        {
+            text:"Trinh Thám",
+            value:"detective"
+        },
+        {
+            text:"Thần Thoại",
+            value:"legend"
+        },
+        {
+            text:"Âm Nhạc",
+            value:"music"
+        },
+        {
+            text:"Khoa Học",
+            value:"science"
+        },
+        {
+            text:"Lịch Sử",
+            value:"history"
+        },
+        {
+            text:"Kiếm Hiệp",
+            value:"hero"
+        },
+        {
+            text:"Hoạt Hình",
+            value:"cartoon"
+        },
+        {
+            text:"Chiến Tranh",
+            value:"war"
+        },
+        {
+            text:"Hình Sự",
+            value:"criminal"
+        },
+        {
+            text:"Kinh Dị",
+            value:"horrified"
+        },
+        {
+            text:"Thể Thao",
+            value:"sport"
+        },
+        {
+            text:"Học Đường",
+            value:"school"
+        },
+
+    ]
+
     return (
         <div className={cx('update_film')}>
             <Form
@@ -60,22 +125,11 @@ function UpdateFilm() {
                                 name="category"
                                 required
                             >
-                                <option value="">--Thể Loại --</option>
-                                <option value="love">Tình Cảm</option>
-                                <option value="act">Hành Động</option>
-                                <option value="detective">Trinh Thám</option>
-                                <option value="legend">Thần Thoại</option>
-                                <option value="music">Âm Nhạc</option>
-                                <option value="science">Khoa Học</option>
-                                <option value="history">Lịch Sử</option>
-                                <option value="hero">Kiếm Hiệp</option>
-                                <option value="adventure">Phiêu Lưu</option>
-                                <option value="cartoon">Hoạt Hình</option>
-                                <option value="war">Chiến Tranh</option>
-                                <option value="criminal">Hình Sự</option>
-                                <option value="horrified">Kinh Dị</option>
-                                <option value="sport">Thể Thao</option>
-                                <option value="school">Học Đường</option>
+                                {
+                                    CategoryMap.map((category , index) => (
+                                        <option key={index} value={category.value}>{category.text}</option>
+                                    ))
+                                }
                             </Form.Select>
                         </Form.Group>
 

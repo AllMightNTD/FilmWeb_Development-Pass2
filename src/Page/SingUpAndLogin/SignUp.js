@@ -1,13 +1,11 @@
 import style from './SignUpAndLogin.module.scss';
 import classNames from 'classnames/bind';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import AppContext from '../../Components/AppConText';
-import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 function SignUp(props) {
@@ -24,7 +22,7 @@ function SignUp(props) {
         event.preventDefault();
         console.log('You clicked submit');
 
-        const result = await fetch('http://localhost:5000/accounts/api/register', {
+        const result = await fetch('http://localhost:2000/accounts/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

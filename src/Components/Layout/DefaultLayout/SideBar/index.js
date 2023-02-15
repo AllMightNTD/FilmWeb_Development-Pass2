@@ -117,7 +117,7 @@ function SideBar({ checkHide }) {
                 </div>
                 <span>Hourglass</span>
             </Link>
-            <Link to="#" className={cx('sidebar_item')}>
+            <Link to="/yourLoveMovie" className={cx('sidebar_item')}>
                 {' '}
                 <div className={cx('left_menu-icon')} onClick={handleOpenViewSearch}>
                     <FontAwesomeIcon icon={faGratipay} />

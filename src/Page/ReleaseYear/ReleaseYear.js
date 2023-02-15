@@ -33,7 +33,7 @@ function ReleaseYear() {
     console.log(page);
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/me/nam-phat-hanh/${year}?page=${page}&type=less`)
+            .get(`http://localhost:2000/me/nam-phat-hanh/${year}?page=${page}&type=less`)
             .then((response) => setDataFilm(response ? response.data : []))
             .catch((error) => console.log(error));
     }, [page]);

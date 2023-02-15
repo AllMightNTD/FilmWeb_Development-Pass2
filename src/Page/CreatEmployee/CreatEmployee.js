@@ -4,11 +4,9 @@ import classnames from 'classnames/bind';
 import style from './CreatEmployee.module.scss';
 import { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
-import { faCircleChevronRight, faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faClockRotateLeft, faStar } from '@fortawesome/free-solid-svg-icons';
 import AppContext from '../../Components/AppConText';
 import Image from '../../Components/Image';
-
 const cx = classnames.bind(style);
 
 function CreatEmployee() {
@@ -22,9 +20,7 @@ function CreatEmployee() {
     const [avatarMainActor, setAvatarMainActor] = useState('');
     const [writer, setWriter] = useState('');
     const [mainActor, setMainActor] = useState('');
-    const [year, setYear] = useState('');
     const { state, dispatch } = useContext(AppContext);
-    const navigate = useNavigate();
     const { user } = state;
     console.log(user);
     var id;
@@ -39,7 +35,7 @@ function CreatEmployee() {
             <div className={cx('create_film')}>
                 <Form
                     method="POST"
-                    action="http://localhost:5000/employee/saveEmployee"
+                    action="http://localhost:2000/employee/saveEmployee"
                     className={cx('container_form')}
                 >
                     <div className={cx('form_block')}>

@@ -33,7 +33,7 @@ function OddMovie() {
     console.log(page);
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/me/tinh-trang/${statusMovie}?page=${page}&type=less`)
+            .get(`http://localhost:2000/me/tinh-trang/${statusMovie}?page=${page}&type=less`)
             .then((response) => setDataFilm(response ? response.data : []))
             .catch((error) => console.log(error));
     }, [page]);

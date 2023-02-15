@@ -22,7 +22,7 @@ function DefaultLayout({ children }) {
             const token = localStorage.getItem('token');
             const option = {
                 method: 'get',
-                url: 'http://localhost:5000/accounts/currentUser',
+                url: 'http://localhost:2000/accounts/currentUser',
                 headers: {
                     Authorization: `${token}`,
                 },

@@ -13,8 +13,6 @@ import AppContext from '../../Components/AppConText';
 import { useContext } from 'react';
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
-import FacebookLogin from 'react-facebook-login';
-import ToastSuccess from '../../Accessibilyty';
 function SignIn(props) {
     const cx = classNames.bind(style);
 
@@ -24,12 +22,11 @@ function SignIn(props) {
     const { dispatch } = useContext(AppContext);
     const navigate = useNavigate();
 
-    const [checkSuccess, setCheckSuccess] = useState(false);
 
     // Đăng nhập với tài khoản
     async function handleSubmitSignIn(event) {
         event.preventDefault();
-        const result = await fetch('http://localhost:5000/accounts/api/login', {
+        const result = await fetch('http://localhost:2000/accounts/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +54,7 @@ function SignIn(props) {
     // Đăng nhập google thành công
     async function responseSuccesGoogle(response) {
         console.log(response);
-        const result = await fetch('http://localhost:5000/accounts/api/googleLogin', {
+        const result = await fetch('http://localhost:2000/accounts/api/googleLogin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -101,45 +98,13 @@ function SignIn(props) {
         });
     }, []);
 
-    // Login with Facebook
-    async function responseFacebook(response) {
-        console.log(response);
-        const result = await fetch('http://localhost:5000/accounts/api/facebookLogin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: response.email,
-                username: response.name,
-            }),
-        }).then((res) => res.json());
-        if (result.status === 'ok') {
-            alert('Sign In Successfully');
-            const { token, userName } = result.data;
-            localStorage.setItem('token', token);
-            // Ban du lieu ra cha
-            dispatch({ type: 'CURRENT_USER', payload: { userName } });
-            // Thực hiện chuyển trang sau khi đăng nhập
-            navigate('/employee');
-        } else {
-            alert(result.error);
-        }
-    }
-    async function componentClicked(data) {
-        console.warn(data);
-    }
+
 
     const [checkForgotPass, setCheckForgotPass] = useState(false);
 
     const handleRenderViewForgotPass = () => {
         setCheckForgotPass(!checkForgotPass);
     };
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setCheckSuccess(false);
-    //     }, 5000);
-    // });
 
     return (
         <div className={cx('container')}>
@@ -202,22 +167,6 @@ function SignIn(props) {
                     </span>
                 </div>
                 <div className={cx('form_connect-social')}>
-                    <div className={cx('facebook_login')}>
-                        <div className={cx('facebook_icon')}>
-                            <FontAwesomeIcon className={cx('icon_facebook')} icon={faFacebook} />
-                        </div>
-                        <FacebookLogin
-                            appId="657634382595918"
-                            autoLoad={false}
-                            textButton="Login with Facebook"
-                            cssClass={cx('facebook_css')}
-                            size="metro"
-                            fields="name,email,picture"
-                            onClick={componentClicked}
-                            callback={responseFacebook}
-                        />
-                    </div>
-
                     <GoogleLogin
                         clientId={clientId}
                         onSuccess={responseSuccesGoogle}

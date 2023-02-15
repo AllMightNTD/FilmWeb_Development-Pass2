@@ -8,7 +8,7 @@ import axios from 'axios';
 import AppContext from '../../Components/AppConText';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag, faHeart, faShareNodes, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faFolderPlus, faHeart, faShareNodes, faStar } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import ProductCard from '../Employee/MovieCard';
@@ -40,6 +40,9 @@ function WatchMovie() {
 
     const [idFilm, setIdFilm] = useState('');
 
+    // Set show Add to Film 
+    const [showAddToFilm , setShowAddTofilm] = useState(false);
+
     // Lấy state ra : chính là cái user , object trong đó có username
     var { user } = state;
     var idUser;
@@ -52,7 +55,7 @@ function WatchMovie() {
     // Lấy dữ liệu phim
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/employee/${slug}`)
+            .get(`http://localhost:2000/employee/${slug}`)
             .then((response) => handleDataFilm(response ? response.data : []))
             .catch((error) => console.log(error));
     }, [slug]);
@@ -62,9 +65,6 @@ function WatchMovie() {
         setdataWatch(data);
         setIdFilm(data._id);
     }
-
-    // Check thời gian tự động bỏ qua quảng cáo
-    const [number, setNumber] = useState(5);
     // Show model xóa
     const [show, setShow] = useState(false);
 
@@ -87,7 +87,7 @@ function WatchMovie() {
     useEffect(() => {
         axios
             // page = 2 => trang thứ 2 , chứa tối đa 2 phần tử
-            .get(`http://localhost:5000`)
+            .get(`http://localhost:2000`)
             .then((response) => {
                 setDatapopular(response ? response.data : []);
             })
@@ -100,7 +100,7 @@ function WatchMovie() {
     // Xử lý like Film
     function handleLikeFilm() {
         setIsContainerActive(true);
-        fetch('http://localhost:5000/likenumber/likeFilm', {
+        fetch('http://localhost:2000/likenumber/likeFilm', {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ function WatchMovie() {
     // Xử lý unlike Film
     function handleUnlikeFilm() {
         setIsContainerActive(false);
-        fetch('http://localhost:5000/likenumber/unlikeFilm', {
+        fetch('http://localhost:2000/likenumber/unlikeFilm', {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ function WatchMovie() {
     async function handleSubmitCommnets(text, postedBy, nameUser, idFilm) {
         console.log('You clicked submit');
 
-        await fetch('http://localhost:5000/likenumber/comment', {
+        await fetch('http://localhost:2000/likenumber/comment', {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -178,6 +178,29 @@ function WatchMovie() {
                 setValueComment('');
                 console.log(result);
                 setdataWatch(result);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    // Xử lý lưu film vào danh sách yêu thích 
+    async function handleAddFilmtoListLove(){
+        fetch('http://localhost:2000/likenumber/addToListLove', {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                idUser: idUser,
+                idFilm: dataWatch._id,
+            }),
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                // Kết quả like trả về theo id
+                // Kết quả like trả về theo id
+                console.log('Day la result', result);
             })
             .catch((error) => {
                 console.log(error);
@@ -256,6 +279,10 @@ function WatchMovie() {
                                 <FontAwesomeIcon icon={faShareNodes} className={cx('icon_share')} />
                                 Chia sẻ
                             </button>
+                            <button className={cx('button_add-love')} onClick={() => setShowAddTofilm(!showAddToFilm)}>
+                                <FontAwesomeIcon icon={faFolderPlus} className={cx('icon_share')}/>
+                                Add to Film_Love
+                            </button>
                         </div>
                     ) : (
                         // Không có tài khoản => hiện cần login
@@ -308,7 +335,7 @@ function WatchMovie() {
                                     <div className={cx('image_avatar-commnets')}>
                                         <Image
                                             className={cx('avatar')}
-                                            src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/307710303_418354093707451_3724584447684544601_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=RVVIJ0sxNekAX_rgOWZ&_nc_ht=scontent.fhan14-3.fna&oh=00_AfBbnzLWt17IIPPCx1QeiXakUT8cj7KV_BiY6iBYPcd4lQ&oe=638B8973"
+                                            src="https://upload.wikimedia.org/wikipedia/commons/9/90/Spiderman.JPG"
                                         ></Image>
                                     </div>
                                     <div className={cx('post_comments')}>
@@ -337,7 +364,7 @@ function WatchMovie() {
                                         <div className={cx('image_avatar-commnets')}>
                                             <Image
                                                 className={cx('avatar')}
-                                                src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/307710303_418354093707451_3724584447684544601_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=5N_TV3FlOZsAX8N7pBN&tn=KYsvGxARGWrh8U0A&_nc_ht=scontent.fhan14-3.fna&oh=00_AfAZ351xvMDWDTniaWraBkrP7e1YXAJSK7dt5CKolOYwmw&oe=636FD9F3"
+                                                src="https://upload.wikimedia.org/wikipedia/commons/9/90/Spiderman.JPG"
                                             ></Image>
                                         </div>
 
@@ -346,11 +373,7 @@ function WatchMovie() {
                                                 {user ? <h4>{item.nameUser}</h4> : <></>}
                                                 {/* Comment của user */}
                                                 <p>{item.text}</p>
-                                                {/* Số like bình luận  */}
-                                                {/* <div className={cx('number_like-comments')}>
-                                                    <FontAwesomeIcon className={cx('icon_heart')} icon={faHeart} />
-                                                    <span className={cx('like_number')}>200</span>
-                                                </div> */}
+                                        
                                             </div>
                                             <div className={cx('option')}>
                                                 <button
@@ -467,6 +490,21 @@ function WatchMovie() {
                     </Modal.Footer>
                 </Modal>
             }
+             <Modal show={showAddToFilm} onHide={() => setShowAddTofilm(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Modal heading</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Bạn muốn thêm film vào list yêu thích của mình :333 </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setShowAddTofilm(false)}>
+                                Hủy
+                            </Button>
+                            <Button variant="danger" type="submit" onClick={handleAddFilmtoListLove}>
+                                    Đúng Rồi
+                            </Button>
+                         
+                        </Modal.Footer>
+                    </Modal>
         </div>
     );
 }

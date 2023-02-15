@@ -28,7 +28,7 @@ function ListUser() {
     useEffect(() => {
         // Get link lấy ra dữ liệu là 1 object bao gồm 1 mảng và 1 count(số dữ liệu xóa )
         axios
-            .get(`http://localhost:5000/accounts/listUser?page=${page}&type=less`)
+            .get(`http://localhost:2000/accounts/listUser?page=${page}&type=less`)
             .then((myData) => {
                 console.log(myData.data);
                 // Set data dữ liệu
@@ -58,6 +58,7 @@ function ListUser() {
                                 <th>{index + 1}</th>
                                 <th>{dataItem.username}</th>
                                 <th>{dataItem.email}</th>
+                                <th>{dataItem.listfilmloves}</th>
                             </tr>
                         ))
                     }

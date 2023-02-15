@@ -79,6 +79,7 @@
             cursor: pointer;
             margin-right: 10px;
         }
+    
     }
     .separate {
         width: 99%;
@@ -137,6 +138,7 @@
     }
     .button_feelings {
         display: flex;
+        position: relative;
         button {
             padding: 0px 10px;
             border-radius: 5px;
@@ -167,6 +169,14 @@
         }
         .icon_share {
             margin-right: 4px;
+        }
+        .button_add-love{
+            position: absolute;
+            padding: 5px 10px;
+            right: 0;
+            color: var(--primary-white);
+            background-color: #FF99CC;
+            
         }
     }
     .button_save {
